@@ -1,6 +1,12 @@
 Hippo::Application.routes.draw do
 
-  get '/products' => "products#index"
+  get "user/create" => "user#create"
+  get "user/update" => "user#update"
+  get "user/edit"   => "user#edit"
+  get "user/destroy"=> "user#destroy"
+  get "user/index"  => "user#index"
+  get "user/show"   => "user#show"
+  get '/products'   => "products#index"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
