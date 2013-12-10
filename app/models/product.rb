@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
-   validates :name, :price, presence: true #unique...method
-   belongs_to :merchant
+   validates :name, presence: true, uniqueness: { case_sensitive: false }
+   validates :price, presence: true, numericality: { greater_than: 0 }
+   belongs_to :user
    has_many :categories, through: :category_products
    has_many :category_products
 
