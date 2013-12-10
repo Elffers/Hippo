@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
   def create
     @user = User.new
+    if params[:email] && params[:password] && params[:password_confirmation]
+      @user.save
+      redirect_to "/users/index", notice: "You are now a hippo!"
+    else
+      flash.now.alert = "You did not fill out all the fields!"
+      render "create"
+    end
   end
 
   def update
