@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Product do
+  before do
+    Product.delete_all
+  end
+
   describe "validations" do
     describe "name" do
       it "must be present" do

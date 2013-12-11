@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ProductsController do
+  before do
+    Product.delete_all
+  end
+
   describe "GET index" do
     it "populates an array of products" do
       product = Product.create(name: "shoes", price: 9.99, user_id: 1)
@@ -35,4 +39,32 @@ describe ProductsController do
     end
     pending "is only available to signed in users"
   end
+
+  describe "GET edit" do
+    it "renders the edit template" do
+      product = Product.create(name: "shoes", price: 9.99, user_id: 1)
+      get :edit, id: product
+      response.should render_template :edit
+    end
+  end
+
+  describe "POST create" do
+    it "saves the new product to database" do
+      expect{
+        post :create, product: {name: "shoes", price: 9.99, user_id: 1}
+      }.to change(Product,:count).by(1)
+    end
+
+    it "redirects to the list of products" do
+      post :create, product: {name: "shoes", price: 9.99, user_id: 1}
+      response.should redirect_to products_path
+    end
+  end
 end
+
+
+
+
+
+
+
