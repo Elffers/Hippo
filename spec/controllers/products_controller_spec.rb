@@ -59,6 +59,45 @@ describe ProductsController do
       post :create, product: {name: "shoes", price: 9.99, user_id: 1}
       response.should redirect_to products_path
     end
+
+    pending "it properly handles invalid data"
+  end
+
+  describe "PATCH/PUT update" do
+    before :each do
+        @product = Product.create(name: "shoes", price: 9.99, user_id: 1)
+    end
+
+    it "locates the requested product" do
+      put :update, id: @product.id
+      assigns(:product).should eq @product
+    end
+
+    it "changes the products attributes" do
+      put :update, id: @product.id, product: {name: "boots", price: 19.99, user_id: 1}
+    end
+
+    it "redirects the updated product list" do
+      put :update, id: @product.id
+      response.should redirect_to products_path
+    end
+
+    pending "it properly handles invalid data"
+  end
+
+  describe "DELETE destroy" do
+    before :each do
+      @product = Product.create(name: "shoes", price: 9.99, user_id: 1)
+    end
+    it "deletes the product" do
+      expect{
+        delete :destroy, id: @product.id 
+      }.to change(Product, :count).by(-1)
+    end
+    it "redirects to products#index" do
+      delete :destroy, id: @product.id
+      response.should redirect_to products_path
+    end
   end
 end
 

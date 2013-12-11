@@ -11,7 +11,13 @@ Hippo::Application.routes.draw do
   get '/products/new' => "products#new"
   get '/products/edit' => "products#edit"
   get '/products/create' => "products#create"
+  get '/products/destroy' => "products#destroy"
+  get '/products/put' => "products#update"
   
+  #post is a thing that you are doing sometimes
+  # Read about resources HOMEWORK
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
