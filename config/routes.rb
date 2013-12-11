@@ -1,7 +1,8 @@
 Hippo::Application.routes.draw do
-  get "session/new"
+  resources :sessions
   resources :users
   resources :products
+
 
   # get "users/create"  => "users#create"
   # post "users"        => "users#index"
