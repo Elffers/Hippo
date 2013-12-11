@@ -1,5 +1,7 @@
 Hippo::Application.routes.draw do
+  get "session/new"
   resources :users
+  resources :products
 
   # get "users/create"  => "users#create"
   # post "users"        => "users#index"
@@ -9,13 +11,11 @@ Hippo::Application.routes.draw do
   # get "users/"        => "users#index"
   # get "users/:id"     => "users#show"
   
-  get '/products'     => "products#index"
-  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'products#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

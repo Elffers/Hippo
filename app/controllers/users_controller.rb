@@ -14,11 +14,13 @@ class UsersController < ApplicationController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation] 
 
+    #redirect_to @user automatically knows to go to user/id show?
     if @user.save
       redirect_to @user, notice: "You are now a hippo!"
     else
-      flash.now.alert = "There was a problem saving this user! :("
-      render "new"
+      render "new", notice: "There was a problem saving this user! :("
+      # flash.now.alert =  #what does this do??
+      
     end
   end
 
