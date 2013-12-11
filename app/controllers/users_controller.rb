@@ -1,6 +1,27 @@
 class UsersController < ApplicationController
-  def create
+  def new
     @user = User.new
+  end
+
+  def create
+    # unless params[:user][:email] && params[:user][:password] && params[:user][:password_confirmation]
+    #   flash.now.alert = "You did not fill out all the fields!"
+    #   render "new"
+    # end
+
+    @user = User.new()
+    @user.email = params[:user][:email] 
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation] 
+
+    #redirect_to @user automatically knows to go to user/id show?
+    if @user.save
+      redirect_to @user, notice: "You are now a hippo!"
+    else
+      render "new", notice: "There was a problem saving this user! :("
+      # flash.now.alert =  #what does this do??
+      
+    end
   end
 
   def update

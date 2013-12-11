@@ -1,11 +1,8 @@
 Hippo::Application.routes.draw do
-
-  get "users/create" => "users#create"
-  get "users/update" => "users#update"
-  get "users/edit"   => "users#edit"
-  get "users/destroy"=> "users#destroy"
-  get "users/"       => "users#index"
-  get "users/:id"    => "users#show"
+  get "welcome/index"
+  resources :users
+  resources :products
+#This section is probably duplicating things stuff might break, fix this
   get '/products'    => "products#index"
   get '/products/:id' => "products#show"
   get '/products/new' => "products#new"
@@ -13,6 +10,23 @@ Hippo::Application.routes.draw do
   get '/products/create' => "products#create"
   get '/products/destroy' => "products#destroy"
   get '/products/put' => "products#update"
+#End of potential problems
+  get "/sign-up" => "users#new", as: :sign_up
+  # post "/sign-up" => "users#create", as: :sign_up
+  # resources :sessions
+
+  
+  get "/sign-in" => "sessions#new", as: :sign_in
+  post "/sign-in" => "sessions#create", as: :signing_in
+  get "/sign-out" => "sessions#destroy" #, as: :sign_out
+  
+  # get "users/create"  => "users#create"
+  # post "users"        => "users#index"
+  # get "users/update"  => "users#update"
+  # get "users/edit"    => "users#edit"
+  # get "users/destroy" => "users#destroy"
+  # get "users/"        => "users#index"
+  # get "users/:id"     => "users#show"
   
   #post is a thing that you are doing sometimes
   # Read about resources HOMEWORK
@@ -22,7 +36,7 @@ Hippo::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

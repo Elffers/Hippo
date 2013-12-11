@@ -1,8 +1,12 @@
-<h1>Hippos</h1>
 
+params <%=params.inspect%>
+
+<h1>Hippos</h1>
+<ol>
 <% @users.each do |user| %>
-  <%= user %>
+  <li> <%= user.email %></li>
+  
 <% end %>
 
-
+</ol>
 <p>Find me in app/views/user/index.html.erb</p>
