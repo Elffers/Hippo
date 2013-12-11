@@ -1,6 +1,6 @@
 <h1>Hippop In!</h1>
 
-<%= form_tag "/sessions" do %>
+<%= form_tag signing_in_path do %>
   <div class= "field">
     <%= label_tag :email %>
     <%= text_field_tag :email, params[:email] %>

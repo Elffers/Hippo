@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Hippo</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= flash.notice %>
+  <head>
+    <title>Hippo</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  
+  <h1 class="main_heading">Welcome to Hippo</h1>
+  <body>
 
-<%= yield %>
+    <%= flash.notice %>
 
-</body>
+    <%= yield %>
+
+  </body>
 </html>

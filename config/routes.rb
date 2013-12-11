@@ -1,9 +1,17 @@
 Hippo::Application.routes.draw do
-  resources :sessions
+  get "welcome/index"
   resources :users
   resources :products
 
+  get "/sign-up" => "users#new", as: :sign_up
+  # post "/sign-up" => "users#create", as: :sign_up
+  # resources :sessions
 
+  
+  get "/sign-in" => "sessions#new", as: :sign_in
+  post "/sign-in" => "sessions#create", as: :signing_in
+  get "/sign-out" => "sessions#destroy" #, as: :sign_out
+  
   # get "users/create"  => "users#create"
   # post "users"        => "users#index"
   # get "users/update"  => "users#update"
@@ -16,7 +24,7 @@ Hippo::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'products#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
