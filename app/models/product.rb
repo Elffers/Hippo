@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+
    validates :name, presence: true, uniqueness: { case_sensitive: false }
    validates :price, presence: true, numericality: { greater_than: 0 }
    validates :user_id, presence: true
@@ -9,4 +10,5 @@ class Product < ActiveRecord::Base
    belongs_to :user
    has_many :categories, through: :category_products
    has_many :category_products
+
 end
