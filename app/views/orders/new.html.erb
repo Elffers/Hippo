@@ -1,2 +1,17 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+
+params <%=params.inspect%>
+
+<h1>Buy things!</h1>
+
+  <%= form_for @order, url: "/user/#{@user.id}/add_product/#{.id}" do |p| %>
+     <%= p.label :notes %><br />
+     <%= p.text_area :notes %>
+
+     <%= submit_tag("Update") %>
+  <%end%>
+
+
+<% end %>
+  
+  
+
