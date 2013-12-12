@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to @user, notice: "You are now a hippo!"
     else
-      render "new", notice: "There was a problem saving this user! :("
+      render :new, notice: "There was a problem saving this user! :("
       # flash.now.alert =  #what does this do??
       
     end

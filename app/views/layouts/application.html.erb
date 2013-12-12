@@ -16,3 +16,13 @@
 
   </body>
 </html>
+
+<div>
+<%= current_user.inspect %>
+  <% if current_user %> 
+    You are shopping as <%= current_user.name %>!  <a href="/sign-out"> Sign out</a>
+  <% else %> 
+    <a href="/sign-in"> HipPop in!</a>
+    <a href="/sign-up"> Become a hippo!</a>
+  <% end %>
+</div>
