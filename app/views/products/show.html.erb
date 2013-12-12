@@ -1,2 +1,12 @@
+params: <% params.inspect %>
+
+<% if @product.retired == false %>
+<%= @product.name %>
+<%= @product.price %>
+<%= @product.inventory%>
+<%= @product.description %>
+<% end %>
+
+
 <h1>Products#show</h1>
 <p>Find me in app/views/products/show.html.erb</p>

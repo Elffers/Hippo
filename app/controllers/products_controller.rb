@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+# All of these below should only be accessible if the user is signed in
+
   def new
     
   end

@@ -1,4 +1,13 @@
+params <%=params.inspect%>
+
 <% @products.each do |product| %>
-  <%= product.name %>
+  <% if product.retired == false %>
+    <div>
+    <%= product.name %>
+    <!-- Placeholder for merchant name for product -->
+    <%= product.price %>
+    <%= product.inventory %>
+    <%= product.description %>
+    </div>
+  <% end %>
 <% end %>
- hello
