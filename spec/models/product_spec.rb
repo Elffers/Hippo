@@ -48,9 +48,13 @@ describe Product do
     end
 
     describe "retired" do
-      it "must be invalid without retirement status" do
-        expect(Product.new(name: "dress", price: 9.99, user_id: 1, description: "Something you should buy", retired: nil, inventory: 5)).to_not be_valid
+      it "must be valid without retirement status" do
+        expect(Product.new(name: "dress", price: 9.99, user_id: 1, description: "Something you should buy", retired: nil, inventory: 5)).to be_valid
       end
+
+      # it "must be valid with input as 0" do
+      #   expect(Product.new(name: "dress", price: 9.99, user_id: 1, description: "Something you should buy", retired: nil, inventory: 5)).to_not be_valid
+      # end
     end
 
     describe "inventory" do

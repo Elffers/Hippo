@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
    validates :price, presence: true, numericality: { greater_than: 0 }
    validates :user_id, presence: true
    validates :description, presence: true #has photo...CarrierWave???
-   validates :retired, presence: true
    validates :inventory, presence: true, numericality: { greater_than: -1 }
 
    belongs_to :user

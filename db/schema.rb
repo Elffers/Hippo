@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212201420) do
+ActiveRecord::Schema.define(version: 20131212220633) do
 
   create_table "category_products", force: true do |t|
     t.integer  "category_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131212201420) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-    t.boolean  "retired"
+    t.boolean  "retired",     default: false
     t.integer  "inventory"
   end
 
