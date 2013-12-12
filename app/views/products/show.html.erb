@@ -1,6 +1,6 @@
 params: <% params.inspect %>
 
-<% if @product.retired = false %>
+<% if @product.retired == false %>
 <%= @product.name %>
 <%= @product.price %>
 <%= @product.inventory%>
