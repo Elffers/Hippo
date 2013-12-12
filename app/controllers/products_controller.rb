@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  # All of these should only be accessible if the user is signed in
   def show
     @product = Product.find(params[:id])
   end
