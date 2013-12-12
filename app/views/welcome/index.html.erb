@@ -1,12 +1,8 @@
 <div>
-  <a href="/sign-in">HipPop in!</a>
-</div>
-<div>
-  <a href="/sign-up">Become a hippo!</a>
-</div>
-<div>
-  figure out how to say if user is logged in, to show a log out button
-  <% if false %> 
-  <a href="/sign-out">HipPop Away!</a>
+  <% if current_user %> 
+    <a href="/sign-out">HipPop Away!</a>
+  <% else %> 
+    <a href="/sign-in">HipPop in!</a>
+    <a href="/sign-up">Become a hippo!</a>
   <% end %>
 </div>

@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    require_login
     @product = Product.new(product_params)  #User_id might be a security issue, (ask bookis?)
     if @product.save
       redirect_to products_path

@@ -1,7 +1,7 @@
 params <%=params.inspect%>
 
 <% @products.each do |product| %>
-  <% if product.retired == false %>
+  <!-- < if product.retired == false %> -->
     <div>
     <%= product.name %>
     <!-- Placeholder for merchant name for product -->
@@ -9,5 +9,5 @@ params <%=params.inspect%>
     <%= product.inventory %>
     <%= product.description %>
     </div>
-  <% end %>
+
 <% end %>
