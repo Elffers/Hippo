@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id 
-      redirect_to root_path, notice: "Hip Hipporay! You are now logged in as #{user.email}!"
+      redirect_to root_path, notice: "Hip Hipporay! You are now logged in as #{user.name}!"
     else
       render "new", notice: "Invalid email or password :("
     end

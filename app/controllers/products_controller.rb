@@ -19,11 +19,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)  #User_id might be a security issue, (ask bookis?)
-    if @product.save
-      redirect_to products_path
+    if current_user
+      @product = Product.new(product_params)
+      @product.save
+      redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
-      render :new
+      redirect_to sign_in_path, notice: "You must sign in to list a product!"
     end
   end
 
