@@ -14,7 +14,8 @@ class ProductsController < ApplicationController
     @product = Product.new #(user_id: params[:user_id])
   end
 
-  def edit    
+  def edit   
+    @product = Product.find(params[:id]) 
   end
 
   def create
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(params.require(:product).permit(:name, :price, :user_id))
+    if @product.update(product_params)
       redirect_to products_path
     else
       render :edit
