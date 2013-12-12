@@ -1,4 +1,6 @@
 Hippo::Application.routes.draw do
+  get "orders/new"
+  get "orders/index"
   get "welcome/index"
   resources :users
   resources :products
