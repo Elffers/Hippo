@@ -27,9 +27,7 @@ class OrdersController < ApplicationController
       true
     end
 
-
     #this needs to add a product to the order. it is a button on the product show page
-
   end
 
 end

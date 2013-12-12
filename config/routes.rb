@@ -5,13 +5,13 @@ Hippo::Application.routes.draw do
   resources :users
   resources :products
 #This section is probably duplicating things stuff might break, fix this
-  get '/products'    => "products#index"
-  get '/products/:id' => "products#show"
-  get '/products/new' => "products#new"
-  get '/products/edit' => "products#edit"
-  get '/products/create' => "products#create"
-  get '/products/destroy' => "products#destroy"
-  get '/products/put' => "products#update"
+  # get '/products'    => "products#index"
+  # get '/products/:id' => "products#show"
+  # get '/products/new' => "products#new"
+  # get '/products/edit' => "products#edit"
+  # get '/products/create' => "products#create"
+  # get '/products/destroy' => "products#destroy"
+  # get '/products/put' => "products#update"
 #End of potential problems
   get "/sign-up" => "users#new", as: :sign_up
   # post "/sign-up" => "users#create", as: :sign_up
