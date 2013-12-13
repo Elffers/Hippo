@@ -9,10 +9,10 @@ class UsersController < ApplicationController
     #   render "new"
     # end
 
-    @user = User.new()
-    @user.email = params[:user][:email] 
-    @user.password = params[:user][:password]
-    @user.password_confirmation = params[:user][:password_confirmation] 
+    @user = User.new(user_params)
+    # @user.email = params[:user][:email] 
+    # @user.password = params[:user][:password]
+    # @user.password_confirmation = params[:user][:password_confirmation] 
 
     #redirect_to @user automatically knows to go to user/id show?
     if @user.save
@@ -56,4 +56,11 @@ class UsersController < ApplicationController
     @users = User.where name: params[:name]
     render :index
   end
+
+  private
+
+def user_params
+  params.require(:user).permit(:name, :email, :password, :password_confirmation)
+end
+
 end
