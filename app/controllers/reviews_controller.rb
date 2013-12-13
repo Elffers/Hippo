@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def new
-    @reviews = Review.all
+    @reviews = Review.new
   end
 
   def show
@@ -9,12 +9,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if current_user
+    if current_user && current_user.id == @product.user_id,
+      notice: "You can't review your own products. That's cheating. >:("
+    else
       @review = Review.new(review_params)
       @review.save
-      redirect_to "/reviews/#{@review.id}", notice: "We hear ya!"
-    else
-      redirect_to sign_in_path, notice: "You must sign in to post a review!"
+      if current_user
+        redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Review posted as #{current_user.name}."
+      else
+        redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Posted as guest."
+      end    
     end
   end
 
@@ -23,6 +27,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    @review.product_id = params[:id]
     @review = Review.find(params[:id])
     if @review.update(review_params)
       redirect_to reviews_path
@@ -35,6 +40,12 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])  
     @review.destroy
     redirect_to reviews_path  
+  end
+  
+  private
+
+  def review_params
+    params.require(:review).permit(:rating, :description, :product_id)
   end
 
 end
