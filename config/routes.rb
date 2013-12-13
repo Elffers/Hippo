@@ -21,7 +21,7 @@ Hippo::Application.routes.draw do
   # resources :sessions
 
   
-  get "/sign-in" => "sessions#new", as: :sign_in
+  get "/sign-in" => "welcome#index", as: :sign_in
   post "/sign-in" => "sessions#create", as: :signing_in
   get "/sign-out" => "sessions#destroy", as: :sign_out
 

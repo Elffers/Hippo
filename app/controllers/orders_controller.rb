@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   end
   
   def add_product
-    if :current_order
+    if current_order
       @current_order.products << params[:product] #maybe?
     else
       true

@@ -3,12 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
+    order = Order.create
+    session[:order_id] = order.id
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id 
       redirect_to root_path, notice: "Hip Hipporay! You are now logged in as #{user.name}!"
     else
-      render "new", notice: "Invalid email or password :("
+      render :new, notice: "Invalid email or password :("
     end
   end
 
