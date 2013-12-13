@@ -18,12 +18,13 @@
 </html>
 
 <div>
-<%= current_user.inspect %>
+User: <%= current_user.inspect %> <br>
+      <%= current_order.inspect %> <br>
   <% if current_user %> 
-    You are shopping as <%= current_user.name %>!  <a href="/sign-out"> Sign out</a>
+    You are shopping as <%= current_user.name %>!  <a href="/sign-out"> Sign out</a> <br>
   <% else %> 
-    <a href="/sign-in"> HipPop in!</a>
-    <a href="/sign-up"> Become a hippo!</a>
-    <%= current_order.inspect %>
+    <a href="/sign-in"> HipPop in!</a> <br>
+    <a href="/sign-up"> Become a hippo!</a> <br>
+
   <% end %>
 </div>

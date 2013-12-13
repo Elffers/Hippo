@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    @current_order ||= Order.find(session[:order_id]) if session[:order_id]
+    @current_order ||= Order.find(session[:order_id]) 
+  rescue ActiveRecord::RecordNotFound #rescue is cued by error from nil 
+    @current_order = Order.create
+    session[:order_id] = @current_order.id
+    @current_order
   end
 
   helper_method :current_order
