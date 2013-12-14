@@ -1,8 +1,13 @@
 params: <%=params.inspect%>
   
-<%=@user.id%>
-<%=@user.email%>
-<%@user.products.each do |product|%>
-<%=product%>
-<% end %>
+<ol>
+  <li> USER ID: <%=@user.id%> </li>
+  <li> USER EMAIL: <%=@user.email%></li>
+  <li> 
+    PRODUCTS:
+    <%@user.products.each do |product|%>
+    <%=product%>
+    <% end %>
+  </li>
+</ol>
 

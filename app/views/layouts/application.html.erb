@@ -18,13 +18,37 @@
 </html>
 
 <div>
+      <hr>
 User: <%= current_user.inspect %> <br>
       <%= current_order.inspect %> <br>
-  <% if current_user %> 
-    You are shopping as <%= current_user.name %>!  <a href="/sign-out"> Sign out</a> <br>
-  <% else %> 
-    <a href="/sign-in"> HipPop in!</a> <br>
-    <a href="/sign-up"> Become a hippo!</a> <br>
+      <hr>
 
-  <% end %>
 </div>
+  <div class='nav_bar'>
+    <ul>
+      <li id='search'>
+        <%#= form_tag("/search", method: "get" do %>
+          <%#= label_tag("Search") %>
+          <%#= text_field_tag(:product, params[:category]) %>
+        <%# end %>
+      </li>
+      <li>
+        <% if current_user %> 
+        <%= link_to "Hi, #{current_user.name}", user_path(current_user.id) %>
+          <alt= 'Username'>
+        <li></a><a href="/sign-out"> Sign out</a> </li>
+        <% else %> 
+          Hi, Guest!
+        <li><a href="/sign-in"> HipPop in!</a> </li>
+        <% end %>
+      </li>
+      <li>
+        <a href="/orders/<%=current_order.id%>">
+          Items in cart: <%= current_order.order_products.count %> <alt= 'Items in Cart'>
+        </a>
+      </li>
+    </ul>
+  </div> 
+
+    </body>
+  <html>
