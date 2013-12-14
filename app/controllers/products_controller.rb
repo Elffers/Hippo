@@ -44,7 +44,8 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.where name: params[:name] || Product.where 
+    @products = Product.where name: params[:product] 
+    render :index, notice: "these are all the products named #{params[:product]}"
   end
 end
 

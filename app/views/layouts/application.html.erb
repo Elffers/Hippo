@@ -27,10 +27,11 @@ User: <%= current_user.inspect %> <br>
   <div class='nav_bar'>
     <ul>
       <li id='search'>
-        <%#= form_tag("/search", method: "get" do %>
-          <%#= label_tag("Search") %>
-          <%#= text_field_tag(:product, params[:category]) %>
-        <%# end %>
+        <%= form_tag("/search", method: "get") do %>
+          <%= label_tag("Search") %>
+          <%= text_field_tag(:product, params[:product]) %>
+          <%= submit_tag("Search") %>
+        <% end %> 
       </li>
       <li>
         <% if current_user %> 
