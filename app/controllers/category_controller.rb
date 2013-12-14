@@ -1,6 +1,11 @@
 class CategoryController < ApplicationController
   def new
-    category = Category.new
+    require_login
+    @category = Category.new
+  end
+
+  def create
+    @category = Category.new(category_params)
   end
 
   def index
@@ -9,5 +14,11 @@ class CategoryController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @products = Product.all
+  end
+
+  private
+  def category_params
+    params.require(:category).permit(:name)
   end
 end
