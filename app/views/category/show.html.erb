@@ -1,0 +1,15 @@
+params: <% params.inspect %>
+
+<%= @category.name %>
+<% @products.each do |product| %>
+  <% if product.category.include?(product) %>
+
+    <div>
+    <%= product.name %>
+    <%= product.price %>
+    <%= product.inventory %>
+    <%= product.description %>
+    </div>
+    
+  <% end %>
+<% end %>
