@@ -1,12 +1,14 @@
-params <%=params.inspect%>
+params <%=params.inspect%><br>
+<hr>
+NOTICE: <%=flash[:notice] %>
 
-<% @products.each do |product| %>
- <% unless product.retired %>
-
-    <div>
-    <%= product.name %>
-    <%= product.price %>
-    <%= product.inventory %>
-    <%= product.description %>
-    </div>
-<% end %>
+<div>
+  <% @products.each do |product| %>
+   <%# unless product.retired %>
+      <%= product.name %>
+      <%= product.price %>
+      <%= product.inventory %>
+      <%= product.description %> 
+    <%# end %>
+  <% end %>
+</div>
