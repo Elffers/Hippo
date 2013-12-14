@@ -43,9 +43,20 @@ class ProductsController < ApplicationController
     redirect_to products_path  
   end
 
+  def search_by_name
+     @products = Product.where name: params[:product] 
+  end
+
+
   def search
-    @products = Product.where name: params[:product] 
-    render :index, notice: "these are all the products named #{params[:product]}"
+    @products = Product.where('name = ? OR description LIKE ?', params[:product], "%#{params[:product]}%" )
+    if @products == []
+      flash[:notice] = "No items match your search"
+      redirect_to root_path
+    else 
+      flash[:notice] = "these are all the products named #{params[:product]}"
+      render :index
+    end
   end
 end
 

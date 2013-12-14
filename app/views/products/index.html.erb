@@ -1,6 +1,7 @@
-params <%=params.inspect%>
-<%= flash.notice %>
+params <%=params.inspect%><br>
 <hr>
+NOTICE: <%=flash[:notice] %>
+
 <div>
   <% @products.each do |product| %>
    <%# unless product.retired %>
