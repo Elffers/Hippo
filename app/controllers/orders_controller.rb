@@ -21,14 +21,35 @@ class OrdersController < ApplicationController
   end
   
   def add_product
-    if current_order
-      current_order.products =params[:product] #maybe?
-    else
-      true
+    @product = Product.find(params[:product_id])
+    @orderproduct = OrderProduct.new
+    @orderproduct[:order_id] = current_order.id 
+    @orderproduct[:product_id] = @product.id 
+    @orderproduct.save
+    @products = showproducts
+      if @orderproduct.save
+      # if current_order  
+      # else
+      #   true
+      # end
+      render :show
+    else 
+      true        
     end
-
-    #this needs to add a product to the order. it is a button on the product show page
   end
 
+
+private
+
+  def showproducts
+    current_order.products.map do |product|
+      [product.name]
+    end
+  end
+    # def orderproduct_params
+  #   params.require(:order_products).permit(:order_id, :product_id, :quantity)
+  # end
+
 end
+
 
