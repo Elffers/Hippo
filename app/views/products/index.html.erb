@@ -3,12 +3,17 @@ params <%=params.inspect%><br>
 NOTICE: <%=flash[:notice] %>
 
 <div>
-  <% @products.each do |product| %>
-   <%# unless product.retired %>
-      <%= product.name %>
-      <%= product.price %>
-      <%= product.inventory %>
-      <%= product.description %> 
-    <%# end %>
-  <% end %>
+  <ul>
+    <% @products.each do |product| %>
+     <%# unless product.retired %>
+      <li><%= link_to "#{product.name}", product_path(product.id) %></li>
+      <li><%= product.price %></li>
+      <li><%= product.inventory %></li>
+      <li><%= product.description %></li> 
+        <!-- #will have to define @orderproduct for any action that renders this page -->
+        <%= button_to "Add to Cart", add_product_path(current_order.id, product.id), :method => :post %>
+      </li>
+      <%# end %>
+    <% end %>
+  </ul>
 </div>

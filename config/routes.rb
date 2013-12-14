@@ -24,9 +24,15 @@ Hippo::Application.routes.draw do
   get "/sign-in" => "sessions#new", as: :sign_in
   post "/sign-in" => "sessions#create", as: :signing_in
   get "/sign-out" => "sessions#destroy", as: :sign_out
+<<<<<<< HEAD
   
   get "/orders/:id" => "orders#show"
   post "/orders/:id/add_product/:product_id" => "orders#add_product"
+=======
+
+  post "/orders/:id/add_product/:product_id" => "orders#add_product", as: :add_product
+  get "orders/:id" => "orders#show"
+>>>>>>> 923d250907ba1bb7a57f1a6c22eaaf06b3e548de
 
   get "/search" => "products#search"
 
