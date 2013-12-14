@@ -13,9 +13,6 @@ class OrdersController < ApplicationController
   def update
   end
 
-  def index
-  end
-
   def show
     @order = Order.find(params[:id])
   end
@@ -25,8 +22,7 @@ class OrdersController < ApplicationController
       @current_order.products << params[:product] #maybe?
     else
       true
-    end
-
+    end 
     #this needs to add a product to the order. it is a button on the product show page
   end
 
