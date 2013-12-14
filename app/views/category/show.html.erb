@@ -2,7 +2,7 @@ params: <% params.inspect %>
 
 <%= @category.name %>
 <% @products.each do |product| %>
-  <% if product.category.include?(product) %>
+  <% if @category.products.include?(product) %>
 
     <div>
     <%= product.name %>
