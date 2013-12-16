@@ -6,8 +6,6 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
-  
-  <h1 class="main_heading">Welcome to Hippo</h1>
 
   <body>
 
@@ -26,17 +24,12 @@
     <hr>
 
   </div> -->
-<!--     <div class='nav_bar_wrapper'> -->
+
       <div class='nav_bar'>
         <ul>
-       <!--    <li id='search'>
-            <%= form_tag("/search", method: "get") do %>
-              <%= label_tag("Search") %>
-              <%= text_field_tag(:product, params[:product]) %>
-              <%= submit_tag("Search") %>
-            <% end %> 
-          </li> -->
-
+          <li>
+            <a href="/"><img src="http://i.imgur.com/TsoZSGz.jpg" title="Welcome to Hippo!", height="45" width="45"></a>
+          </li>
           <li>
             <% if current_user %> 
               <%= link_to "Hi, #{current_user.name}!", user_path(current_user.id) %>
@@ -57,7 +50,6 @@
         </ul>
 
       </div> 
- <!--    </div>  -->
 
     <div class='search_bar'>
       <%= form_tag("/search", method: "get") do %>
