@@ -13,7 +13,8 @@
  */
 
  html, body {
-/*  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; */
+  font-family: arial, sans-serif;
+  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,19 +24,40 @@
   height:100%;
 }
 
-.main_heading {
-  font-family: arial, sans-serif;
-  font-size: 48pt;
+
+.nav_bar {
+  position: fixed;
+  width: 100%;
+  height: 48px;
+  top: 0;
+  background-color: #C1A5A5;
   text-align: center;
-  background: #C1A5A5;
+  padding-bottom: 15px;
 }
 
 .nav_bar ul {
-  list-style: none;
-  font-family: arial, sans-serif;
+  top: 0;
+  position: fixed;
+}
+
+.nav_bar ul li {
+  top: 0;
+  width: 250px;
   font-size: 18pt;
-  background: #C1A5A5;
-  display: block;
-  postion: relative;
+  display: inline-block;
+}
+
+.content {
+  background: white;
+}
+
+.search_bar{
+  position: fixed;
+  width: 100%;
+  height: 32px;
+  bottom: 0;
+  background-color: #C1A5A5;
+  text-align: right;
+  padding-right: 50px;
 }
 

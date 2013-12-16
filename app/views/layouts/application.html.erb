@@ -6,12 +6,12 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
-  
-  <h1 class="main_heading">Welcome to Hippo</h1>
 
   <body>
 
-    <%= yield %>
+    <div class='content'>
+      <%= yield %>
+    </div>
 
   </body>
 
@@ -25,35 +25,38 @@
 
   </div> -->
 
-    <div class='nav_bar'>
-      <ul>
-        <li id='search'>
-          <%= form_tag("/search", method: "get") do %>
-            <%= label_tag("Search") %>
-            <%= text_field_tag(:product, params[:product]) %>
-            <%= submit_tag("Search") %>
-          <% end %> 
-        </li>
+      <div class='nav_bar'>
+        <ul>
+          <li>
+            <a href="/"><img src="http://i.imgur.com/TsoZSGz.jpg" title="Welcome to Hippo!", height="45" width="45"></a>
+          </li>
+          <li>
+            <% if current_user %> 
+              <%= link_to "Hi, #{current_user.name}!", user_path(current_user.id) %>
+                <alt= 'Username'>
+              <li></a><a href="/sign-out"> Sign out</a> </li>
+            <% else %> 
+              Hi, Guest!
+              <li><a href="/sign-in"> HipPop in!</a> </li>
+              <li><a href="/users/new">Become a Hippo!</a></li>
+            <% end %>
+          </li>
 
-        <li>
-          <% if current_user %> 
-            <%= link_to "Hi, #{current_user.name}", user_path(current_user.id) %>
-              <alt= 'Username'>
-            <li></a><a href="/sign-out"> Sign out</a> </li>
-          <% else %> 
-            Hi, Guest!
-            <li><a href="/sign-in"> HipPop in!</a> </li>
-            <li><a href="/users/new">Become a Hippo!</a></li>
-          <% end %>
-        </li>
+          <li>
+            <a href="/orders/<%=current_order.id%>">
+              Items in cart: <%= current_order.order_products.count %> <alt= 'Items in Cart'>
+            </a>
+          </li>
+        </ul>
 
-        <li>
-          <a href="/orders/<%=current_order.id%>">
-            Items in cart: <%= current_order.order_products.count %> <alt= 'Items in Cart'>
-          </a>
-        </li>
-      </ul>
+      </div> 
 
-  </div> 
+    <div class='search_bar'>
+      <%= form_tag("/search", method: "get") do %>
+        <%= label_tag("Have something in mind?") %>
+        <%= text_field_tag(:product, params[:product]) %>
+        <%= submit_tag("Search!") %>
+      <% end %> 
+    </div>
 
 </html>
