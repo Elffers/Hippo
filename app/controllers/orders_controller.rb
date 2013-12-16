@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  
+  before_action :set_order, except: [:new, :create]
+
   def new
     @order = Order.new
   end
@@ -17,39 +18,25 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
   end
   
   def add_product
-    @product = Product.find(params[:product_id])
-    @orderproduct = OrderProduct.new
-    @orderproduct[:order_id] = current_order.id 
-    @orderproduct[:product_id] = @product.id 
-    @orderproduct.save
-    @products = showproducts
+    @orderproduct = OrderProduct.new(order_id: current_order.id, product_id: params[:product_id])
+    @products = current_order.products #this returns objects-- iterate in HTML
       if @orderproduct.save
-      # if current_order  
-      # else
-      #   true
-      # end
-      render :show
+      redirect_to order_path(current_order) #changes url
     else 
-      true        
+      flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
+      render :"/product/show"      
     end
   end
 
 
 private
 
-  def showproducts
-    current_order.products.map do |product|
-      [product.name]
-    end
+  def set_order
+    @order = current_order
   end
-    # def orderproduct_params
-  #   params.require(:order_products).permit(:order_id, :product_id, :quantity)
-  # end
-
 end
 
 
