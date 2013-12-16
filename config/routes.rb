@@ -32,12 +32,11 @@ Hippo::Application.routes.draw do
   get "/sign-out" => "sessions#destroy", as: :sign_out
 
   post "/orders/:id/add_product/:product_id" => "orders#add_product", as: :add_product
-  get "orders/:id" => "orders#show"
+  get "orders/:id" => "orders#show", as: :order
+
 
   get "/search" => "products#search"
 
-  
-  
   get "users/new"  => "users#new"
   # post "users"        => "users#index"
   # get "users/update"  => "users#update"

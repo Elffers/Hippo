@@ -1,10 +1,10 @@
-params: <% params.inspect %>
-
-<%= @product.name %>
-<%= @product.price %>
-<%= @product.inventory%>
-<%= @product.description %>
-
-
+<div class= "productshow">
+  <h1><%= @product.name.capitalize %></h2>
+  <ul>
+    <li>$<%= @product.price %></li> <!-- this isn't showing the two zeros! -->
+    <li><%= @product.inventory%></li>
+    <li><%= @product.description %></li>
+  </ul>
+</div>
 
 
