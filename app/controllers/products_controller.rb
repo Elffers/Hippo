@@ -8,10 +8,13 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-# All of these below should only be accessible if the user is signed in
-
   def new
-    @product = Product.new #(user_id: params[:user_id])
+    @categor
+    if current_user
+      @product = Product.new #(user_id: params[:user_id])
+    else
+      redirect_to sign_in_path, notice: "You must sign in to list a product!"
+    end
   end
 
   def edit   
@@ -19,17 +22,19 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if current_user
-      @product = Product.new(product_params)
-      @product.save
-      redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
-    else
-      redirect_to sign_in_path, notice: "You must sign in to list a product!"
-    end
+    @product = Product.new(product_params)
+    
+    @product.save
+    redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
   end
 
   def update
     @product = Product.find(params[:id])
+    params[:product][:categories].each do |category_id|
+      next if category_id.to_i == 0
+      category = Category.find(category_id.to_i)
+      @recipe.categories << category
+    end
     if @product.update(product_params)
       redirect_to products_path
     else

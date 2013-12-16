@@ -12,6 +12,14 @@ params <%=params.inspect%>
       </ul>
     </div>
   <% end %>
+  <div>
+  <%= select(:category_products,
+               :product_id,
+               Category.all.collect { |p| [p.name, p.id] },
+               {:selected => CategoryProduct.where(:product_id => @product.id).map(&:category_id)},
+               {'name' => 'product[category][]', :multiple => true}) %>
+  </div>
+  Want to create a <a href="/categories/new">new category</a>?
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
