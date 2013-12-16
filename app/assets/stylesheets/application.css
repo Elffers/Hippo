@@ -11,3 +11,29 @@
  *= require_self
  *= require_tree .
  */
+
+ html, body {
+  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.main_heading {
+  font-family: arial, sans-serif;
+  font-size: 48pt;
+  text-align: center;
+  background: #C1A5A5;
+}
+
+.nav_bar ul {
+  font-family: arial, sans-serif;
+  font-size: 18pt;
+  background: #C1A5A5;
+  display: block;
+  postion: relative;
+}

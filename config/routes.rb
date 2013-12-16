@@ -35,15 +35,16 @@ Hippo::Application.routes.draw do
   get "orders/:id" => "orders#show"
 
   get "/search" => "products#search"
+
   
   
-  # get "users/create"  => "users#create"
+  get "users/new"  => "users#new"
   # post "users"        => "users#index"
   # get "users/update"  => "users#update"
   # get "users/edit"    => "users#edit"
   # get "users/destroy" => "users#destroy"
   # get "users/"        => "users#index"
-  # get "users/:id"     => "users#show"
+  get "users/:id"     => "users#show"
   
   #post is a thing that you are doing sometimes
   # Read about resources HOMEWORK
