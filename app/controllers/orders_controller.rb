@@ -34,6 +34,16 @@ class OrdersController < ApplicationController
     redirect_to order_path(current_order)
   end
 
+  def checkout
+    if current_order.status == "pending"
+      #checkout, fill in payment info
+      redirect_to payment_path
+    else
+      flash[:notice] = "You cannot checkout this order"
+      render :show
+    end
+  end
+
 
 private
 
