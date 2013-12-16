@@ -30,26 +30,20 @@ Hippo::Application.routes.draw do
   get "/sign-in" => "sessions#new", as: :sign_in
   post "/sign-in" => "sessions#create", as: :signing_in
   get "/sign-out" => "sessions#destroy", as: :sign_out
-<<<<<<< HEAD
-  
-  get "/orders/:id" => "orders#show"
-  post "/orders/:id/add_product/:product_id" => "orders#add_product"
-=======
 
   post "/orders/:id/add_product/:product_id" => "orders#add_product", as: :add_product
   get "orders/:id" => "orders#show"
->>>>>>> 923d250907ba1bb7a57f1a6c22eaaf06b3e548de
+
 
   get "/search" => "products#search"
 
-  
-  # get "users/create"  => "users#create"
+  get "users/new"  => "users#new"
   # post "users"        => "users#index"
   # get "users/update"  => "users#update"
   # get "users/edit"    => "users#edit"
   # get "users/destroy" => "users#destroy"
   # get "users/"        => "users#index"
-  # get "users/:id"     => "users#show"
+  get "users/:id"     => "users#show"
   
   #post is a thing that you are doing sometimes
   # Read about resources HOMEWORK
