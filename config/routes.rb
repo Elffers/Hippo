@@ -33,11 +33,9 @@ Hippo::Application.routes.draw do
 
   post "/orders/:id/add_product/:product_id" => "orders#add_product", as: :add_product
   get "orders/:id" => "orders#show", as: :order
-
+  delete '/orders/:id/remove_product/:product_id' => "orders#remove_product", as: :remove_product
+  
   get "/search" => "products#search"
-
-  
-  
   get "users/new"  => "users#new"
   # post "users"        => "users#index"
   # get "users/update"  => "users#update"

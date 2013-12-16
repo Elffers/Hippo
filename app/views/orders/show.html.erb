@@ -10,9 +10,11 @@ OrderProduct: <%= @orderproduct.inspect %>
 These are the products in your order:
 
 <ol>
-<% @products.map do |product| %>
+<% @products.each do |product| %>
  <li> <%= link_to "#{product.name.upcase}", product_path(product) %></li>
+      <%= button_to "delete", remove_product_path(current_order.id, product.id), method: :delete %>
 <% end %> 
 </ol>
 
 </div>
+

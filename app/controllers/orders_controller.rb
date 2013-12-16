@@ -31,6 +31,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def remove_product
+    @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
+    @orderproduct.destroy
+    redirect_to order_path(current_order)
+  end
+
 
 private
 
