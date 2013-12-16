@@ -1,3 +1,5 @@
+<div class= "ordershow">
+
 Params: <%= params.inspect %> <br>
 
 Order: <%= current_order.inspect %>
@@ -6,6 +8,11 @@ Order: <%= current_order.inspect %>
 OrderProduct: <%= @orderproduct.inspect %>
 
 These are the products in your order:
-<%= @products %>
 
-current_order.products.each do 
+<ol>
+<% @products.map do |product| %>
+ <li> <%= link_to "#{product.name}", product_path %></li>
+<% end %> 
+</ol>
+
+</div>

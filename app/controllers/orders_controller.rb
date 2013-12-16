@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, except: [:new, :create]
+  before_action :set_products, only: [:show, :add_product]
 
   def new
     @order = Order.new
@@ -22,7 +23,6 @@ class OrdersController < ApplicationController
   
   def add_product
     @orderproduct = OrderProduct.new(order_id: current_order.id, product_id: params[:product_id])
-    @products = current_order.products #this returns objects-- iterate in HTML
       if @orderproduct.save
       redirect_to order_path(current_order) #changes url
     else 
@@ -35,7 +35,11 @@ class OrdersController < ApplicationController
 private
 
   def set_order
-    @order = current_order
+    @order = current_order 
+  end
+
+  def set_products
+    @products = current_order.products  #this returns objects-- iterate in HTML
   end
 end
 
