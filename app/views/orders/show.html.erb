@@ -11,7 +11,7 @@ These are the products in your order:
 
 <ol>
 <% @products.map do |product| %>
- <li> <%= link_to "#{product.name}", product_path %></li>
+ <li> <%= link_to "#{product.name.upcase}", product_path(product) %></li>
 <% end %> 
 </ol>
 

@@ -9,5 +9,13 @@ params: <%=params.inspect%>
     <%=product%>
     <% end %>
   </li>
+  <li>    
+    ORDERS:
+    CURRENT ORDER:
+    <%= link_to "#{current_order}", order_path(current_order.id)%>
+    <%@user.orders do |order|%>
+    <%=order%>
+    <% end %></li>
 </ol>
 
+<!-- make sure current order is at the top, maybe retired are a different opacity? -->
