@@ -18,8 +18,7 @@ params <%=params.inspect%>
     </div>
   <% end %>
   <div>
-  <%= select(:category_products,
-               :product_id,
+    <%= f.select(:category_products,
                Category.all.collect { |p| [p.name, p.id] },
                {:selected => CategoryProduct.where(:product_id => @product.id).map(&:category_id)},
                {'name' => 'product[category][]', :multiple => true}) %>
