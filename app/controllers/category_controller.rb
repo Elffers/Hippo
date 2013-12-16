@@ -6,6 +6,7 @@ class CategoryController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.save
   end
 
   def index
