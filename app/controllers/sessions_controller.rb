@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:order_id] = nil
     redirect_to root_path, notice: "You are now logged out! Hip Hop awaaaaaayyy!"
   end
 

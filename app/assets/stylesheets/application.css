@@ -13,7 +13,7 @@
  */
 
  html, body {
-  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
+/*  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,9 +31,11 @@
 }
 
 .nav_bar ul {
+  list-style: none;
   font-family: arial, sans-serif;
   font-size: 18pt;
   background: #C1A5A5;
   display: block;
   postion: relative;
 }
+
