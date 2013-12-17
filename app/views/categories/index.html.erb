@@ -2,6 +2,6 @@ params <%=params.inspect%>
 
 <% @categories.each do |category| %>
     <div>
-    <%= category.name %>
+    <%=link_to "#{category.name}", category_path(category.id) %>
     </div>
 <% end %>
