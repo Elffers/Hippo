@@ -60,8 +60,9 @@ class OrdersController < ApplicationController
   def checkout
   end
 
-  def submit_payment
-    
+  def submit
+   current_order.update(status:params[:payment_method])
+   #Here, alert each user in Order.products.each do {|x| find the user associated w/product and alert them} 
   end
 
 

@@ -47,7 +47,7 @@ Hippo::Application.routes.draw do
   get "users/:id"     => "users#show"
 
   get "/checkout"     => "orders#checkout", as: :checkout
-  post "/checkout"    => "orders#submit_payment", as: :pay
+  post "/checkout"    => "orders#submit", as: :pay
   root 'welcome#index'
 
   # Example of regular route:
