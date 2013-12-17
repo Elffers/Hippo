@@ -22,7 +22,7 @@ Hippo::Application.routes.draw do
   get "/categories" => "categories#index"
   get "/categories/new" => "categories#new"
   post "/categories" => "categories#create"
-  get "/categories/:id" => "categories#show"
+  get "/categories/:id" => "categories#show", as: :category
 
 
   get "/sign-up" => "users#new", as: :sign_up

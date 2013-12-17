@@ -1,15 +1,24 @@
 params: <% params.inspect %>
 
-<%= @category.name %>
-<% @products.each do |product| %>
-  <% if @category.products.include?(product) %>
+<hr>
 
-    <div>
-    <%= product.name %>
-    <%= product.price %>
-    <%= product.inventory %>
-    <%= product.description %>
-    </div>
-    
-  <% end %>
-<% end %>
+<%= @category.name.upcase %>
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Inventory</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr><% @products.each do |product| %>
+      <% if @category.products.include?(product) %>
+        <td> <%= product.name.capitalize %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= product.inventory %></td>
+        <td><%= product.description %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
