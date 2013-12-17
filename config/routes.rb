@@ -38,7 +38,7 @@ Hippo::Application.routes.draw do
   get "orders/:id" => "orders#show"
 
   get "/search" => "products#search"
-  
+  get "products/new" => 'products#new'
   
   # get "users/create"  => "users#create"
   # post "users"        => "users#index"

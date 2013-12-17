@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def new
     if current_user
       @product = Product.new #(user_id: params[:user_id])
+      render :new
     else
       redirect_to sign_in_path, notice: "You must sign in to list a product!"
     end
