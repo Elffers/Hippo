@@ -1,3 +1,46 @@
-<%= form_for @order do |f| %>
-<%= f.label %>
-<%= f.text_field %>
+
+<%= form_tag pay_path do %>
+<% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
+  Payment method:
+  <div class= "field">
+    <%#= label_tag :payment_method %>
+    <%#= select_tag :payment_method, options_for_select(payment) %>
+  </div>
+
+  <%= radio_button_tag(:payment_method, "Visa") %>
+  <%= label_tag(:payment_method, "Visa") %>
+
+  <%= radio_button_tag(:payment_method, "MasterCard") %>
+  <%= label_tag(:payment_method, "MasterCard") %>
+
+  <%= radio_button_tag(:payment_method, "PayPal") %>
+  <%= label_tag(:payment_method, "PayPal") %>
+
+  <%= radio_button_tag(:payment_method, "Bitcoins") %>
+  <%= label_tag(:payment_method, "Bitcoins") %>
+
+  <br><br>
+  <div class= "field">
+    <%= label_tag :address1, "Street address:" %>
+    <%= text_field_tag :address1, params[:address1] %>
+  </div>
+  <div class= "field">
+    <%= label_tag :address2, "Street address (2)" %>
+    <%= text_field_tag :address2, params[:address2] %>
+  </div>
+  <div class= "field">
+    <%= label_tag :city %>
+    <%= text_field_tag :city, params[:city] %>
+  </div>
+  <div class= "field">
+    <%= label_tag :state %>
+    <%= text_field_tag :state, params[:state] %>
+  </div>
+   <div class= "field">
+    <%= label_tag :zip_code %>
+    <%= text_field_tag :zip_code, params[:zip_code] %>
+  </div>
+  <%= submit_tag "Submit payment!" %>
+
+<% end %>
+

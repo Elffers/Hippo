@@ -1,12 +1,9 @@
 <%=flash.notice %>
 <hr>
-<div class= "ordershow">
-
 Order: <%= current_order.inspect %>
 <hr>
 
-OrderProduct: <%= @orderproduct.inspect %>
-
+<div class= "ordershow">
 These are the products in your order:
 <table>
   <thead>
@@ -54,6 +51,7 @@ These are the products in your order:
 <div>
   <%= link_to "Proceed to checkout", checkout_path %></li>
 </div>
-<%= link_to "Back to browsing", root_path %>
+<%= link_to "Back to browsing", root_path %><br>
+<%= link_to "Back to profile", user_path(current_user.id) %>
 <!-- 
 needs a "keep shopping link" -->

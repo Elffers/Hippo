@@ -36,10 +36,6 @@ class OrdersController < ApplicationController
         flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
         render :show
       end
-    # else
-    #   flash[:notice] = "You already have this product in your cart"
-    #   render :show
-    # end
     end
   end
 
@@ -62,13 +58,9 @@ class OrdersController < ApplicationController
 
 
   def checkout
-    if current_order.status == "pending"
-      #checkout, fill in payment info
-      redirect_to payment_path
-    else
-      flash[:notice] = "You cannot checkout this order"
-      render :show
-    end
+  end
+
+  def submit_payment
   end
 
 
