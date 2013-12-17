@@ -33,11 +33,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     #Instead of Params block productcategory.new(productcategory params private method)
     #Private method product catagory Params params.require.productcategory.permit(product_id, category_id)
-    params[:product][:category].each do |category_id|
-      next if category_id.to_i == 0
-      category = Category.find(category_id.to_i)
-      @product.categories << category
-    end
+    
     # @category_product.new(category_product_params).save
     if @product.update(product_params)
       redirect_to products_path
