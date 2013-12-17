@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new #(user_id: params[:user_id])
+
   end
 
   def edit   
@@ -21,6 +22,7 @@ class ProductsController < ApplicationController
   def create
     if current_user
       @product = Product.new(product_params)
+      @product[:user_id] = current_user.id
       @product.save
       redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
