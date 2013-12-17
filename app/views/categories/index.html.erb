@@ -1,9 +1,10 @@
 params <%=params.inspect%>
 <hr>
-
+<ul>
 <% @categories.each do |category| %>
     <div>
-    <%= link_to "#{category.name}", category_path(category.id) %>
+   <li> <%= link_to "#{category.name.capitalize}", category_path(category.id) %></li>
 
     </div>
 <% end %>
+</ul>
