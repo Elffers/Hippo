@@ -1,3 +1,21 @@
 .ordershow {
   background-color: white;
 }
+
+
+table {
+  border: 2px solid black;
+  border-spacing: 0;
+}
+
+td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+th {
+  border: 1px solid black;
+  border-bottom: 3px solid black;
+  padding: 10px;
+  background-color: #D8F6CE;
+}

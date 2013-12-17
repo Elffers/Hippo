@@ -1,3 +1,5 @@
+<%=flash.notice %>
+<hr>
 <div class= "ordershow">
 
 Order: <%= current_order.inspect %>
@@ -17,8 +19,21 @@ These are the products in your order:
   <tbody> 
     <tr>
       <% @products.each do |product| %>
-        <td> <%= link_to "#{product.name.capitalize}", product_path(product) %></td>
-        <td> <%= OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity %></td>
+        <td><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
+        <td><%= OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity %>
+            <%#= button_to "Change", update_quantity_path(current_order.id, product.id), method: :patch %>
+            <%#= form_for @orderproduct, url: add_product_path(current_order.id, product.id) do |f| %>
+              <%#= f.label "Update quantity" %>
+              <%#= f.number_field :quantity %>
+              <%#= f.submit "Update!"%>
+            <%# end %>
+            <%= form_tag(update_quantity_path(current_order.id, product.id), method: "patch") do %>
+            <%=  number_field_tag(:quantity) %>
+            <%=  submit_tag "Update!" %>
+          <% end %>
+      </li>
+
+        </td>
         <td><%= button_to "delete", remove_product_path(current_order.id, product.id), method: :delete %></td>
     </tr>
       <% end %>
