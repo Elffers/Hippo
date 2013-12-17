@@ -24,7 +24,7 @@ These are the products in your order:
         <td><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
         <td><%= OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity %>
             <%= form_tag(update_quantity_path(current_order.id, product.id), method: "patch") do %>
-            <%=  number_field_tag(:quantity, params[:quantity], min: 1) %>
+            <%=  number_field_tag(:quantity, params[:quantity], min: 1, class: "number_field") %>
             <%=  submit_tag "Update!" %>
           <% end %>
         </td>
@@ -46,9 +46,9 @@ These are the products in your order:
       </td>
       <td></td>
       <td><%= number_to_currency(subtotals.reduce(:+))%></td>
+      <td></td>
      </tr>
   </tbody>
-
 </table>
 
 <div>
