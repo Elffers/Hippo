@@ -1,53 +1,7 @@
 params <%=params.inspect%>
 
 <h1>List a product</h1>
-<p>Choose the categories that describe this product:</p>
-    
 
+<%= render 'add_category_form' %>
 
-
-<%= form_for @product do |f| %>
-  <% if @product.errors.any? %>
-  <div class= "error_messages">
-    <h2> Form is invalid </h2>
-    <ul>
-      <% for message in @product.errors.full_messages %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div>
-    <%= f.select(:category_products,
-               Category.all.collect { |p| [p.name, p.id] },
-               {:selected => CategoryProduct.where(:product_id => @product.id).map(&:category_id)},
-               {'name' => 'product[category][]', :multiple => true}) %>
-  </div>
-  Want to create a <a href="/categories/new">new category</a>?
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :price, "How much?" %>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label(:retired) %>
-    <%= f.check_box :retired %>
-  </div>
-  <div class="field">
-    <%= f.label :inventory %>
-    <%= f.number_field :inventory %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class= "actions"><%=f.submit %></div>
-<% end %>
+<%= render 'base_form' %>

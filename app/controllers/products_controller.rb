@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @categor
     if current_user
       @product = Product.new #(user_id: params[:user_id])
     else
@@ -21,20 +20,25 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id]) 
   end
 
-  def create
+  def create #If @product save, else render edit
     @product = Product.new(product_params)
-    
-    @product.save
-    redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
+    if @product.save
+      redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
+    else
+      redirect_to "/products/new", notice: "There was an error, try again."
+    end
   end
 
   def update
     @product = Product.find(params[:id])
-    params[:product][:categories].each do |category_id|
+    #Instead of Params block productcategory.new(productcategory params private method)
+    #Private method product catagory Params params.require.productcategory.permit(product_id, category_id)
+    params[:product][:category].each do |category_id|
       next if category_id.to_i == 0
       category = Category.find(category_id.to_i)
-      @recipe.categories << category
+      @product.categories << category
     end
+    # @category_product.new(category_product_params).save
     if @product.update(product_params)
       redirect_to products_path
     else
@@ -71,5 +75,7 @@ def product_params
   params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :retired)
 end
 
-
+# def category_product_params
+#   params.require(:category_product).permit(:product_id, :category_id)
+# end
 

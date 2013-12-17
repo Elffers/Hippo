@@ -1,0 +1,11 @@
+<%= form_for @product do |f| %>  
+  <p>Choose the categories that describe this product:</p>
+  <div>
+    <%= f.select(:category_products,
+               Category.all.collect { |p| [p.name, p.id] },
+               {:selected => CategoryProduct.where(:product_id => @product.id).map(&:category_id)},
+               {'name' => 'product[category][]', :multiple => true}) %>
+  </div>
+  <div>Want to create a <a href="/categories/new">new category</a>?</div>
+  <div class= "actions"><%=f.submit %></div>
+<% end %>

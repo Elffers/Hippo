@@ -1,0 +1,7 @@
+<%= form_for @product do |f| %> 
+  <%= @product.categories.each do |c| %>
+    <%= c.name %>
+    <%= link_to 'Destroy', product_category_product_path(product_id: @product.id, id: c.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
