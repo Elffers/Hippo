@@ -18,6 +18,8 @@
 </div>
 <%= link_to "Back to browsing", products_path %>
 
-<%if @product.user_id == current_user.id %>
-  <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %>
+<% if current_user %>
+  <% if @product.user_id == current_user.id %>
+    <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %>
+  <% end %>
 <% end %>
