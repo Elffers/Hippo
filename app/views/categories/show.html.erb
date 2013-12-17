@@ -1,0 +1,26 @@
+params: <% params.inspect %>
+
+<hr>
+
+<%= @category.name.upcase %>
+<table>
+  <thead>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Inventory</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr><% @products.each do |product| %>
+      <% if @category.products.include?(product) %>
+        <td> <%= link_to "#{product.name.capitalize}", product_path(product.id) %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= product.inventory %></td>
+        <td><%= product.description %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back to Browse by Category", categories_path %>
