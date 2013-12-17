@@ -44,15 +44,8 @@ Hippo::Application.routes.draw do
   # get "users/destroy" => "users#destroy"
   # get "users/"        => "users#index"
   get "users/:id"     => "users#show"
-  
-  #post is a thing that you are doing sometimes
-  # Read about resources HOMEWORK
 
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
+  get "/checkout"     => "orders#checkout", as: :checkout
   root 'welcome#index'
 
   # Example of regular route:
