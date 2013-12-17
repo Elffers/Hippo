@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
      #else the user id is some guest id that isn't stored in the DB
+   rescue ActiveRecord::RecordNotFound #rescue is cued by error from nil 
+    @current_user = User.create
+    session[:user_id] = @current_user.id
+    @current_user
   end
 
   def current_order

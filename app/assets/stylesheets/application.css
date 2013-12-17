@@ -13,7 +13,8 @@
  */
 
  html, body {
-/*  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; */
+  font-family: arial, sans-serif;
+  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,19 +24,64 @@
   height:100%;
 }
 
-.main_heading {
-  font-family: arial, sans-serif;
-  font-size: 48pt;
-  text-align: center;
-  background: #C1A5A5;
+
+.nav_bar {
+  /*border: 1px solid black;*/
+/*  position: fixed;*/
+  /*width: 100%;*/
+  height: 48px;
+  top: 0;
+  background-color: #C1A5A5;
+  text-align: right;
+  padding: 15px;
+  border-bottom: 2px solid black;
 }
 
-.nav_bar ul {
-  list-style: none;
-  font-family: arial, sans-serif;
-  font-size: 18pt;
-  background: #C1A5A5;
-  display: block;
-  postion: relative;
+.nav_bar #icon {
+  /*display: inline-block;*/
+  /*border: 1px solid red;*/
+  width: 50px;
+  left: 0px;
+  position: fixed;
+}
+
+.nav_bar .navbuttons {
+  width: 900px;
+  right: 0px;
+  top: 0px;
+  position: fixed;
+  border: 1px solid blue;
+  /*position: absolute;*/
+}
+
+.nav_bar ul li {
+  border: 1px solid black;
+  padding: 5px;
+  /*top: 100px;*/
+  width: 200px;
+  font-size: 15pt;
+  display: inline-block;
+}
+
+.content {
+  border: 2px solid black;
+  width: 700px;
+  margin: auto;
+  /*vertical-align*/
+  padding: 20px;
+  background: white;
+}
+
+.search_bar{
+  border: 1px solid red;
+ left: 60px;
+  float: left;
+  width: 200px;
+  height: 32px;
+  margin: 10px, auto;
+  background-color: #C1A5A5;
+  padding: 15px;
+  position: fixed;
+
 }
 

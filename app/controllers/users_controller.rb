@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     #redirect_to @user automatically knows to go to user/id show?
     if @user.save
-      redirect_to @user, notice: "You are now a hippo!"
+      redirect_to root_path, notice: "You are now a hippo!"
     else
       render :new, notice: "There was a problem saving this user! :("
       # flash.now.alert =  #what does this do??

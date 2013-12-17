@@ -15,9 +15,6 @@ class OrdersController < ApplicationController
   def update
   end
 
-  def index
-  end
-
   def show
     @orderproduct = OrderProduct.new 
   end
@@ -41,6 +38,16 @@ class OrdersController < ApplicationController
     @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
     @orderproduct.destroy
     redirect_to order_path(current_order)
+  end
+
+  def checkout
+    if current_order.status == "pending"
+      #checkout, fill in payment info
+      redirect_to payment_path
+    else
+      flash[:notice] = "You cannot checkout this order"
+      render :show
+    end
   end
 
 
