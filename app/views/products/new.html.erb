@@ -1,40 +1,40 @@
 params <%=params.inspect%>
 
 <h1>List a product</h1>
-<%= form_for @product do |f| %>
-  <% if @product.errors.any? %>
-  <div class= "error_messages">
+
+<%#= form_for @product do |f| %>
+  <%# if @product.errors.any? %>
+<!--   <div class= "error_messages">
     <h2> Form is invalid </h2>
     <ul>
-      <% for message in @product.errors.full_messages %>
-        <li><%= message %></li>
-        <% end %>
+      <%# for message in @product.errors.full_messages %>
+        <li><%#= message %></li>
+        <%# end %>
       </ul>
     </div>
-  <% end %>
+  <%# end %>
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%#= f.label :name %>
+    <%#= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :price, "How much?" %>
-    <%= f.text_field :price %>
+    <%#= f.label :price, "How much?" %>
+    <%#= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%#= f.label :description %>
+    <%#= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label(:retired) %>
-    <%= f.check_box :retired %>
+    <%#= f.label(:retired) %>
+    <%#= f.check_box :retired %>
   </div>
   <div class="field">
-    <%= f.label :inventory %>
-    <%= f.number_field :inventory %>
+    <%#= f.label :inventory %>
+    <%#= f.number_field :inventory %>
   </div>
 
 
-  <div class= "actions"><%=f.submit %></div>
+<%= render 'add_category_form' %>
 
-
-<% end %>
+<%= render 'base_form' %>

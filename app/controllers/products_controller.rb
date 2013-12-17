@@ -8,30 +8,36 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-# All of these below should only be accessible if the user is signed in
-
   def new
-    @product = Product.new #(user_id: params[:user_id])
-
+    if current_user
+      @product = Product.new #(user_id: params[:user_id])
+      render :new
+    else
+      redirect_to sign_in_path, notice: "You must sign in to list a product!"
+    end
   end
 
   def edit   
     @product = Product.find(params[:id]) 
   end
 
-  def create
-    if current_user
-      @product = Product.new(product_params)
-      @product[:user_id] = current_user.id
-      @product.save
+
+  def create #If @product save, else render edit
+    @product = Product.new(product_params)
+    @product[:user_id] = current_user.id
+    if @product.save
       redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
-      redirect_to sign_in_path, notice: "You must sign in to list a product!"
+      redirect_to "/products/new", notice: "There was an error, try again."
     end
   end
 
   def update
     @product = Product.find(params[:id])
+    #Instead of Params block productcategory.new(productcategory params private method)
+    #Private method product catagory Params params.require.productcategory.permit(product_id, category_id)
+    
+    # @category_product.new(category_product_params).save
     if @product.update(product_params)
       redirect_to products_path
     else
@@ -69,5 +75,7 @@ def product_params
   params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :retired)
 end
 
-
+# def category_product_params
+#   params.require(:category_product).permit(:product_id, :category_id)
+# end
 
