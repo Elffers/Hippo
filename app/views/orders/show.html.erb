@@ -51,7 +51,7 @@ These are the products in your order:
 <div>
   <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
   <% unless items.inject(:+) == nil %> 
-    <%= link_to "Proceed to checkout", checkout_path %></li>
+    <%= link_to "Proceed to checkout", checkout_path %><br>
   <% end %>
   <%= link_to "Back to browsing", root_path %><br>
   <% if current_user %>
