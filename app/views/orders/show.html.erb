@@ -12,6 +12,7 @@ These are the products in your order:
 <ol>
 <% @products.each do |product| %>
  <li> <%= link_to "#{product.name.upcase}", product_path(product) %></li>
+      <%= OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity %>
       <%= button_to "delete", remove_product_path(current_order.id, product.id), method: :delete %>
 <% end %> 
 </ol>

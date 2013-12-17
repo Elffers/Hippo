@@ -19,15 +19,21 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @orderproduct = OrderProduct.new 
   end
   
   def add_product
-    @orderproduct = OrderProduct.new(order_id: current_order.id, product_id: params[:product_id])
+    @product = Product.find(params[:product_id])
+    @orderproduct = OrderProduct.new(
+      order_id: current_order.id, 
+      product_id: params[:product_id], 
+      quantity: params[:order_product][:quantity].to_i)
       if @orderproduct.save
       redirect_to order_path(current_order) #changes url
     else 
       flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
-      render :"/product/show"      
+      redirect_to "/products"
+
     end
   end
 

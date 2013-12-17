@@ -10,10 +10,18 @@ NOTICE: <%=flash[:notice] %>
       <li><%= product.price %></li>
       <li><%= product.inventory %></li>
       <li><%= product.description %></li> 
-        <!-- #will have to define @orderproduct for any action that renders this page -->
-        <%= button_to "Add to Cart", add_product_path(current_order.id, product.id), :method => :post %>
+          <%#= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
+          <%#=  number_field_tag(:quantity) %>
+          <%#=  submit_tag "Add to Cart" %>
+          <%# end %>
+
+      <li><%= form_for @orderproduct, url: add_product_path(current_order.id, product.id) do |f| %>
+          <%= f.number_field :quantity %>
+          <%= f.submit "Add to cart!" %>
+        <% end %>
       </li>
-      <%# end %>
     <% end %>
   </ul>
 </div>
+
+

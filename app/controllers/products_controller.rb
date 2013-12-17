@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
 
 
   def search
+    @orderproduct = OrderProduct.new(order_id: current_order.id, product_id: params[:product_id], quantity: params[:quantity].to_i) #will be input as string
     @products = Product.where('name = ? OR description LIKE ?', params[:product], "%#{params[:product]}%" )
     if @products == []
       flash[:notice] = "No items match your search"

@@ -28,4 +28,5 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
   helper_method :current_user
   helper_method :require_login
+
 end
