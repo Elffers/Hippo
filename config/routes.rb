@@ -34,7 +34,8 @@ Hippo::Application.routes.draw do
   post "/orders/:id/add_product/:product_id" => "orders#add_product", as: :add_product
   get "orders/:id" => "orders#show", as: :order
   delete '/orders/:id/remove_product/:product_id' => "orders#remove_product", as: :remove_product
-  
+  patch '/orders/:id/update_quantity/:product_id' => "orders#update_quantity", as: :update_quantity
+
   get "/search" => "products#search"
 
   get "users/new"  => "users#new"
@@ -46,6 +47,7 @@ Hippo::Application.routes.draw do
   get "users/:id"     => "users#show"
 
   get "/checkout"     => "orders#checkout", as: :checkout
+  post "/checkout"    => "orders#submit", as: :pay
   root 'welcome#index'
 
   # Example of regular route:

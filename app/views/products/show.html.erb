@@ -4,7 +4,12 @@
     <li>$<%= @product.price %></li> <!-- this isn't showing the two zeros! -->
     <li><%= @product.inventory%></li>
     <li><%= @product.description %></li>
+    <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
+            <%=  number_field_tag(:quantity) %>
+            <%=  submit_tag "Add to Cart" %>
+          <% end %>
   </ul>
 </div>
+<%= link_to "Back to browsing", products_path %>
 
 

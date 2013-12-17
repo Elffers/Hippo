@@ -1,12 +1,27 @@
+
+<%= flash.notice %>
 <hr>
-<!-- Uncomment the following line for testing purposes. If you feel like it. -->
-<!-- EXPECTING NO PRODUCT RETURN NOTICE:  -->
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash.now[:notice] %></div>
-  <% end %>
 
-<!--   sign-up, sign-in should be separate fixed window that you can exit
-  sign in, goes to welcome, which should be product index
-  add continue to "Products List" button -->
+<div>
+  <ul>
+    <% Product.all.each do |product| %>
+     <%# unless product.retired %>
+      <li><%= link_to "#{product.name}", product_path(product.id) %></li>
+      <li><%= product.price %></li>
+      <li><%= product.inventory %></li>
+      <li><%= product.description %></li> 
+      <li><%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
+            <%=  number_field_tag(:quantity) %>
+            <%=  submit_tag "Add to Cart" %>
+          <% end %>
 
-  
+      <%#= form_for @orderproduct, url: add_product_path(current_order.id, product.id) do |f| %>
+          <%#= f.number_field :quantity %>
+          <%#= f.submit "Add to cart!" %>
+        <%# end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+
