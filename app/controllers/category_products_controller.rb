@@ -1,5 +1,5 @@
 class CategoryProductsController < ApplicationController
-  def update
+  def update #normally called create
     @categoryproducts = CategoryProduct.new
     @product = Product.find(params[:id])
     puts @product
@@ -8,7 +8,7 @@ class CategoryProductsController < ApplicationController
       category = Category.find(category_id.to_i)
       @product.categories << category
     end
-    redirect_to products_path
+    redirect_to products_path #redirect to product show page
   end
 
   # def update
