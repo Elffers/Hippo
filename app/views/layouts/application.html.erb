@@ -1,3 +1,11 @@
+<!--   This div is for debugging. Uncomment for development purposes. -->
+<!--   <div>
+    <hr>
+  User: <%= current_user.inspect %> <br>
+        <%= current_order.inspect %> <br>
+    <hr>
+
+  </div> -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,28 +16,19 @@
   </head>
 
   <body>
-
-    <div class='content'>
-      <%= yield %>
-    </div>
-
-  </body>
-
-
-<!--   This div is for debugging. Uncomment for development purposes. -->
-<!--   <div>
-    <hr>
-  User: <%= current_user.inspect %> <br>
-        <%= current_order.inspect %> <br>
-    <hr>
-
-  </div> -->
-
-      <div class='nav_bar'>
+     <div class='search_bar'>
+        <%= form_tag("/search", method: "get") do %>
+          <%= label_tag("Have something in mind?") %>
+          <%= text_field_tag(:product, params[:product]) %>
+          <%= submit_tag("Search!") %>
+        <% end %> 
+      </div>
+    <div class='nav_bar'>
+      <div id="icon">
+        <a href="/"><img src="http://i.imgur.com/TsoZSGz.jpg" title="Welcome to Hippo!", height="45" width="45"></a>
+      </div>
+      <div class='navbuttons'>
         <ul>
-          <li>
-            <a href="/"><img src="http://i.imgur.com/TsoZSGz.jpg" title="Welcome to Hippo!", height="45" width="45"></a>
-          </li>
           <li>
             <% if current_user %> 
               <%= link_to "Hi, #{current_user.name}!", user_path(current_user.id) %>
@@ -41,22 +40,18 @@
               <li><a href="/users/new">Become a Hippo!</a></li>
             <% end %>
           </li>
-
           <li>
             <a href="/orders/<%=current_order.id%>">
               Items in cart: <%= current_order.order_products.count %> <alt= 'Items in Cart'>
             </a>
           </li>
         </ul>
+      </div>
+    </div> 
 
-      </div> 
-
-    <div class='search_bar'>
-      <%= form_tag("/search", method: "get") do %>
-        <%= label_tag("Have something in mind?") %>
-        <%= text_field_tag(:product, params[:product]) %>
-        <%= submit_tag("Search!") %>
-      <% end %> 
+  
+     <div class='content'>
+      <%= yield %>
     </div>
-
+  </body>
 </html>
