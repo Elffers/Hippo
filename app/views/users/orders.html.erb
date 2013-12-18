@@ -1,0 +1,9 @@
+<ol>
+  <% @orders.each do |order| %>
+<li><%= order.inspect %>
+
+<%= @product.name %>
+</li> 
+<!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
+<% end %>
+</ol>

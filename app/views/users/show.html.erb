@@ -6,26 +6,33 @@ params: <%=params.inspect%>
   <li> USER EMAIL: <%= @user.email %></li>
 </ul>
   
+<!-- <h3>ORDERS TO FULFILL:</h3> -->
+
 <h3>PRODUCTS:</h3>
   <table>
     <thead>
       <tr>
         <th> Product name</th>
         <th> Inventory </th>
-        <th> Orders requested <th>
+        <th> Orders requested </th>
+        <th> Ship this product </th>
       </tr>
     </thead>
     <tbody>
-      
-        <% @user.products.each do |product|%>
-          <tr>
+      <% @user.products.each do |product|%>
+        <tr>
           <td><%= link_to "#{product.name}", product_path(product.id)%></td>
           <td><%= product.inventory %></td>
-          <td><%= product.orders == [] %></td>
-          <%#= link_to "Orders", %>
+          <% unless product.orders == [] %>
+          <!-- #this should only take into account orders whose status is "paid" -->
+            <td><%= product.orders.count %></td> 
+            <td><%= link_to "Ship", user_orders_path(@user) %></td>
+          <% else %>
+            <td>This product has not been ordered</td>
+            <td></td>
+          <% end %>
         </tr>
-        <% end %>
-        
+      <% end %>
     </tbody>
   </table>
   
