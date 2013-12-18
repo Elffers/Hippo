@@ -34,9 +34,12 @@
           <%= review.description %>
         <% end %>
       <% end %></li>
+
+      <% unless @product.user_id == current_user.id %>
       <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
             <%=  number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
             <%=  submit_tag "Add to Cart" %></li>
+          <% end %>
       <% end %>
     </ul>
       
