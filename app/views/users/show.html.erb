@@ -12,14 +12,22 @@ params: <%=params.inspect%>
       <tr>
         <th> Product name</th>
         <th> Inventory </th>
-        <th> Order status <th>
-        <th></th>
+        <th> Orders requested <th>
       </tr>
     </thead>
+    <tbody>
+      
+        <% @user.products.each do |product|%>
+          <tr>
+          <td><%= link_to "#{product.name}", product_path(product.id)%></td>
+          <td><%= product.inventory %></td>
+          <td><%= product.orders == [] %></td>
+          <%#= link_to "Orders", %>
+        </tr>
+        <% end %>
+        
+    </tbody>
   </table>
-  <%@user.products.each do |product|%>
-    <%=link_to "#{product.name}", product_path(product.id)%>
-  <% end %>
   
   <h3>ORDER HISTORY:<h3>
     <table>

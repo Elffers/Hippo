@@ -24,6 +24,9 @@
   height:100%;
 }
 
+body {
+
+}
 
 .nav_bar {
   /*border: 1px solid black;*/
@@ -65,7 +68,7 @@
 
 .content {
   border: 2px solid black;
-  width: 700px;
+  width: 900px;
   margin: auto;
   /*vertical-align*/
   padding: 20px;
@@ -82,6 +85,9 @@
   background-color: #C1A5A5;
   padding: 15px;
   position: fixed;
+}
 
+tbody {
+  width: 700px;
 }
 
