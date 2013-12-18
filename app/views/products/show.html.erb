@@ -1,11 +1,11 @@
 <div class= "productshow">
   <h1><%= @product.name.capitalize %></h2>
   <ul>
-    <li>$<%= @product.price %></li> <!-- this isn't showing the two zeros! -->
+    <li><%= number_to_currency(@product.price) %></li> <!-- this isn't showing the two zeros! -->
     <li><%= @product.inventory%></li>
     <li><%= @product.description %></li>
     <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
-            <%=  number_field_tag(:quantity) %>
+            <%=  number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
             <%=  submit_tag "Add to Cart" %>
           <% end %></li>
     <li>Categories:<% unless @product.categories == [] %>
