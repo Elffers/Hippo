@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, except: [:new, :create]
+  before_action :set_order, except: [:new, :create, :show] #don't want to show only current order
   before_action :set_products, only: [:show, :add_product, :update_quantity, :checkout]
   before_action :check_order, only: [:add_product]
   before_action :totals, only: [:show, :update_quantity, :checkout]
