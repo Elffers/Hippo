@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
 private
   def check_user
     @order = Order.find(params[:id])
-    @order.user_id == current_user.id
+    @order.user_id == session[:user_id]
   end
 
   def check_order
