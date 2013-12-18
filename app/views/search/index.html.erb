@@ -1,0 +1,34 @@
+<h1>Your Hippo Search Results</h1>
+
+<div>
+  <ul>
+    <% @products.each do |product| %>
+      <% unless product[:status] == "retired" %>
+        <li><%= link_to "Product: #{product.name.capitalize}", product_path(product.id) %></li>
+        <li><%= number_to_currency(product.price) %></li>
+        <li><%= product.inventory %></li>
+        <li><%= product.description %></li> 
+        <li>
+          <% if session[:user_id] %>
+            <% if product.user_id != current_user.id %>
+            <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
+                  <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
+                  <%=  submit_tag "Add to Cart" %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    <%end %>      
+  </ul>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= link_to "Category: #{category.name.capitalize}", category_path(category.id) %></li>
+    <%end %>      
+  </ul>
+  <ul>
+    <% @users.each do |user| %>
+      <li><%= link_to "User: #{user.name}", user_path(user.id) %></li>
+    <%end %>      
+  </ul>
+</div>
