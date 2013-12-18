@@ -46,9 +46,9 @@ Hippo::Application.routes.draw do
 
   get "products/new" => 'products#new'
 
-  # get "/reviews" => "reviews#show"
-  # get "/reviews/new" => "reviews#new"
-
+  #get "/reviews/:id" => "reviews#show"
+  get "/reviews/new" => "reviews#new"
+  post "/reviews/new" => "reviews#create"
   
   # get "users/create"  => "users#create"
 
