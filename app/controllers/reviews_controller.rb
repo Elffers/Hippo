@@ -1,22 +1,25 @@
 class ReviewsController < ApplicationController
 
   def new
-    @reviews = Review.new
+    @review = Review.new
+    #@product = Product.find(params[:id])
   end
 
   def show
     @review = Review.find(params[:id])
   end
 
-  def create
-    if current_user && current_user.id == @product.user_id,
-      notice: "You can't review your own products. That's cheating. >:("
+  def create # Are we going to have a problem if current_user.id == nil here?
+    @review = Review.new(review_params)
+    @review.product_id = @product.id
+    if session[:user_id] == @product.user_id
+      flash[:notice] = "You can't review your own products. That's cheating. >:("
     else
       @review = Review.new(review_params)
       @review.save
-      if current_user
-        redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Review posted as #{current_user.name}."
-      else
+      if @review.save && current_user
+        redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Review posted as #{user.find(session[:user_id])}."
+      elsif @review.save
         redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Posted as guest."
       end    
     end

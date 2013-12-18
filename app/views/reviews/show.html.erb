@@ -1,0 +1,12 @@
+<div class= "reviewshow">
+
+<!--   Need to implement a way to find the reviews by the product displayed.  -->
+  <ul> 
+    <% Review.all.each do |review| %>
+      <li><%= review.rating %></li>
+      <li><%= review.description %></li>
+      <li>By: <%= review.user_id %></li> <!-- I want to convert this to the user's name eventually -->
+    <% end %>
+  </ul>
+
+</div>
