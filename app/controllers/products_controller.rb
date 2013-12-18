@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
     
     # @category_product.new(category_product_params).save
     if @product.update(product_params)
-      redirect_to products_path
+      redirect_to product_path(@product.id)
     else
       render :edit
     end
