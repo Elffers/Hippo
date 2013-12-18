@@ -5,7 +5,6 @@
 
 <%= @top_categories = array.sort_by{|x| x[1]}.reverse %>
 <%#= @top_categories.first.first.name %>
-
 <% @top_categories.each do |category| %>
     <div>
     <%=link_to "#{category.first.name}", category_path(category.first.id) %>
