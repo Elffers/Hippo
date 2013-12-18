@@ -18,17 +18,13 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # if check_user
-      @order = Order.find(params[:id])
-      @orderproduct = OrderProduct.new 
-      @products = @order.products
-      puts "PRODUCTS = #{@products}"
-      unless @products == nil?
-        totals
-      end
-    # else 
-    #   flash[:notice] = "You are not authorized to view this order"
-    # end
+    @order = Order.find(params[:id])
+    @orderproduct = OrderProduct.new 
+    @products = @order.products
+    puts "PRODUCTS = #{@products}"
+    unless @products == nil?
+      totals
+    end
   end
   
   def add_product
