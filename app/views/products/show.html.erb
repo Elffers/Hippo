@@ -3,7 +3,7 @@
   <h1><%= @product.name.capitalize %></h1>
 
   <ul>
-    <li>Price $<%= number_to_currency(@product.price) %></li> <!-- this isn't showing the two zeros! -->
+    <li>Price: <%= number_to_currency(@product.price) %></li> <!-- this isn't showing the two zeros! -->
     <li>Description: <%= @product.description %></li>
     <li>Categories:<% unless @product.categories == [] %>
       <% @product.categories.each do |category|%>
@@ -14,9 +14,9 @@
     <% if current_user %>
       <% if @product.user_id == current_user.id %>
         <li>Current Inventory: <%= @product.inventory %></li>    
-        <li><% if @product.retired %>
-              This product is retired.
-            <% end %></li><br>
+        <% if @product.retired %>
+            This product is retired.
+        <% end %><br>
         <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
         <%= link_to "View all your products", user_path(current_user.id) %>
       <% else %>
