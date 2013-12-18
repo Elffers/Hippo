@@ -1,23 +1,27 @@
 params <%=params.inspect%>
 
-<h1>Write a Review</h2>
-  <%= form_for @review do |f| %>
-  <% if @product.errors.any? %>
-  <div class= "error_messages">
-    <h2> Form is invalid </h2>
-    <ul>
-      <% for message in @review.errors.full_messages %>
-        <li><%= message %></li>
-        <% end %>
+<h1>Write a Review</h1>
+  <%= form_for @review, url: reviews_new_path do |f| %>
+  <% if @review.errors.any? %>
+    <div class= "error_messages">
+      <h2> Form is invalid </h2>
+      <ul>
+        <% for message in @review.errors.full_messages %>
+          <li><%= message %></li>
+          <% end %>
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= f.label :rating %>
     <%= f.number_field :rating %>
+  </div>
+
   <div class="field">
   <%= f.label :description %>
   <%= f.text_field :description %>
+  </div>
 
 <div class= "actions"><%=f.submit %></div>
 
