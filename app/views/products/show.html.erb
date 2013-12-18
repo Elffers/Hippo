@@ -18,7 +18,7 @@
       <li><% if @product.retired %>
             This product is retired.
           <% end %></li><br>
-      <li><%= link_to "View all your products", url:"" %></li> <!-- This is broken!!!! -->
+      <li><%= link_to "View all your products", user_path(current_user.id) %></li> <!-- This is broken!!!! -->
       <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %>
    
 
