@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, except: [:new, :create]
-  before_action :set_products, only: [:show, :add_product]
+  before_action :set_products, only: [:show, :add_product, :update_quantity]
   before_action :check_order, only: [:add_product]
 
   def new
@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
     @subtotals = @products.map do |product|
       product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
     end
+    @total = @subtotals.reduce(:+)
   end
   
   def add_product
@@ -50,6 +51,11 @@ class OrdersController < ApplicationController
 
   def update_quantity
     @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
+    #this is not DRY! in #show
+    @subtotals = @products.map do |product|
+      product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
+    end
+    @total = @subtotals.reduce(:+)
     if @orderproduct.update(quantity:params[:quantity])
       redirect_to order_path(current_order)
     else

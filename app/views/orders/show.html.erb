@@ -38,7 +38,7 @@ These are the products in your order:
          <%= items.inject(:+) %>
       </td>
       <td></td>
-      <td><%= number_to_currency(subtotals.reduce(:+))%></td>
+      <td><%= number_to_currency(@total)%></td>
       <td></td>
      </tr>
   </tbody>
