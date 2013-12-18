@@ -54,19 +54,6 @@ class ProductsController < ApplicationController
   def search_by_name
      @products = Product.where name: params[:product] 
   end
-
-
-  def search
-    @orderproduct = OrderProduct.new(order_id: current_order.id, product_id: params[:product_id], quantity: params[:quantity].to_i) #will be input as string
-    @products = Product.where('name = ? OR description LIKE ?', params[:product], "%#{params[:product]}%" )
-    if @products == []
-      flash[:notice] = "No items match your search"
-      redirect_to root_path
-    else 
-      flash[:notice] = "these are all the products named #{params[:product]}"
-      render :index
-    end
-  end
 end
 
 private
