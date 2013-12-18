@@ -2,15 +2,26 @@ params: <%=params.inspect%>
 <h1><%= @user.name.upcase %></h1>
   
 <ul>
-  <li> USER ID: <%=@user.id%> </li>
-  <li> USER EMAIL: <%=@user.email%></li>
-  <li> 
-    PRODUCTS:
-    <%@user.products.each do |product|%>
+  <li> USER ID: <%= @user.id %> </li>
+  <li> USER EMAIL: <%= @user.email %></li>
+</ul>
+  
+<h3>PRODUCTS:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th> Product name</th>
+        <th> Inventory </th>
+        <th> Order status <th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+  <%@user.products.each do |product|%>
     <%=link_to "#{product.name}", product_path(product.id)%>
-    <% end %>
-  </li>
-  <li>ORDER HISTORY
+  <% end %>
+  
+  <h3>ORDER HISTORY:<h3>
     <table>
       <thead>
         <tr>
@@ -36,8 +47,8 @@ params: <%=params.inspect%>
   
       </tbody>
     </table>
-  </li>
-</ul>
+  
+
 
 <%=link_to "List a new product", new_product_path %>
 
