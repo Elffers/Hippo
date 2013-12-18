@@ -23,15 +23,15 @@ class SearchController < ApplicationController
 
   private
   def search_user
-    @users = User.where('name = ?', params[:search])
+    @users = User.where('name LIKE ?', "%#{params[:search]}%")
   end
 
   def search_category
-    @categories = Category.where('name LIKE ?', params[:search])
+    @categories = Category.where('name LIKE ?', "%#{params[:search]}%")
   end
 
   def search_product
-    @products = Product.where('name = ? OR description LIKE ?', params[:search], "%#{params[:search]}%" )
+    @products = Product.where('name LIKE ? OR description LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%" )
   end
 
   def concat_search
