@@ -1,11 +1,8 @@
-params <%=params.inspect%><br>
-
 <% array = @categories.map do |c| %>
   <%[c, c.products.count] %>
   <% end %>
 <% @top_categories = array.sort_by{|x| x[1]}.reverse %>
 
-<%=array.inspect %><hr>
 <%= @top_categories = array.sort_by{|x| x[1]}.reverse %>
 <%#= @top_categories.first.first.name %>
 
