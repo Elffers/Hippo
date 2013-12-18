@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
-  def create
+  def create # Are we going to have a problem if current_user.id == nil here?
     if current_user && current_user.id == @product.user_id,
       notice: "You can't review your own products. That's cheating. >:("
     else
