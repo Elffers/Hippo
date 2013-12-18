@@ -1,8 +1,9 @@
-<ol>
-  <% @orders.each do |order| %>
-<li><%= order.inspect %>
+<%= params.inspect %>
 
-<%= @product.name %>
+<ol>
+  <% @orders.each do |op| %>
+<li> Quantity: <%= op.quantity %><br>
+  <%= link_to "order #{op.order_id}", order_path(op.order_id) %> <!-- This won't actually be accessible by merchant -->
 </li> 
 <!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
 <% end %>
