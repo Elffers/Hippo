@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
 
   def show
     @orderproduct = OrderProduct.new 
-    subtotals = @products.map do |product|
+    @subtotals = @products.map do |product|
       product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
     end
   end
