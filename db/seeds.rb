@@ -33,8 +33,11 @@ Product.create(user_id:4, name:"black pen", price: 1.99, description:"good at wr
 Product.create(user_id:2, name:"red pen", price: 1.99, description:"good at writing in red", retired: false, inventory: 12)
 Product.create(user_id:5, name:"purple pen", price: 1.99, description:"good at writing in purple", retired: false, inventory: 12)
 Product.create(user_id:2, name:"whiteout pen", price: 1.99, description:"good at fixing writing in blue", retired: false, inventory: 12)
-Product.create(user_id:4, name:"notebook", price: 2.99, description:"yummy and green", retired: false, inventory: 12)
-Product.create(user_id:5, name:"dictionary", price: 12.99, description:"yummy and green", retired: false, inventory: 12)
+Product.create(user_id:4, name:"notebook", price: 2.99, description:"good for writing", retired: false, inventory: 12)
+Product.create(user_id:5, name:"dictionary", price: 12.99, description:"good for learning", retired: false, inventory: 12)
+Product.create(user_id:1, name:"test", price: 12.99, description:"good for practicing", retired: false, inventory: 12)
+Product.create(user_id:5, name:"last year's test", price: 12.99, description:"used to be good for learning", retired: true, inventory: 12)
+
 # Category
 Category.create(name:"food")
 Category.create(name:"fruit")
@@ -45,6 +48,7 @@ Category.create(name:"shirts")
 Category.create(name:"dresses")
 Category.create(name:"pens")
 Category.create(name:"office supplies")
+Category.create(name:"test")
 
 # CategoryProduct
 CategoryProduct.create(category_id:1,product_id:12)
@@ -104,6 +108,9 @@ CategoryProduct.create(category_id:9,product_id:27)
 CategoryProduct.create(category_id:9,product_id:28)
 CategoryProduct.create(category_id:9,product_id:29)
 CategoryProduct.create(category_id:9,product_id:30)
+CategoryProduct.create(category_id:10,product_id:31)
+CategoryProduct.create(category_id:10,product_id:32)
+
 # Reviews
 # create_table "reviews", force: true do |t|
 #     t.integer  "rating"
