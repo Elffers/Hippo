@@ -1,28 +1,10 @@
 # User
-# create_table "User", force: true do |t|
-#     t.string   "name"
-#     t.string   "email"
-#     t.datetime "created_at"
-#     t.datetime "updated_at"
-#     t.text     "address"
-#     t.string   "password_digest"
-#   end
 User.create(name:"Hs", email:"hs@hs.com", address:"123 4th St", password:"123", password_confirmation:"123")
 User.create(name:"Blake", email:"blake@blake.com", address:"123 4th St", password:"123", password_confirmation:"123")
 User.create(name:"Anne", email:"anne@anne.com", address:"123 4th St", password:"123", password_confirmation:"123")
 User.create(name:"Whitney", email:"whitney@whitney.com", address:"123 4th St", password:"123", password_confirmation:"123")
 User.create(name:"Test", email:"test@test.com", address:"123 4th St", password:"123", password_confirmation:"123")
 # Product
-# create_table "Product", force: true do |t|
-#     t.integer  "user_id"
-#     t.string   "name"
-#     t.float    "price"
-#     t.datetime "created_at"
-#     t.datetime "updated_at"
-#     t.text     "description"
-#     t.boolean  "retired",     default: false
-#     t.integer  "inventory"
-  # end
 Product.create(user_id:1, name:"blue shirt", price: 19.99, description:"Pretty and blue", retired: false, inventory: 12)
 Product.create(user_id:1, name:"green shirt", price: 19.99, description:"Pretty and green", retired: false, inventory: 12)
 Product.create(user_id:3, name:"red shirt", price: 19.99, description:"Pretty and red", retired: false, inventory: 12)
@@ -54,11 +36,6 @@ Product.create(user_id:2, name:"whiteout pen", price: 1.99, description:"good at
 Product.create(user_id:4, name:"notebook", price: 2.99, description:"yummy and green", retired: false, inventory: 12)
 Product.create(user_id:5, name:"dictionary", price: 12.99, description:"yummy and green", retired: false, inventory: 12)
 # Category
-# create_table "Category", force: true do |t|
-#     t.text     "name"
-#     t.datetime "created_at"
-#     t.datetime "updated_at"
-#   end
 Category.create(name:"food")
 Category.create(name:"fruit")
 Category.create(name:"furniture")
@@ -70,12 +47,6 @@ Category.create(name:"pens")
 Category.create(name:"office supplies")
 
 # CategoryProduct
-# create_table "category_products", force: true do |t|
-#     t.integer  "category_id"
-#     t.integer  "product_id"
-#     t.datetime "created_at"
-#     t.datetime "updated_at"
-#   end
 CategoryProduct.create(category_id:1,product_id:12)
 CategoryProduct.create(category_id:1,product_id:13)
 CategoryProduct.create(category_id:1,product_id:14)
