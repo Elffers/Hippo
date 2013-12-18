@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, except: [:new, :create]
-  before_action :set_products, only: [:show, :add_product]
+  before_action :set_products, only: [:show, :add_product, :update_quantity, :checkout]
   before_action :check_order, only: [:add_product]
+  before_action :totals, only: [:show, :update_quantity, :checkout]
 
   def new
     @order = Order.new
@@ -18,9 +19,6 @@ class OrdersController < ApplicationController
 
   def show
     @orderproduct = OrderProduct.new 
-    subtotals = @products.map do |product|
-      product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
-    end
   end
   
   def add_product
@@ -58,7 +56,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def checkout
   end
 
@@ -68,7 +65,6 @@ class OrdersController < ApplicationController
      product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
    end
   end
-
 
 private
 
@@ -84,6 +80,16 @@ private
   def set_products
     @products = current_order.products
   end
+
+  def totals
+    @items = current_order.order_products.map {|x| x.quantity} 
+    @item_total =  @items.inject(:+)
+    @subtotals = @products.map do |product|
+      product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
+    end
+    @total = @subtotals.reduce(:+)
+  end
+
 end
 
 

@@ -4,23 +4,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    # unless params[:user][:email] && params[:user][:password] && params[:user][:password_confirmation]
-    #   flash.now.alert = "You did not fill out all the fields!"
-    #   render "new"
-    # end
-
     @user = User.new(user_params)
-    # @user.email = params[:user][:email] 
-    # @user.password = params[:user][:password]
-    # @user.password_confirmation = params[:user][:password_confirmation] 
-
-    #redirect_to @user automatically knows to go to user/id show?
     if @user.save
+      session[:user_id] = @user.id
       redirect_to root_path, notice: "You are now a hippo!"
     else
       render :new, notice: "There was a problem saving this user! :("
-      # flash.now.alert =  #what does this do??
-      
     end
   end
 
@@ -42,16 +31,6 @@ class UsersController < ApplicationController
     @products = @user.products
     @orders = @user.orders
   end
-
-  # def list_item
-  #   User.products
-  #   # product = Product.create
-  #   params[:user][:products] = [product]
-  # end
-
-  # def products
-  #   Products.where user_id:id 
-  # end
 
   def search
     @users = User.where name: params[:name]

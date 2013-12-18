@@ -1,6 +1,7 @@
 <%=flash.notice %>
 <hr>
-Order: <%= current_order.inspect %>
+Order: <%= current_order.inspect %><br>
+UserID : <%= current_user.id if current_user %><br>
 <hr>
 
 <div class= "ordershow">
@@ -25,15 +26,10 @@ These are the products in your order:
               <%= submit_tag "Update!" %>
             <% end %>
         </td>
-        <td><%=number_to_currency(product.price) %></td>
-
-        <td><%= number_to_currency(product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity)%></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency @subtotals[@products.index(product)]%></td>
         <td><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %></td>
     </tr>
-      <% end %>
-
-      <% subtotals = @products.map do |product| %>
-        <% product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity%>
       <% end %>
      <tr>
       <td>TOTAL:</td>
@@ -42,7 +38,7 @@ These are the products in your order:
          <%= items.inject(:+) %>
       </td>
       <td></td>
-      <td><%= number_to_currency(subtotals.reduce(:+))%></td>
+      <td><%= number_to_currency(@total)%></td>
       <td></td>
      </tr>
   </tbody>

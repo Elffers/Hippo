@@ -35,12 +35,15 @@
         <% end %>
       <% end %></li>
 
-      <% unless @product.user_id == current_user.id %>
-      <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
-            <%=  number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
-            <%=  submit_tag "Add to Cart" %></li>
-          <% end %>
-      <% end %>
+      <%# if current_user %> 
+      <!-- The unless condition requires there to be a user signed in; however, having that requirement first means a guest browser can't add the product to cart -->
+        <%# unless @product.user_id == current_user.id %>
+        <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
+              <%=  number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
+              <%=  submit_tag "Add to Cart" %></li>
+            <% end %>
+        <%# end %>
+      <%# end %>
     </ul>
       
 </div>

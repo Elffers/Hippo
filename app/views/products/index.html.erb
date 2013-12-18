@@ -2,30 +2,37 @@ params <%=params.inspect%><br>
 <hr>
 NOTICE: <%=flash[:notice] %>
 
+
+<!-- **The following div is temporary! ** List top categories here
+   * put top_categories array in application controller (right now only in catoegory controller-also need in welcome controller) -->
+
+<div class="sidebar">
+  <% Category.all.each do |category| %>
+  <%= link_to "#{category.name.upcase}", category_path(category) %>
+  <% end %>
+</div>
+
 <div>
   <ul>
     <% @products.each do |product| %>
-     <%# unless product.retired %>
-      <li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
-      <li><%= number_to_currency(product.price) %></li>
-      <li><%= product.inventory %></li>
-      <li><%= product.description %></li> 
-      <% if current_user %>    
-        <% if product.user_id != current_user.id %>
-        <li><%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
-              <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
-              <%=  submit_tag "Add to Cart" %>
+      <% unless product[:status] == "retired" %>
+        <li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
+        <li><%= number_to_currency(product.price) %></li>
+        <li><%= product.inventory %></li>
+        <li><%= product.description %></li> 
+        <li>
+          <% if current_user %>
+            <% if product.user_id != current_user.id %>
+            <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
+                  <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
+                  <%=  submit_tag "Add to Cart" %>
+                <% end %>
             <% end %>
-        <% end %>
+          <% end %>
+        </li>
+
       <% end %>
-
-
-      <%#= form_for @orderproduct, url: add_product_path(current_order.id, product.id) do |f| %>
-          <%#= f.number_field :quantity %>
-          <%#= f.submit "Add to cart!" %>
-        <%# end %>
-      </li>
-    <% end %>
+    <%end %>      
   </ul>
 </div>
 
