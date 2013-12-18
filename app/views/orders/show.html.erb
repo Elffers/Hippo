@@ -6,58 +6,60 @@ UserID : <%= current_user.id if current_user %><br>
 <hr>
 
 <div class= "ordershow">
-These are the products in your order:
-<table>
-  <thead>
-    <tr>
-      <th> Name     </th>
-      <th> Quantity </th>
-      <th> Price    </th>
-      <th> Subtotal </th>
-      <th> Remove   </th>
-    </tr>
-  </thead>
-  <tbody> 
-    <% unless @products == [] %>
-      <tr>
-        <% @products.each do |product| %>
-          <td><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
-          <td><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %>
-              <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
-                <%= number_field_tag(:quantity, params[:quantity], in: 1..product.inventory, class: "number_field") %>
-                <%= submit_tag "Update!" %>
-              <% end %>
-          </td>
-          <td><%= number_to_currency(product.price) %></td>
-          <td><%= number_to_currency @subtotals[@products.index(product)]%></td>
-          <td><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %></td>
-          </tr>
-        <% end %>
-      
-      <tr>
-        <td>TOTAL:</td>
-        <td> 
-          <% items = current_order.order_products.map {|x| x.quantity} %>
-          <%= items.inject(:+) %>
-        </td>
-        <td></td>
-        <td><%= number_to_currency(@total)%></td>
-        <td></td>
-       </tr>
-     <% end %>
-  </tbody>
-</table>
+  <% if check_user %>
+    These are the products in your order:
+    <table>
+      <thead>
+        <tr>
+          <th> Name     </th>
+          <th> Quantity </th>
+          <th> Price    </th>
+          <th> Subtotal </th>
+          <th> Remove   </th>
+        </tr>
+      </thead>
+      <tbody> 
+        <% unless @products == [] %>
+          <tr>
+            <% @products.each do |product| %>
+              <td><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
+              <td><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %>
+                  <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
+                    <%= number_field_tag(:quantity, params[:quantity], in: 1..product.inventory, class: "number_field") %>
+                    <%= submit_tag "Update!" %>
+                  <% end %>
+              </td>
+              <td><%= number_to_currency(product.price) %></td>
+              <td><%= number_to_currency @subtotals[@products.index(product)]%></td>
+              <td><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %></td>
+              </tr>
+            <% end %>
+          
+          <tr>
+            <td>TOTAL:</td>
+            <td> 
+              <% items = current_order.order_products.map {|x| x.quantity} %>
+              <%= items.inject(:+) %>
+            </td>
+            <td></td>
+            <td><%= number_to_currency(@total)%></td>
+            <td></td>
+           </tr>
+         <% end %>
+      </tbody>
+    </table>
 
-<div>
-  <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
-  <% unless @products == [] %> 
-    <%= link_to "Proceed to checkout", checkout_path %><br>
-  <% end %>
-  <%= link_to "Back to browsing", root_path %><br>
-  <% if current_user %>
-    <%= link_to "Back to profile", user_path(current_user.id) %>
-  <% end %>
-</div>
+    <div>
+      <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
+      <% unless @products == [] %> 
+        <%= link_to "Proceed to checkout", checkout_path %><br>
+      <% end %>
+      <%= link_to "Back to browsing", root_path %><br>
+      <% if current_user %>
+        <%= link_to "Back to profile", user_path(current_user.id) %>
+      <% end %>
+    </div>
 
-<!-- 
-needs a "keep shopping link" -->
+<% else %>
+  You are not authorized to view this page!
+<% end %>

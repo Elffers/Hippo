@@ -18,13 +18,17 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @orderproduct = OrderProduct.new 
-    @products = @order.products
-    puts "PRODUCTS = #{@products}"
-    unless @products == nil?
-      totals
-    end
+    # if check_user
+      @order = Order.find(params[:id])
+      @orderproduct = OrderProduct.new 
+      @products = @order.products
+      puts "PRODUCTS = #{@products}"
+      unless @products == nil?
+        totals
+      end
+    # else 
+    #   flash[:notice] = "You are not authorized to view this order"
+    # end
   end
   
   def add_product
@@ -73,6 +77,10 @@ class OrdersController < ApplicationController
   end
 
 private
+  def check_user
+    @order = Order.find(params[:id])
+    @order.user_id == current_user.id
+  end
 
   def check_order
    @product = Product.find(params[:product_id])
@@ -95,6 +103,8 @@ private
     end
     @total = @subtotals.reduce(:+)
   end
+
+  helper_method :check_user
 
 end
 

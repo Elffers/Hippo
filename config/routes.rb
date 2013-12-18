@@ -54,7 +54,7 @@ Hippo::Application.routes.draw do
   # get "users/destroy" => "users#destroy"
   # get "users/"        => "users#index"
   get "users/:id"     => "users#show"
-  get "users/:id/orders" => "users#orders", as: :user_orders
+  get "users/:id/orders/:product_id" => "users#orders", as: :user_orders
 
   get "/checkout"     => "orders#checkout", as: :checkout
   post "/checkout"    => "orders#submit", as: :pay
