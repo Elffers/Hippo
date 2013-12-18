@@ -1,3 +1,4 @@
+Total: 
 
 <%= form_tag pay_path do %>
 <% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
@@ -43,4 +44,6 @@
   <%= submit_tag "Submit payment!" %>
 
 <% end %>
+
+<%= link_to "Edit your order", order_path(current_order.id) %>
 

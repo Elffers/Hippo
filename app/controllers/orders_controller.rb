@@ -18,6 +18,9 @@ class OrdersController < ApplicationController
 
   def show
     @orderproduct = OrderProduct.new 
+    subtotals = @products.map do |product|
+      product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity
+    end
   end
   
   def add_product
@@ -42,8 +45,7 @@ class OrdersController < ApplicationController
   def remove_product
     @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
     @orderproduct.destroy
-    redirect_to order_path(current_order)
-    #render :show?
+    redirect_to order_path(current_order) #why doesn't need to be current_order.id?
   end
 
   def update_quantity
@@ -51,7 +53,7 @@ class OrdersController < ApplicationController
     if @orderproduct.update(quantity:params[:quantity])
       redirect_to order_path(current_order)
     else
-      flash.now[:notice] = "There was problem updating your order." #render doesn't show notice b/c generates page first
+      flash.now[:notice] = "There was problem updating your order."
       render :show
     end
   end
@@ -80,7 +82,7 @@ private
   end
 
   def set_products
-    @products = current_order.products  #this returns objects-- iterate in HTML
+    @products = current_order.products
   end
 end
 

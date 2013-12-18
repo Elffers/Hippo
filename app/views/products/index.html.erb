@@ -6,14 +6,14 @@ NOTICE: <%=flash[:notice] %>
   <ul>
     <% @products.each do |product| %>
      <%# unless product.retired %>
-      <li><%= link_to "#{product.name}", product_path(product.id) %></li>
+      <li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
       <li><%= number_to_currency(product.price) %></li>
       <li><%= product.inventory %></li>
       <li><%= product.description %></li> 
       <% if current_user %>    
         <% if product.user_id != current_user.id %>
         <li><%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
-              <%=  number_field_tag(:quantity) %>
+              <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
               <%=  submit_tag "Add to Cart" %>
             <% end %>
         <% end %>
