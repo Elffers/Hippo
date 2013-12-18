@@ -18,8 +18,9 @@
       <li><% if @product.retired %>
             This product is retired.
           <% end %></li><br>
-      <li><%= link_to "View all your products", url:"" %></li> <!-- This is broken!!!! -->
-      <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %>
+      <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
+      <%= link_to "View all your products", user_path(current_user.id) %>
+      
    
 
     <% else %>
@@ -30,8 +31,8 @@
         <% end %>
       <% end %></li>
       <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
-        <%=  number_field_tag(:quantity) %>
-        <%=  submit_tag "Add to Cart" %></li>
+            <%=  number_field_tag(:quantity) %>
+            <%=  submit_tag "Add to Cart" %></li>
       <% end %>
     </ul>
 
