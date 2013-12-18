@@ -2,16 +2,11 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
-    #@product = Product.find(params[:id])
   end
 
-  def show
-    @review = Review.find(params[:id])
-  end
-
+ 
   def create # Are we going to have a problem if current_user.id == nil here?
     @review = Review.new(review_params)
-    @review.product_id = @product.id
     if session[:user_id] == @product.user_id
       flash[:notice] = "You can't review your own products. That's cheating. >:("
     else
@@ -23,6 +18,10 @@ class ReviewsController < ApplicationController
         redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Posted as guest."
       end    
     end
+  end
+
+  def show
+    @review = Review.find(params[:id])
   end
 
   def edit   
@@ -48,7 +47,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :description, :product_id)
+    params.require(:review).permit(:rating, :description, :product_id) # because of embedded resources, the product_id is already being passed in via params
   end
 
 end

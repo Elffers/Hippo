@@ -25,7 +25,7 @@
           <%= review.description %>
         <% end %> 
       <% end %> 
-      <%= link_to "Add a review!", reviews_new_path %><br><br>
+      <%= link_to "Add a review!", new_product_review_path(@product) %><br><br>
       <!-- ends reviews -->
     <% unless session[:user_id] == nil %> 
       <!-- start what owner of product can see -->

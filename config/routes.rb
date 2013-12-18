@@ -5,6 +5,7 @@ Hippo::Application.routes.draw do
   resources :users
   resources :products do 
     resources :category_products
+    resources :reviews, only: [:new, :create, :index]
   end
 #This section is probably duplicating things stuff might break, fix this
   # get '/products'    => "products#index"
@@ -45,10 +46,10 @@ Hippo::Application.routes.draw do
   get "users/new"  => "users#new"
 
   get "products/new" => 'products#new'
+  resources :reviews, except: [:new, :create, :index]
 
   #get "/reviews/:id" => "reviews#show"
-  get "/reviews/new" => "reviews#new"
-  post "/reviews/new" => "reviews#create"
+
   
   # get "users/create"  => "users#create"
 
