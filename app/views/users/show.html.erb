@@ -1,7 +1,7 @@
 params: <%=params.inspect%>
+<h1><%= @user.name.upcase %></h1>
   
-orders: <%=@user.orders.count %>
-<ol>
+<ul>
   <li> USER ID: <%=@user.id%> </li>
   <li> USER EMAIL: <%=@user.email%></li>
   <li> 
@@ -9,9 +9,6 @@ orders: <%=@user.orders.count %>
     <%@user.products.each do |product|%>
     <%=link_to "#{product.name}", product_path(product.id)%>
     <% end %>
-  </li>
-  <li>    
-    <%= link_to "See current order", order_path(current_order.id)%>
   </li>
   <li>ORDER HISTORY
     <table>
@@ -40,7 +37,7 @@ orders: <%=@user.orders.count %>
       </tbody>
     </table>
   </li>
-</ol>
+</ul>
 
 <%=link_to "List a new product", new_product_path %>
 
