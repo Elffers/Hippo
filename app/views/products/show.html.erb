@@ -2,8 +2,9 @@
 
   <h1><%= @product.name.capitalize %></h1>
 
-  <li>$<%= @product.price %></li> <!-- this isn't showing the two zeros! -->
-  <li><%= @product.description %></li>
+  <ul>
+  <li>Price $<%= @product.price %></li> <!-- this isn't showing the two zeros! -->
+  <li>Description: <%= @product.description %></li>
   <li>Categories:<% unless @product.categories == [] %>
     <% @product.categories.each do |category|%>
       <%= category.name %>
@@ -13,23 +14,21 @@
 
   <% if current_user %>
     <% if @product.user_id == current_user.id %>
-    <ul> 
-      <li><%= @product.inventory %></li>    
+      <li>Current Inventory: <%= @product.inventory %></li>    
       <li><% if @product.retired %>
-            <%= Retired %>
+            This product is retired.
           <% end %></li>
       <li><%= button_to "Edit this product", edit_product_path(@product.id), method: :get %></li>
-    </ul>  
    
 
     <% else %>
-      <ul>
       <li>Reviews: <% unless @product.reviews == [] %>
         <% @product.reviews.each do |review| %>
           <%= review.title %>
           <%= review.description %>
         <% end %>
       <% end %></li>
+    </ul>
 
     <% end %>  
   <% end %> 
@@ -41,5 +40,6 @@
     <%=  number_field_tag(:quantity) %>
     <%=  submit_tag "Add to Cart" %>
   <% end %>
+  <br><br>
   <%= link_to "Back to browsing", products_path %>
 </div>
