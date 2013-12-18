@@ -62,7 +62,9 @@ class OrdersController < ApplicationController
 
   def submit
    current_order.update(status:params[:payment_method])
-   #Here, alert each user in Order.products.each do {|x| find the user associated w/product and alert them} 
+   current_order.products.each do |product|
+     product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
+   end
   end
 
 
