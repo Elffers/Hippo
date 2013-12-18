@@ -2,6 +2,16 @@ params <%=params.inspect%><br>
 <hr>
 NOTICE: <%=flash[:notice] %>
 
+
+<!-- **The following div is temporary! ** List top categories here
+   * put top_categories array in application controller (right now only in catoegory controller-also need in welcome controller) -->
+
+<div class="sidebar">
+  <% Category.all.each do |category| %>
+  <%= link_to "#{category.name.upcase}", category_path(category) %>
+  <% end %>
+</div>
+
 <div>
   <ul>
     <% @products.each do |product| %>
@@ -10,9 +20,8 @@ NOTICE: <%=flash[:notice] %>
         <li><%= number_to_currency(product.price) %></li>
         <li><%= product.inventory %></li>
         <li><%= product.description %></li> 
-        
         <li>
-          <% if current_user %>    <!-- #this means you can't add the product to your cart even if you're a guest -->
+          <% if current_user %>
             <% if product.user_id != current_user.id %>
             <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
                   <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>

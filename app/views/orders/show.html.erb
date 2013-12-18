@@ -25,16 +25,12 @@ These are the products in your order:
               <%= submit_tag "Update!" %>
             <% end %>
         </td>
-        <td><%=number_to_currency(product.price) %></td>
-
-        <td><%= number_to_currency(product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity)%></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency @subtotals[@products.index(product)]%></td>
         <td><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %></td>
     </tr>
       <% end %>
 
-      <% subtotals = @products.map do |product| %>
-        <% product.price * OrderProduct.find_by(product_id: product.id, order_id: current_order.id).quantity%>
-      <% end %>
      <tr>
       <td>TOTAL:</td>
       <td> 
