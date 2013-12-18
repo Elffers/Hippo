@@ -6,11 +6,11 @@ NOTICE: <%=flash[:notice] %>
 <!-- **The following div is temporary! ** List top categories here
    * put top_categories array in application controller (right now only in catoegory controller-also need in welcome controller) -->
 
-<div class="sidebar">
-  <% Category.all.each do |category| %>
-  <%= link_to "#{category.name.upcase}", category_path(category) %>
-  <% end %>
-</div>
+<!-- <div class="sidebar">
+  <#% Category.all.each do |category| %>
+  <#%= link_to "#{category.name.upcase}", category_path(category) %>
+  <#% end %>
+</div> -->
 
 <div>
   <ul>
@@ -21,7 +21,7 @@ NOTICE: <%=flash[:notice] %>
         <li><%= product.inventory %></li>
         <li><%= product.description %></li> 
         <li>
-          <% if current_user %>
+          <% if session[:user_id] %>
             <% if product.user_id != current_user.id %>
             <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
                   <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>

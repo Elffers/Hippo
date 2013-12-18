@@ -14,38 +14,32 @@
         There are no categories associated with this product.
       <% end %>
     </li>
-
-    <% if current_user %> 
-    <!-- start what owner of product can see -->
-      <% if @product.user_id == current_user.id %> 
-        <li>Current Inventory: <%= @product.inventory %></li>   
-        <% if @product[:status] == "retired" %>
-          This product is retired.
-        <% end %><br>
-        <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
-        <%= link_to "View all your products", user_path(current_user.id) %>
-      <% end %>
-    <% end %> 
-    <!-- Ends what owner of product can see -->
-
-      <li>Reviews: <% unless @product.reviews == [] %>
+  </ul>
+    <!-- this starts reviews -->
+    <h3>Reviews:</h3>
+      <% if @product.reviews == [] %>
+        <p>There are no reviews for this product.</p>
+      <% else %>
         <% @product.reviews.each do |review| %>
           <%= review.title %>
           <%= review.description %>
-        <% end %>
-      <% end %></li>
-
-      <%# if current_user %> 
-      <!-- The unless condition requires there to be a user signed in; however, having that requirement first means a guest browser can't add the product to cart -->
-        <%# unless @product.user_id == current_user.id %>
-        <li><%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
-              <%=  number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
-              <%=  submit_tag "Add to Cart" %></li>
-            <% end %>
-        <%# end %>
-      <%# end %>
-    </ul>
-      
+        <% end %> 
+      <% end %> 
+      <!-- ends reviews -->
+    <% unless session[:user_id] == nil %> 
+      <!-- start what owner of product can see -->
+      <% if @product.user_id == current_user.id %> 
+        <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
+        <%= link_to "View all your products", user_path(current_user.id) %>
+      <% end %> 
+    <% end %> 
+<!-- ends what merchant can see -->
+    <% if @product.user_id != session[:user_id] %>
+      <%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
+      <%= number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
+      <%= submit_tag "Add to Cart" %>
+      <% end %>
+    <% end %> 
 </div>
 
 
