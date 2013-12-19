@@ -2,15 +2,41 @@ params: <%=params.inspect%>
 <h1><%= @user.name.upcase %></h1>
   
 <ul>
-  <li> USER ID: <%=@user.id%> </li>
-  <li> USER EMAIL: <%=@user.email%></li>
-  <li> 
-    PRODUCTS:
-    <%@user.products.each do |product|%>
-    <%=link_to "#{product.name}", product_path(product.id)%>
-    <% end %>
-  </li>
-  <li>ORDER HISTORY
+  <li> USER ID: <%= @user.id %> </li>
+  <li> USER EMAIL: <%= @user.email %></li>
+</ul>
+  
+<!-- <h3>ORDERS TO FULFILL:</h3> -->
+
+<h3>PRODUCTS:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th> Product name</th>
+        <th> Inventory </th>
+        <th> Orders requested </th>
+        <th> Ship this product </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.products.each do |product|%>
+        <tr>
+          <td><%= product.id %> <%= link_to "#{product.name}", product_path(product.id)%></td>
+          <td><%= product.inventory %></td>
+          <% unless product.orders == [] %>
+          <!-- #this should only take into account orders whose status is "paid" -->
+            <td><%= product.orders.count %></td> 
+            <td><%= link_to "Ship", user_orders_path(@user, product.id) %></td>
+          <% else %>
+            <td>This product has not been ordered</td>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <h3>ORDER HISTORY:<h3>
     <table>
       <thead>
         <tr>
@@ -36,8 +62,8 @@ params: <%=params.inspect%>
   
       </tbody>
     </table>
-  </li>
-</ul>
+  
+
 
 <%=link_to "List a new product", new_product_path %>
 

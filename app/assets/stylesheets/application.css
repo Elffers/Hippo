@@ -98,6 +98,10 @@ html, body {
   text-align: left;
 }
 
+tbody {
+  width: 700px;
+}
+
 #notice {
   background-color: #E33BCF;
   text-align: center;

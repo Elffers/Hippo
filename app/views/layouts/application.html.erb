@@ -12,7 +12,7 @@
       <div class='search_bar'>
         <%= form_tag("/search", method: "get") do %>
           <%= label_tag("Have something in mind?") %>
-          <%= text_field_tag(:product, params[:product]) %>
+          <%= text_field_tag(:search, params[:search]) %>
           <%= submit_tag("SEARCH!") %>
         <% end %> 
       </div>
@@ -26,18 +26,13 @@
             <% if current_user %> 
               <%= link_to "Hi, #{current_user.name}!", user_path(current_user.id) %>
                 <alt= 'Username'>
-              <li></a><a href="/sign-out"> Sign out</a> </li>
+              <li><%= link_to "Sign out", "/sign-out" %></li>
             <% else %> 
               Hi, Guest!
-              <li><a href="/sign-in"> HipPop in!</a> </li>
-              <li><a href="/users/new">Become a Hippo!</a></li>
+              <li><%= link_to "HipPop in!", "/sign-in" %></li>
+              <li><%= link_to "Become a Hippo!", "/users/new" %></li>
             <% end %>
-          </li>
-          <li>
-            <a href="/orders/<%=current_order.id%>">
-              Items in cart: <%= current_order.order_products.count %> <alt= 'Items in Cart'>
-            </a>
-          </li>
+          <li><%= link_to "Items in cart: #{current_order.order_products.count }", order_path(current_order) %></li>
         </ul>
       </div>
     </div> 

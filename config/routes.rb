@@ -39,7 +39,7 @@ Hippo::Application.routes.draw do
   delete '/orders/:id/remove_product/:product_id' => "orders#remove_product", as: :remove_product
   patch '/orders/:id/update_quantity/:product_id' => "orders#update_quantity", as: :update_quantity
 
-  get "/search" => "products#search"
+  get "/search" => "search#show"
 
 
   get "users/new"  => "users#new"
@@ -54,6 +54,7 @@ Hippo::Application.routes.draw do
   # get "users/destroy" => "users#destroy"
   # get "users/"        => "users#index"
   get "users/:id"     => "users#show"
+  get "users/:id/orders/:product_id" => "users#orders", as: :user_orders
 
   get "/checkout"     => "orders#checkout", as: :checkout
   post "/checkout"    => "orders#submit", as: :pay
