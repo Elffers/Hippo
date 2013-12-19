@@ -1,10 +1,13 @@
 <h3>Orders to fulfill</h3>
+<h3><%= @product.name.upcase %></h3>
+<div>
+  <ol>
+    <% @items.each do |op| %>
+    <li> Quantity: <%= op.quantity %><br>
 
-<ol>
-  <% @orders.each do |op| %>
-<li> Quantity: <%= op.quantity %><br>
-  <%= link_to "order #{op.order_id}", order_path(op.order_id) %> <!-- This won't actually be accessible by merchant -->
-</li> 
-<!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
-<% end %>
-</ol>
+      <%= link_to "order #{op.order_id}", order_path(op.order_id) %> 
+    </li> 
+  <!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
+  <% end %>
+  </ol>
+</div>

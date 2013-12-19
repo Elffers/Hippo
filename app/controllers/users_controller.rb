@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def orders
     @product = Product.find(params[:product_id])
-    @orders = @product.order_products
+    @items = @product.order_products
   end
 
   private

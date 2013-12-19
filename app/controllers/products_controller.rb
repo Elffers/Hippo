@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
   def new
     if current_user
       @product = Product.new #(user_id: params[:user_id])
-      render :new
     else
       redirect_to sign_in_path, notice: "You must sign in to list a product!"
     end
@@ -30,7 +29,14 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit   
+  def edit
+    if @product.user_id != session[:user_id]
+      flash[:notice] = "You are not authorized to edit this product!"
+      redirect_to "/products/#{@product.id}"
+    else
+      true
+    end
+
   end
 
   def update
