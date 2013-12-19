@@ -1,51 +1,114 @@
-<h1>TOTAL: <%= number_to_currency @total %></h1>
+<!-- <h1>TOTAL: <%= number_to_currency @total %></h1>
 <hr>
 
-<%= form_tag pay_path do %>
-<% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
+<#%= form_tag pay_path do %>
+<#% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
   <h3>Payment method:</h3>
   <div class= "field">
     <%#= label_tag :payment_method %>
     <%#= select_tag :payment_method, options_for_select(payment) %>
   </div>
 
-  <%= radio_button_tag(:payment_method, "paid") %>
-  <%= label_tag(:payment_method, "Visa") %>
+  <%#= radio_button_tag(:payment_method, "paid") %>
+  <%#= label_tag(:payment_method, "Visa") %>
 
-  <%= radio_button_tag(:payment_method, "paid") %>
-  <%= label_tag(:payment_method, "MasterCard") %>
+  <%#= radio_button_tag(:payment_method, "paid") %>
+  <%#= label_tag(:payment_method, "MasterCard") %>
 
-  <%= radio_button_tag(:payment_method, "paid") %>
-  <%= label_tag(:payment_method, "PayPal") %>
+  <%#= radio_button_tag(:payment_method, "paid") %>
+  <%#= label_tag(:payment_method, "PayPal") %>
 
-  <%= radio_button_tag(:payment_method, "paid") %>
-  <%= label_tag(:payment_method, "Bitcoins") %>
+  <%#= radio_button_tag(:payment_method, "paid") %>
+  <%#= label_tag(:payment_method, "Bitcoins") %> -->
+<h3>Shipping Information</h3>
+  <%= form_for @purchase_info, url: {action: "complete_purchase" } do |f| %>
+  <% if @purchase_info.errors.any? %>
+  <div class= "error_messages">
+    <h2> Problem in Form </h2>
+    <ul>
+      <% @purchase_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :address2 %>
+    <%= f.text_field :address2 %>
+  </div>
+  <div class="field">
+    <%= f.label :city, "City" %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state, "State" %>
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :zip_code, "Zip Code" %>
+    <%= f.number_field :zip_code %>
+  </div>
 <hr>
-  
-  <h3>Shipping Address:</h3>
-  <div class= "field">
-    <%= label_tag :address1, "Street address:" %>
-    <%= text_field_tag :address1, params[:address1] %>
+  <h3>Billing Information:</h3>
+<!--   <div class="field">
+    <#%= f.label :same_address %>
+    <#%= f.checkbox :billing_zip_code %>
+  </div> -->
+ <div class="field">
+    <%= f.label :billing_first %>
+    <%= f.text_field :billing_first %>
   </div>
-  <div class= "field">
-    <%= label_tag :address2, "Street address (2):" %>
-    <%= text_field_tag :address2, params[:address2] %>
+  <div class="field">
+    <%= f.label :billing_last %>
+    <%= f.text_field :billing_last %>
   </div>
-  <div class= "field">
-    <%= label_tag :city, "City:" %>
-    <%= text_field_tag :city, params[:city] %>
+  <div class="field">
+    <%= f.label :credit_card_number %>
+    <%= f.text_field :credit_card_number %>
   </div>
-  <div class= "field">
-    <%= label_tag :state, "State:" %>
-    <%= text_field_tag :state, params[:state] %>
+  <div class="field">
+    <%= f.label :expiration_date %>
+    <%= f.text_field :expiration_date %>
   </div>
-   <div class= "field">
-    <%= label_tag :zip_code, "Zip code:" %>
-    <%= text_field_tag :zip_code, params[:zip_code] %>
+  <div class="field">
+    <%= f.label :cvv %>
+    <%= f.text_field :cvv %>
   </div>
-  <%= submit_tag "Submit payment!" %>
-
+  <div class="field">
+    <%= f.label :billing_address %>
+    <%= f.text_field :billing_address %>
+  </div>
+  <div class="field">
+    <%= f.label :billing_address2 %>
+    <%= f.text_field :billing_address2 %>
+  </div>
+  <div class="field">
+    <%= f.label :billing_city %>
+    <%= f.text_field :billing_city %>
+  </div>
+  <div class="field">
+    <%= f.label :billing_state %>
+    <%= f.text_field :billing_state %>
+  </div>
+  <div class="field">
+    <%= f.label :billing_zip_code %>
+    <%= f.number_field :billing_zip_code %>
+  </div>
+  <%= f.submit %>
 <% end %>
+
 <hr>
 <%= link_to "Edit your order", order_path(current_order.id) %>
 
