@@ -9,6 +9,18 @@ class SessionsController < ApplicationController
       # this should attach order to user if signed in. 
       current_order.update(user_id:current_user.id) if current_user 
       redirect_to root_path, notice: "Hip Hipporay! You are now logged in as #{user.name}!"
+      # To set previous orderproducts into current order if not checked out
+      if user.orders != []
+        user.orders.each do |order|
+          if order.status == "pending" && order != current_order
+            order.order_products.each do |op|
+              op.update(order_id:current_order.id)
+              order.destroy
+            end
+        end
+      end
+    end
+    
     else
       render :new, notice: "Invalid email or password :("
     end
