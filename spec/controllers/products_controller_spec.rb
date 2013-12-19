@@ -5,18 +5,18 @@ describe ProductsController do
     Product.delete_all
   end
 
-  describe "GET index" do
-    it "populates an array of products" do
-      product = Product.create(name: "shoes", price: 9.99, user_id: 1)
-      get :index
-      assigns(:products).should eq([product])
-    end
+  # describe "GET index" do
+  #   it "populates an array of products" do
+  #     product = Product.create(name: "shoes", price: 9.99, user_id: 1)
+  #     get :index
+  #     assigns(:products).should eq([product])
+  #   end
 
-    it "renders the :index view" do
-      get :index
-      response.should render_template :index
-    end
-  end
+  #   it "renders the :index view" do
+  #     get :index
+  #     response.should render_template :index
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested product to @product" do
