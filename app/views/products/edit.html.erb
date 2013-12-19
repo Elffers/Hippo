@@ -1,9 +1,13 @@
 <h1><%= @product.name.upcase %></h1>
+
 <h1>Edit a product</h1>
+
+<hr>
 <%= @product.photo %>
-<!-- update to have underscores -->
+
+<%= render 'base_form' %>
+<hr>
 <%= render 'edit_category_form' %>
 <hr>
 <%= render 'add_category_form' %>
-<hr>
-<%= render 'base_form' %>
+

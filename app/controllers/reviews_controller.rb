@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
     @review = Review.new
     @product = Product.find(params[:product_id])
   end
-
  
   def create # Are we going to have a problem if current_user.id == nil here?
     @product = Product.find(params[:product_id])

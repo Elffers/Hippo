@@ -7,11 +7,16 @@
                  {:selected => CategoryProduct.where(:product_id => @product.id).map(&:category_id)},
                  {'name' => 'product[category][]', :multiple => true}) %>
     </div>
-    
-    <div class= "actions"><%=f.submit %></div>
+    <br>
+    <div class= "actions">
+      <%=f.submit "Update categories" %>
+    </div>
   <% end %>
 <% end %>
 
+<br>
 <div>Want to create a new category?
-<%= link_to "Create new Category", "/categories/new" %>
+  <%= link_to "Create new Category", create_category_path(@product) %>
 </div>
+
+<br>

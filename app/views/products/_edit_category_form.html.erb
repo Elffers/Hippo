@@ -1,8 +1,9 @@
-<ul><% unless @product.categories == [] %> 
+<h3>Categories:</h3>
+  <ul><% unless @product.categories == [] %> 
   <%= form_for @product do |f| %> 
-    <%= @product.categories.each do |c| %>
+    <% @product.categories.each do |c| %>
       <li><%= c.name %>
-      <%= link_to 'Destroy', product_category_product_path(product_id: @product.id, id: c.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Remove', product_category_product_path(product_id: @product.id, id: c.id), method: :delete, data: { confirm: 'Are you sure you want to remove this category?' } %>
     </li>
     <% end %>
   <% end %>
