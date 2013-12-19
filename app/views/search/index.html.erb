@@ -1,19 +1,23 @@
-<h1>Your Hippo Search Results</h1>
+<h1>Your Hippo Search Results:</h1>
+<hr>
 
 <div>
-  <h3> Products that match your search </h3>
+  <h3> Products that match your search:</h3>
    <%= render 'products/index' %> 
-    
-  <h3> Cateogories that match your search </h3>
+  <hr>
+  
+  <h3> Cateogories that match your search:</h3>
   <ul>
     <% @categories.each do |category| %>
-      <li><%= link_to "Category: #{category.name.capitalize}", category_path(category.id) %></li>
+      <li><%= link_to "#{category.name.capitalize}", category_path(category.id) %></li>
     <%end %>      
   </ul>
-
+  <hr>
+  
+  <h3> Sellers that match your search:</h3>
   <ul>
     <% @users.each do |user| %>
-      <li><%= link_to "User: #{user.name}", user_path(user.id) %></li>
+      <li><%= link_to "#{user.name}", user_path(user.id) %></li>
     <%end %>      
   </ul>
 </div>
