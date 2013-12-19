@@ -16,8 +16,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    User.find(session[:user_id]).orders.each do |order|
+      if order.status == "pending" && order.order_products == []
+        order.destroy
+      end
+    end
     session[:user_id] = nil
     session[:order_id] = nil
+
     redirect_to root_path, notice: "You are now logged out! Hip Hop awaaaaaayyy!"
   end
 
