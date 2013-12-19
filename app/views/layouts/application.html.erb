@@ -30,7 +30,7 @@
             <% else %> 
               Hi, Guest!
               <li><%= link_to "HipPop in!", "/sign-in" %></li>
-              <li><%= link_to "Become a Hippo!", "/users/new" %></li>
+              <li><%= link_to "Become a Hippo!", sign_up_path%></li>
             <% end %>
           <li><%= link_to "Items in cart: #{current_order.order_products.count }", order_path(current_order) %></li>
         </ul>

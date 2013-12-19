@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product, except: [:new, :create] 
 
   # def index
   #   @products = Product.all
@@ -6,7 +7,6 @@ class ProductsController < ApplicationController
   # end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def new
@@ -18,14 +18,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit   
-    @product = Product.find(params[:id]) 
-  end
-
-
-  def create #If @product save, else render edit
+  def create 
     @product = Product.new(product_params)
-    @product[:user_id] = current_user.id
+    #Following would be unnecessary if route was renamed RESTfully
+    @product[:user_id] = current_user.id 
     if @product.save
       redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
@@ -33,12 +29,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit   
+  end
+
   def update
-    @product = Product.find(params[:id])
-    #Instead of Params block productcategory.new(productcategory params private method)
-    #Private method product catagory Params params.require.productcategory.permit(product_id, category_id)
-    
-    # @category_product.new(category_product_params).save
     if @product.update(product_params)
       redirect_to product_path(@product.id)
     else
@@ -47,7 +41,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])  
     @product.destroy
     redirect_to products_path  
   end
@@ -55,15 +48,15 @@ class ProductsController < ApplicationController
   def search_by_name
      @products = Product.where name: params[:product] 
   end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :retired)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
 end
-
-private
-
-def product_params
-  params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :retired)
-end
-
-# def category_product_params
-#   params.require(:category_product).permit(:product_id, :category_id)
-# end
-
