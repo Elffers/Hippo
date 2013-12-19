@@ -1,10 +1,9 @@
 <h1><%= @product.name.upcase %></h1>
-params <%=params.inspect%>
 
 <h1>Edit a product</h1>
-<!-- update to have underscores -->
+<%= render 'base_form' %>
+<hr>
 <%= render 'edit_category_form' %>
 <hr>
 <%= render 'add_category_form' %>
-<hr>
-<%= render 'base_form' %>
+
