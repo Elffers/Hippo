@@ -64,12 +64,11 @@ html, body {
   width: 700px;
   margin: auto;
   margin-left: 500px;
-  /*vertical-align*/
   padding: 20px;
   background: white;
 }
 
-.search_bar{
+.search_bar {
   border: 1px solid #968D86;
   left: 60px;
   float: left;
@@ -82,7 +81,7 @@ html, body {
 }
 
 .search_bar input {
-  width: 100px;
+  width: 50px;
   min-height: 20px;
 } 
 
@@ -109,4 +108,31 @@ tbody {
   font-style: italic;
 }
 
+.ordershow {
+  background-color: white;
+  padding: 10px;
+}
 
+table {
+  width: 100%;
+  border: 1px #968D86;
+  border-spacing: 0;
+  margin: auto;
+}
+
+.number_field {
+  width: 50px;
+}
+
+td {
+  border: 1px solid #968D86;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+th {
+  border: 1px solid #968D86;
+  padding: 10px;
+  background-color: #968D86;
+}
