@@ -18,13 +18,22 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @orderproduct = OrderProduct.new 
-    @products = @order.products
-    puts "PRODUCTS = #{@products}"
-    unless @products == nil?
-      totals
+    if Order.find_by(id:params[:id]).nil?
+      flash[:notice] = "This order does not exist."
+      redirect_to root_path
+    else
+      @order = Order.find(params[:id])
+      @orderproduct = OrderProduct.new 
+      @products = @order.products
+      unless @products == nil?
+        totals
+      end
     end
+    # rescue ActiveRecord::RecordNotFound
+    #   flash[:notice] = "This order does not exist."
+    #   @order = current_order
+    #   redirect_to root_path
+
   end
   
   def add_product

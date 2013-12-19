@@ -12,7 +12,7 @@ params: <% params.inspect %>
   </thead>
   <tbody>
     <tr><% @products.each do |product| %>
-      <% if @category.products.include?(product) %>
+      <% if @category.products.include?(product) && product.retired == false %>
         <td> <%= link_to "#{product.name.capitalize}", product_path(product.id) %></td>
         <td><%= number_to_currency(product.price) %></td>
         <td><%= product.inventory %></td>

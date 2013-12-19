@@ -24,10 +24,16 @@
           <tr>
             <td><%= product.id %> <%= link_to "#{product.name}", product_path(product.id)%></td>
             <td><%= product.inventory %></td>
-            <% unless product.orders == [] %>
+            <% if product.orders != [] %>
             <!-- #this should only take into account orders whose status is "paid" -->
               <td><%= product.orders.count %></td> 
               <td><%= link_to "Ship", user_orders_path(@user, product.id) %></td>
+            <% elsif product.inventory == 0 %>
+              <td> **Out of stock**</td>
+              <td></td>
+            <% elsif product.retired == true %>
+              <td> This product has been retired </td>
+              <td></td>
             <% else %>
               <td>This product has not been ordered</td>
               <td></td>
