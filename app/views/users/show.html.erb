@@ -1,72 +1,83 @@
 <h1><%= @user.name.upcase %></h1>
   
-<ul>
-  <li> USER ID: <%= @user.id %> </li>
-  <li> USER EMAIL: <%= @user.email %></li>
-</ul>
-  
-<!-- <h3>ORDERS TO FULFILL:</h3> -->
+<% if session[:user_id] == @user.id %> 
 
-<h3>PRODUCTS:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th> Product name</th>
-        <th> Inventory </th>
-        <th> Orders requested </th>
-        <th> Ship this product </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @user.products.each do |product|%>
-        <tr>
-          <td><%= product.id %> <%= link_to "#{product.name}", product_path(product.id)%></td>
-          <td><%= product.inventory %></td>
-          <% unless product.orders == [] %>
-          <!-- #this should only take into account orders whose status is "paid" -->
-            <td><%= product.orders.count %></td> 
-            <td><%= link_to "Ship", user_orders_path(@user, product.id) %></td>
-          <% else %>
-            <td>This product has not been ordered</td>
-            <td></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
-  <h3>ORDER HISTORY:<h3>
+  <ul>
+    <li> USER ID: <%= @user.id %> </li>
+    <li> USER EMAIL: <%= @user.email %></li>
+  </ul>
+    
+  <!-- <h3>ORDERS TO FULFILL:</h3> -->
+
+  <h3>PRODUCTS:</h3>
     <table>
       <thead>
         <tr>
-          <th> Order </th>
-          <th> Status </th>
-          <th> Items in Order </th>
-          <th> Created on </th>
-          <th> Last Updated </th>
+          <th> Product name</th>
+          <th> Inventory </th>
+          <th> Orders requested </th>
+          <th> Ship this product </th>
         </tr>
       </thead>
       <tbody>
-        <% @user.orders.reverse.each do |order|%>
-         <tr> 
-          <% if order == current_order %>
-            <td><%= link_to "Current order", order_path(current_order) %></td>
-            <!-- the next elsif block will be condensed into the current order -->
-          <% elsif order.status == "pending" %> 
-            <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
-            <!-- end the part that will be condesned -->
-          <% elsif order.status != "pending" %>
-            <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
-          <% end %>
-          <td><%= order.status %></td>
-          <td><%= order.products.count %></td>
-          <td><%= order.created_at.strftime('%H:%M:%S on %d %b %Y') %></td>
-          <td><%= order.updated_at.strftime('%H:%M:%S on %d %b %Y') %></td> 
-          <!-- #maybe change order of table elements? if shipped, show completion date -->
-         </tr>
+        <% @user.products.each do |product|%>
+          <tr>
+            <td><%= product.id %> <%= link_to "#{product.name}", product_path(product.id)%></td>
+            <td><%= product.inventory %></td>
+            <% unless product.orders == [] %>
+            <!-- #this should only take into account orders whose status is "paid" -->
+              <td><%= product.orders.count %></td> 
+              <td><%= link_to "Ship", user_orders_path(@user, product.id) %></td>
+            <% else %>
+              <td>This product has not been ordered</td>
+              <td></td>
+            <% end %>
+          </tr>
         <% end %>
-  
       </tbody>
     </table>
-  
+    
+    <h3>ORDER HISTORY:<h3>
+      <table>
+        <thead>
+          <tr>
+            <th> Order </th>
+            <th> Status </th>
+            <th> Items in Order </th>
+            <th> Created on </th>
+            <th> Last Updated </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.orders.reverse.each do |order|%>
+           <tr> 
+            <% if order == current_order %>
+              <td><%= link_to "Current order", order_path(current_order) %></td>
+              <!-- the next elsif block will be condensed into the current order -->
+            <% elsif order.status == "pending" %> 
+              <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
+              <!-- end the part that will be condesned -->
+            <% elsif order.status != "pending" %>
+              <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
+            <% end %>
+            <td><%= order.status %></td>
+            <td><%= order.products.count %></td>
+            <td><%= order.created_at.strftime('%b %d, %Y at %l:%M %P') %></td>
+            <td><%= order.updated_at.strftime('%b %d, %Y at %l:%M %P') %></td> 
+            <!-- #maybe change order of table elements? if shipped, show completion date -->
+           </tr>
+          <% end %>
+    
+        </tbody>
+      </table>
+    
 <%=link_to "List a new product", new_product_path %>
+
+<% else %>
+
+  <h3>Products sold by <%=@user.name%>:</h3>
+
+  <%= render 'products/index' %>
+
+<% end %>
+

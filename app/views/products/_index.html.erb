@@ -1,3 +1,4 @@
+
 <div id="notice">Hey there! <%=flash[:notice] %></div>
 
 
@@ -11,9 +12,9 @@
 </div> -->
 
 <div class="productlist">
-  <% if session[:user_id] %>
+  
     <% @products.each do |product| %>
-      <% if product.user_id != current_user.id %>
+      <% if product.user_id != session[:user_id] %>
       <ul class="individualproduct">
         <% unless product[:status] == "retired" %>
         <li id="productprice"><li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
@@ -29,7 +30,7 @@
         </li>
       </ul>
     <% end %>
-  <%end %>      
+      
       
 </div>
 
