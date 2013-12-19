@@ -33,15 +33,20 @@ class OrdersController < ApplicationController
       redirect_to order_path(current_order)
     else 
     @product = Product.find(params[:product_id])
-    @orderproduct = OrderProduct.new(
-      order_id: current_order.id, 
-      product_id: params[:product_id], 
-      quantity: params[:quantity])
-      if @orderproduct.save
-        redirect_to order_path(current_order) #changes url
-      else 
-        flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
-        render :show
+      if @product.inventory == 0
+        flash[:notice] = "This product is out of stock. Check back soon!"
+        redirect_to root_path
+      else
+        @orderproduct = OrderProduct.new(
+        order_id: current_order.id, 
+        product_id: params[:product_id], 
+        quantity: params[:quantity])
+        if @orderproduct.save
+          redirect_to order_path(current_order) #changes url
+        else 
+          flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
+          render :show
+        end
       end
     end
   end
@@ -68,8 +73,16 @@ class OrdersController < ApplicationController
   def submit
    current_order.update(status:params[:payment_method])
    current_order.products.each do |product|
-     product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
-   end
+      if product.inventory == 0
+        flash[:notice] = "We are currently out of stock. Check back soon!"
+        redirect_to order_path(current_order)
+      elsif OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity > product.inventory
+        flash[:notice] = "We have #{product.inventory} of those in stock."
+        redirect_to order_path(current_order)
+      else
+        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
+      end
+    end
   end
 
 private
