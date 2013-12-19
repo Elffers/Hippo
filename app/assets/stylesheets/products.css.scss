@@ -1,3 +1,25 @@
-// Place all the styles related to the Products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.field #review_description {
+  height: 150px;
+  width: 300px;
+}
+
+.productlist ul{
+  border: 5px solid #968D86; 
+  list-style-type: none;
+  display: inline-block;
+  min-height: 100px;
+  height: 150px;
+  width: 150px;
+  margin-left: 25px;
+}
+
+.individualproduct ul{
+  list-style-type: block;
+  border: 5px solid green;
+}
+
+#cartbutton {
+  min-height: 50px;
+
+}

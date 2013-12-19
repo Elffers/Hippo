@@ -4,4 +4,5 @@ class Review < ActiveRecord::Base
   # vaidates :user_id, presence: true, numericality: { only_integer: true}
 
   belongs_to :product
+  belongs_to :user
 end

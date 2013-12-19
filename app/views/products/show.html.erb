@@ -1,5 +1,7 @@
 <div class= "productshow">
 
+<%= flash.notice %>
+<%= @product.inspect %>
  <h1><%= @product.name.capitalize %></h1>
   <div><%= image_tag(src=@product.photo, size: '150x150') %></div>
   <ul>
@@ -15,17 +17,30 @@
       <% end %>
     </li>
   </ul>
+
     <!-- this starts reviews -->
     <h3>Reviews:</h3>
+    <ul>
       <% if @product.reviews == [] %>
         <p>There are no reviews for this product.</p>
       <% else %>
         <% @product.reviews.each do |review| %>
-          <%= review.title %>
-          <%= review.description %>
+        <li><h4>Rating: <%= review.rating %></h4>
+          <p><%= review.description %><p>
+          <% if review.user_id == session[:user_id] %>
+            <%= link_to "Delete review", review_path(review), method: :delete %>
+            <%= link_to "Edit review", edit_review_path(review) %>
+          <% end %>
         <% end %> 
+        </li>
       <% end %> 
-      <!-- ends reviews -->
+    </ul>
+      <% unless @product.user_id == session[:user_id] %>
+        <%= link_to "Add a review!", new_product_review_path(@product) %><br>
+      <% end %> 
+
+    <!-- ends reviews -->
+
     <% unless session[:user_id] == nil %> 
       <!-- start what owner of product can see -->
       <% if @product.user_id == current_user.id %> 
@@ -33,7 +48,9 @@
         <%= link_to "View all your products", user_path(current_user.id) %>
       <% end %> 
     <% end %> 
-<!-- ends what merchant can see -->
+      <!-- ends what merchant can see -->
+
+    <!-- makes sure product can't be purchased by owner of the product -->
     <% if @product.user_id != session[:user_id] %>
       <%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
       <%= number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
@@ -45,5 +62,5 @@
 
 <div class="go_back">
   <br><br>
-  <%= link_to "Back to browsing", products_path %>
+  <%= link_to "Back to browsing", root_path %>
 </div>

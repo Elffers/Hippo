@@ -1,12 +1,3 @@
-<!--   This div is for debugging. Uncomment for development purposes. -->
-<!--   <div>
-    <hr>
-  User: <%= current_user.inspect %> <br>
-        <%= current_order.inspect %> <br>
-    <hr>
-
-  </div> -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,17 +8,18 @@
   </head>
 
   <body>
-     <div class='search_bar'>
+    <div class='nav_bar'> 
+      <div class='search_bar'>
         <%= form_tag("/search", method: "get") do %>
           <%= label_tag("Have something in mind?") %>
           <%= text_field_tag(:search, params[:search]) %>
-          <%= submit_tag("Search!") %>
+          <%= submit_tag("SEARCH!") %>
         <% end %> 
       </div>
-    <div class='nav_bar'>
+    
       <div id="icon">
-        <a href="/"><img src="http://i.imgur.com/TsoZSGz.jpg" title="Welcome to Hippo!", height="45" width="45"></a>
-      </div>
+        <a href="/"><img src="/assets/hellohippo.png" title="Welcome to Hippo!", height="45" width="45"></a>
+      
       <div class='navbuttons'>
         <ul>
           <li>
@@ -44,7 +36,7 @@
         </ul>
       </div>
     </div> 
-
+</div>
   
      <div class='content'>
       <%= yield %>
