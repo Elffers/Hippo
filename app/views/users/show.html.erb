@@ -42,6 +42,7 @@ params: <%=params.inspect%>
         <tr>
           <th> Order </th>
           <th> Status </th>
+          <th> Items in Order </th>
           <th> Created on </th>
           <th> Last Updated </th>
         </tr>
@@ -55,6 +56,7 @@ params: <%=params.inspect%>
             <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
           <% end %>
           <td><%= order.status %></td>
+          <td><%= order.products.count %></td>
           <td><%= order.created_at.strftime('%H:%M:%S on %d %b %Y') %></td>
           <td><%= order.updated_at.strftime('%H:%M:%S on %d %b %Y') %></td> <!-- #maybe change order of table elements? if shipped, show completion date -->
          </tr>
