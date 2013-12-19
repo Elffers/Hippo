@@ -1,3 +1,4 @@
+<%#=flash.notice %>
 <div class="sidebar">
   <% Category.all.each do |category| %>
   <%= link_to "#{category.name.upcase}", category_path(category) %>
