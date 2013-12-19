@@ -18,7 +18,7 @@
     </li>
   </ul>
 
-    <!-- this starts reviews -->
+    <!--  starts reviews -->
     <h3>Reviews:</h3>
     <ul>
       <% if @product.reviews == [] %>
@@ -38,7 +38,7 @@
       <% unless @product.user_id == session[:user_id] %>
         <%= link_to "Add a review!", new_product_review_path(@product) %><br>
       <% end %> 
-
+    <hr>
     <!-- ends reviews -->
 
     <% unless session[:user_id] == nil %> 
@@ -49,18 +49,20 @@
       <% end %> 
     <% end %> 
       <!-- ends what merchant can see -->
-
     <!-- makes sure product can't be purchased by owner of the product -->
     <% if @product.user_id != session[:user_id] %>
-      <%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
-      <%= number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
-      <%= submit_tag "Add to Cart" %>
+       <% if @product.inventory == 0 %>
+         <p> Out of stock -- Check back soon!</p>
+       <% else %>
+        <%= form_tag(add_product_path(current_order.id, @product.id), method: "post") do %>
+          <%= number_field_tag(:quantity, 1, in: 1..@product.inventory) %>
+          <%= submit_tag "Add to Cart" %>
+        <% end %>
       <% end %>
     <% end %> 
 </div>
 
-
+<hr>
 <div class="go_back">
-  <br><br>
   <%= link_to "Back to browsing", root_path %>
 </div>
