@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
- html, body {
+html, body {
   font-family: arial, sans-serif;
   background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -22,15 +22,15 @@
   margin:0;
   padding:0;
   height:100%;
+  margin-top: 30px;
 }
 
 .nav_bar {
   height: 48px;
   top: 0;
-  background-color: #C1A5A5;
+  background-color: #968D86;
   text-align: right;
   padding: 15px;
-  border-bottom: 2px solid black;
   position: fixed;
   width: 100%;
 }
@@ -39,7 +39,7 @@
   /*display: inline-block;*/
   /*border: 1px solid red;*/
   width: 50px;
-  left: 0px;
+  left: 15px;
   position: fixed;
 }
 
@@ -53,7 +53,6 @@
 }
 
 .nav_bar ul li {
-  border: 1px solid black;
   padding: 5px;
   /*top: 100px;*/
   width: 200px;
@@ -62,7 +61,6 @@
 }
 
 .content {
-  border: 2px solid black;
   width: 700px;
   margin: auto;
   margin-left: 500px;
@@ -72,13 +70,13 @@
 }
 
 .search_bar{
-  border: 1px solid red;
+  border: 1px solid #968D86;
   left: 60px;
   float: left;
   width: 200px;
   height: 32px;
   margin: 10px, auto;
-  background-color: #C1A5A5;
+  background-color: #968D86;
   padding: 15px;
   position: fixed;
 }
@@ -101,8 +99,10 @@
 }
 
 #notice {
-  background-color: red;
+  background-color: #E33BCF;
   text-align: center;
+  font-size: 18pt;
+  font-style: italic;
 }
 
 
