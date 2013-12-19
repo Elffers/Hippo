@@ -1,64 +1,91 @@
 <%=flash.notice %>
 <hr>
-Order: <%= @order.id %><br>
+Order: <%= @order.inspect%><br>
+Buyer: <%= @order.user.id%><br>
 UserID: <%= current_user.id if current_user %><br>
 <hr>
-
-<div class= "ordershow">
-  <% if check_user %>
-    These are the products in your order: 
+<!-- Ensures only buyer can see full order -->
+<% if check_user %>
+  <div class= "ordershow">
+    <% if @products == [] %>
+      <h3> There are no products in this order.</h3>
+    <% else %>
+    <!-- maybe refactor to case when syntax? -->
+      <% if @order.status == "pending" %>
+        <h3>This order has not been checked out!</h3>
+      <% elsif @order.status == "paid" %>
+         <h3>This order is being shipped!</h3>
+      <% elsif @order.status == "shipped" %>
+        <h3>This order has been completed!</h3>
+      <% end %>
+    <!-- end status message -->
     <table>
       <thead>
         <tr>
-          <th> Name     </th>
-          <th> Quantity </th>
-          <th> Price    </th>
-          <th> Subtotal </th>
-          <th> Remove   </th>
+          <th> Name      </th>
+          <th> Quantity  </th>
+          <th> Price     </th>
+          <th> Subtotal  </th>
+          <% if @order.status == "pending" %>
+            <th> Edit quantity  </th>
+            <th> Remove         </th>
+          <% end %>
         </tr>
       </thead>
       <tbody> 
-        <% unless @products == [] %>
+        <% @products.each do |product| %>
           <tr>
-            <% @products.each do |product| %>
-              <td><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
-              <td><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %>
-                  <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
-                    <%= number_field_tag(:quantity, params[:quantity], in: 1..product.inventory, class: "number_field") %>
-                    <%= submit_tag "Update!" %>
-                  <% end %>
+            <td id= "item name"><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
+            <td id="quantity"><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %></td>
+            <td id="price"><%= number_to_currency(product.price) %></td>
+            <td id= "subtotal"><%= number_to_currency @subtotals[@products.index(product)]%></td>
+            <!-- Can edit/remove if order still open -->
+            <% if @order.status == "pending" %>
+              <td id= "edit_quantity">
+              <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
+                <%= number_field_tag(:quantity, params[:quantity], in: 1..product.inventory, class: "number_field") %>
+                <%= submit_tag "Update!" %>
+              <% end %>
               </td>
-              <td><%= number_to_currency(product.price) %></td>
-              <td><%= number_to_currency @subtotals[@products.index(product)]%></td>
-              <td><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %></td>
-              </tr>
+              <td id= "remove"><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %>
+              </td>
             <% end %>
-          
-          <tr>
-            <td>TOTAL:</td>
-            <td> 
-              <% items = current_order.order_products.map {|x| x.quantity} %>
-              <%= items.inject(:+) %>
-            </td>
+          </tr>
+        <% end %>
+        
+        <tr>
+          <td>TOTAL:</td>
+          <td> 
+            <% items = current_order.order_products.map {|x| x.quantity} %>
+            <%= items.inject(:+) %>
+          </td>
+          <td></td>
+          <td><%= number_to_currency(@total)%></td>
+          <% if @order.status == "pending" %>
             <td></td>
-            <td><%= number_to_currency(@total)%></td>
             <td></td>
-           </tr>
-         <% end %>
-      </tbody>
-    </table>
-
-    <div>
+          <% end %>
+         </tr>
+       <% end %>
+    </tbody>
+  </table>
+  <br><hr>
+    <div class="navigation_links">
       <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
-      <% unless @products == [] %> 
-        <%= link_to "Proceed to checkout", checkout_path %><br>
-      <% end %>
+      <div class="checkout_button">
+        <% unless @products == [] %> 
+          <%= button_to "Proceed to checkout", checkout_path, method: :get %><br>
+        <% end %>
+      </div>
+
       <%= link_to "Back to browsing", root_path %><br>
       <% if current_user %>
         <%= link_to "Back to profile", user_path(current_user.id) %>
       <% end %>
-    </div>
+    </div> <!-- ends ordershow -->
+  <hr>
 
 <% else %>
-  You are not authorized to view this page!
+  <h3>You are not authorized to view this page!</h3>  
 <% end %>
+
