@@ -29,6 +29,7 @@
           <p><%= review.description %><p>
           <% if review.user_id == session[:user_id] %>
             <%= link_to "Delete review", review_path(review), method: :delete %>
+            <%= link_to "Edit review", edit_review_path(review) %>
           <% end %>
         <% end %> 
         </li>

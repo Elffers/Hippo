@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    @product = Product.find(params[:product_id])
   end
 
  
@@ -19,14 +20,6 @@ class ReviewsController < ApplicationController
         redirect_to product_path(params[:product_id])
       end
     end
-    # else
-    #   @review = Review.new(review_params)
-    #   @review.save
-    #   if @review.save && current_user
-    #     redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Review posted as #{user.find(session[:user_id])}."
-    #   elsif @review.save
-    #     redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Posted as guest."
-    #   end    
   end
 
   def show
@@ -34,7 +27,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit   
-    @review = Review.find(params[:id]) 
+    @review = Review.find(params[:id])
   end
 
   def update
