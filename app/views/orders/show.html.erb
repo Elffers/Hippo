@@ -1,13 +1,12 @@
 <%=flash.notice %>
-params: <%=params.inspect%>
 <hr>
 Order: <%= @order.id %><br>
-UserID : <%= current_user.id if current_user %><br>
+UserID: <%= current_user.id if current_user %><br>
 <hr>
 
 <div class= "ordershow">
   <% if check_user %>
-    These are the products in your order:
+    These are the products in your order: 
     <table>
       <thead>
         <tr>
