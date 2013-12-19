@@ -1,37 +1,30 @@
 
-<div id="notice">Hey there! <%=flash[:notice] %></div>
+<!-- <div id="notice">Hey there! <%#=flash[:notice] %></div> -->
 
-
-<!-- **The following div is temporary! ** List top categories here
-   * put top_categories array in application controller (right now only in catoegory controller-also need in welcome controller) -->
-
-<!-- <div class="sidebar">
-  <#% Category.all.each do |category| %>
-  <#%= link_to "#{category.name.upcase}", category_path(category) %>
-  <#% end %>
-</div> -->
-
-<div class="productlist">
-  
-    <% @products.each do |product| %>
-      <% if product.user_id != session[:user_id] %>
+<div class="productlist">  
+  <% @products.each do |product| %>
+    <% if product.user_id != session[:user_id] %>
       <ul class="individualproduct">
         <% unless product[:status] == "retired" %>
-        <li id="productprice"><li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
-        <li id="PICTURE">PICTURE</li>
-        <li><%= number_to_currency(product.price) %></li>
-        <li id="cartbutton">
-            <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
-                  <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
-                  <%=  submit_tag "Add to Cart" %>
-                <% end %>
+          <li id="productprice"><li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
+          <li id="PICTURE">PICTURE</li>
+          <li><%= number_to_currency(product.price) %></li>
+          <li id="cartbutton">
+            <!-- Add to cart button. Ensures that user cannot add product if none in stock -->
+            <% if product.inventory == 0 %>
+              <p> Out of stock </p>
+            <% else %>
+              <%= form_tag(add_product_path(current_order.id, product.id), method: "post") do %>
+                <%=  number_field_tag(:quantity, 1, in: 1..product.inventory) %>
+                <%=  submit_tag "Add to Cart" %>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
+          </li>
+          <!-- end button -->
+        <% end %> <!-- ends retired clause -->
       </ul>
-    <% end %>
-      
-      
+    <% end %> <!-- ends guard against product ownew viewing product -->
+  <% end %>
 </div>
 
   
