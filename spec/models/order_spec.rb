@@ -12,15 +12,3 @@ describe Order do
     expect(order).to_not be_valid
   end
 end
-
-
-# describe '#home_team_name' do
-#   before do
-#     @home_team = Team.new(:name => 'The Home Team')
-#     @event = Event.new(home_team_id: @home_team.id)
-#   end
-
-#   it 'should return the name of the home team' do
-#     @event.home_team_name.should == 'The Home Team'
-#   end
-# end 

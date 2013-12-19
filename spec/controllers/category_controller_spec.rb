@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe CategoryController do
+describe CategoriesController do
 
 end
