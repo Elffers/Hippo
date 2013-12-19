@@ -1,11 +1,15 @@
 <div class= "reviewshow">
+  <%= flash.notice %>
+  <%= @product.reviews.inspect %>
+  <%= Review.last.description %><br>
+  ID: <%= Review.last.product_id %>
 
 <!--   Need to implement a way to find the reviews by the product displayed.  -->
   <ul> 
-    <% Review.all.each do |review| %>
+    <% @product.reviews.each do |review| %>
       <li><%= review.rating %></li>
       <li><%= review.description %></li>
-      <li>By: <%= review.user_id %></li> <!-- I want to convert this to the user's name eventually -->
+      <li>By: <%#= review.user_id %></li> <!-- I want to convert this to the user's name eventually -->
     <% end %>
   </ul>
 

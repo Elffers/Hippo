@@ -1,7 +1,7 @@
 params <%=params.inspect%>
 
 <h1>Write a Review</h1>
-  <%= form_for @review, url: new_product_review_path(params[:product_id]) do |f| %>
+  <%= form_for @review, url: product_reviews_path(params[:product_id]) do |f| %>
   <% if @review.errors.any? %>
     <div class= "error_messages">
       <h2> Form is invalid </h2>
@@ -15,7 +15,7 @@ params <%=params.inspect%>
 
   <div class="field">
     <%= f.label :rating %>
-    <%= f.number_field :rating %>
+    <%= f.number_field :rating, in: 1..5 %> <!-- maybe make these stars?! -->
   </div>
 
   <div class="field">
