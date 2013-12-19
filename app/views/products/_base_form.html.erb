@@ -33,6 +33,12 @@
     <%= f.label :inventory %>
     <%= f.number_field :inventory %>
   </div>
+
+   <div class="image">
+    <%= f.label :photo, "Upload an image of your product!" %>
+    <%= f.file_field :photo %>
+    <%= f.hidden_field :photo_cache %> <!-- what is this? -->
+  </div>
  
   <div class= "actions"><%=f.submit %></div>
 <% end %>
