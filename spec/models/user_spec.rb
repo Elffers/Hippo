@@ -37,13 +37,14 @@ describe User do
       end
     end
 
-    describe "password" do
-      pending "must match info in database" do
-      end
-    end
+    # describe "password" do
+    #   pending "must match info in database" do
+    #   end
+    # end
 
-    describe "relationships" do
-      pending "must have many products" do
-      end
-    end
+    # # describe "relationships" do
+    # #   pending "must have many products" do
+    # #   end
+    # # end
+  end
 end

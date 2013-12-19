@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product, except: [:new, :create] 
 
   # def index
   #   @products = Product.all
@@ -6,7 +7,6 @@ class ProductsController < ApplicationController
   # end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def new
@@ -18,23 +18,22 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit   
-    @product = Product.find(params[:id]) 
-  end
-
-
-  def create #If @product save, else render edit
+  def create 
     @product = Product.new(product_params)
-    @product[:user_id] = current_user.id
+    #Following would be unnecessary if route was renamed RESTfully
+    @product[:user_id] = current_user.id 
     if @product.save
       redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
+      #new_product_path
       redirect_to "/products/new", notice: "There was an error, try again."
     end
   end
 
+  def edit   
+  end
+
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to product_path(@product.id)
     else
@@ -43,7 +42,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])  
     @product.destroy
     redirect_to products_path  
   end
@@ -57,7 +55,9 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :photo, :retired)
   end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
 end
-
-
-

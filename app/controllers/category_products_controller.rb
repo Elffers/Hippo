@@ -11,10 +11,6 @@ class CategoryProductsController < ApplicationController
     redirect_to product_path(@product.id) #redirect to product show page
   end
 
-  # def update
-  #   redirect_to products_path
-  # end
-
   def destroy
     @product = Product.find(params[:product_id])
     @categoryproduct = CategoryProduct.find_by(product_id: params[:product_id], category_id:params[:id]) 
