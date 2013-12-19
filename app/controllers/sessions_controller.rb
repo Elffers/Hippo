@@ -17,10 +17,9 @@ class SessionsController < ApplicationController
               op.update(order_id:current_order.id)
               order.destroy
             end
+          end
         end
       end
-    end
-    
     else
       render :new, notice: "Invalid email or password :("
     end
