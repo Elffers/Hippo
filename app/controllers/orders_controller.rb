@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
   def complete_purchase
     @purchase_info = PurchaseInfo.new(params[:complete_purchase])
     @purchase_info[:order_id] = current_order.id
-    current_order.update[status: "paid"]
+    current_order.update(status: "paid")
     if @purchase_info.save
       flash[:notice] = "Your order is complete!"
       redirect_to root_path
