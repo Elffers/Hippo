@@ -1,5 +1,5 @@
-params <%=params.inspect%>
 <%=flash.notice %>
+<hr>
 
 <h1>Create a new Category!</h1>
 <%= form_for @category, url: create_category_path(Product.find(params[:product_id])) do |f| %>
@@ -13,9 +13,10 @@ params <%=params.inspect%>
       </ul>
     </div>
   <% end %>
+
   <div class="field">
-    <%= f.label :name, "Category" %>
-    <%= f.text_field :name %>
+    <%= f.label :name, "Category:" %>
+    <%= f.text_field :name %><br><br>
   </div>
 
   <div class= "actions"><%=f.submit %></div>
