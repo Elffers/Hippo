@@ -3,7 +3,7 @@
 <%= flash.notice %>
 <%= @product.inspect %>
  <h1><%= @product.name.capitalize %></h1>
-
+  <div><%= image_tag(src=@product.photo, size: '150x150') %></div>
   <ul>
     <li>Price: <%= number_to_currency(@product.price) %></li> 
     <li>Description: <%= @product.description %></li>

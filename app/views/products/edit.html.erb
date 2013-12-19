@@ -1,6 +1,10 @@
 <h1><%= @product.name.upcase %></h1>
 
 <h1>Edit a product</h1>
+
+<hr>
+<%= @product.photo %>
+
 <%= render 'base_form' %>
 <hr>
 <%= render 'edit_category_form' %>
