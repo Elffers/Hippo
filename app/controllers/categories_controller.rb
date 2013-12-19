@@ -6,17 +6,17 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    #@product = Product.find(params[:product_id])
+    @product = Product.find(params[:product_id])
     @category = Category.new(category_params)
-    @categories = Category.all
+    # @categories = Category.all
     if @category.save
-      render :index
-    #redirect_to edit_product_path(@product.id) 
+      redirect_to edit_product_path(params[:product_id])
+    #redirect_to product_path(@product.id) 
     #needs some way to remember which product 
     #you were editing at the time you wanted to create this new category
     else
       flash[:notice] = "This category already exists!"
-      redirect_to categories_new_path
+      redirect_to new_category_path(@product)
     end
   end
 

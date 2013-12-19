@@ -7,21 +7,18 @@ Hippo::Application.routes.draw do
   resources :products do 
     resources :category_products
     resources :reviews, only: [:new, :create, :index]
+    #resources :categories, only: [:new, :create]
   end
   resources :reviews, except: [:new, :create, :index]
-#This section is probably duplicating things stuff might break, fix this
-  get 'products/:id' => "products#show"
 
-  get '/products/:id/edit' => "products#edit"
-  get "products/new" => 'products#new'
+  # get "/categories" => "categories#index"
+  # get "/categories/new" => "categories#new"
+  # post "/categories" => "categories#create"  
 
-  patch "/products/:id/edit" => "products#update"
-#End of potential problems
-
-  get "/categories" => "categories#index"
-  get "/categories/new" => "categories#new"
-  post "/categories" => "categories#create"
   get "/categories/:id" => "categories#show", as: :category
+  get "/products/:product_id/categories/new" => "categories#new", as: :new_category
+  post "/products/:product_id/categories/new" => "categories#create", as: :create_category
+  #get "/products/:product_id/categories" => "c"
 
 
   get "/sign-up" => "users#new", as: :sign_up

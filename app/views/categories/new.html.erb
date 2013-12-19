@@ -2,7 +2,7 @@ params <%=params.inspect%>
 <%=flash.notice %>
 
 <h1>Create a new Category!</h1>
-<%= form_for @category do |f| %>
+<%= form_for @category, url: create_category_path(Product.find(params[:product_id])) do |f| %>
   <% if @category.errors.any? %>
   <div class= "error_messages">
     <h2> Form is invalid </h2>
