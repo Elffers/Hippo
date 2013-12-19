@@ -16,8 +16,9 @@ class CategoryProductsController < ApplicationController
   # end
 
   def destroy
-    categoryproduct = CategoryProduct.where("category_id = ? AND product_id = ?", params[:id], params[:product_id]).first
-    categoryproduct.destroy
-    redirect_to product_path(@product.id)
+    @product = Product.find(params[:product_id])
+    @categoryproduct = CategoryProduct.find_by(product_id: params[:product_id], category_id:params[:id]) 
+    @categoryproduct.destroy
+    redirect_to product_path(@product)
   end
 end
