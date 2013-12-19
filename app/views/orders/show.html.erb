@@ -1,7 +1,7 @@
 <%=flash.notice %>
 <hr>
 Order: <%= @order.inspect%><br>
-Buyer: <%= @order.user.id%><br>
+Buyer: <%= @order.user_id %><br>
 UserID: <%= current_user.id if current_user %><br>
 <hr>
 <!-- Ensures only buyer can see full order -->
