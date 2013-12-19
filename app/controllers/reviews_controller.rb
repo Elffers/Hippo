@@ -6,11 +6,19 @@ class ReviewsController < ApplicationController
 
  
   def create # Are we going to have a problem if current_user.id == nil here?
-    @review = Review.new(review_params)
-    @review.product_id = params[:product_id]
-    # if session[:user_id] == @product.user_id
-    #   flash[:notice] = "You can't review your own products. That's cheating. >:("
-    #   redirect_to "/products/#{@product.id}"
+    @product = Product.find(params[:product_id])
+    if session[:user_id] == @product.user_id
+      flash[:notice] = "You can't review your own products. That's cheating. >:("
+      redirect_to product_path(params[:product_id])
+    else
+      @review = Review.new(review_params)
+      @review.product_id = params[:product_id]
+      @review.user_id = session[:user_id]
+      if @review.save
+        flash[:notice] = "You have successfully posted this review!"
+        redirect_to product_path(params[:product_id])
+      end
+    end
     # else
     #   @review = Review.new(review_params)
     #   @review.save
@@ -19,11 +27,6 @@ class ReviewsController < ApplicationController
     #   elsif @review.save
     #     redirect_to "/reviews/#{@review.id}", notice: "We hear ya! Posted as guest."
     #   end    
-    
-    if @review.save
-      flash[:notice] = "You have successfully posted this review"
-      redirect_to product_path(params[:product_id])
-    end
   end
 
   def show
@@ -45,9 +48,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])  
+    @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_path  
+    redirect_to product_path(@review.product)
   end
   
   private

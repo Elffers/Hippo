@@ -25,13 +25,19 @@
         <p>There are no reviews for this product.</p>
       <% else %>
         <% @product.reviews.each do |review| %>
-        <li>Rating: <%= review.rating %><br>
-          <%= review.description %>
+        <li><h4>Rating: <%= review.rating %></h4>
+          <p><%= review.description %><p>
+          <% if review.user_id == session[:user_id] %>
+            <%= link_to "Delete review", review_path(review), method: :delete %>
+          <% end %>
         <% end %> 
         </li>
       <% end %> 
     </ul>
-      <%= link_to "Add a review!", new_product_review_path(@product) %><br><br>
+      <% unless @product.user_id == session[:user_id] %>
+        <%= link_to "Add a review!", new_product_review_path(@product) %><br>
+      <% end %> 
+
     <!-- ends reviews -->
 
     <% unless session[:user_id] == nil %> 
