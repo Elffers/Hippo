@@ -5,7 +5,7 @@ User.create(name:"Anne", email:"anne@anne.com", address:"123 4th St", password:"
 User.create(name:"Whitney", email:"whitney@whitney.com", address:"123 4th St", password:"123", password_confirmation:"123")
 User.create(name:"Test", email:"test@test.com", address:"123 4th St", password:"123", password_confirmation:"123")
 # Product
-Product.create(user_id:1, name:"blue shirt", photo: "http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg", price: 19.99, description:"Pretty and blue", retired: false, inventory: 12)
+Product.create(user_id:1, name:"blue shirt", photo: "http://bit.ly/19zrTF9", price: 19.99, description:"Pretty and blue", retired: false, inventory: 12)
 Product.create(user_id:1, name:"green shirt", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 19.99, description:"Pretty and green", retired: false, inventory: 12)
 Product.create(user_id:3, name:"red shirt", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 19.99, description:"Pretty and red", retired: false, inventory: 12)
 Product.create(user_id:5, name:"purple shirt", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 19.99, description:"Pretty and purple", retired: false, inventory: 12)
