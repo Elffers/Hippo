@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
- html, body {
+html, body {
   font-family: arial, sans-serif;
   background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -22,33 +22,28 @@
   margin:0;
   padding:0;
   height:100%;
-}
-
-body {
-
+  margin-top: 30px;
 }
 
 .nav_bar {
-  /*border: 1px solid black;*/
-/*  position: fixed;*/
-  /*width: 100%;*/
   height: 48px;
   top: 0;
-  background-color: #C1A5A5;
+  background-color: #968D86;
   text-align: right;
   padding: 15px;
-  border-bottom: 2px solid black;
+  position: fixed;
+  width: 100%;
 }
 
 .nav_bar #icon {
   /*display: inline-block;*/
   /*border: 1px solid red;*/
   width: 50px;
-  left: 0px;
+  left: 15px;
   position: fixed;
 }
 
-.nav_bar .navbuttons {
+.navbuttons {
   width: 900px;
   right: 0px;
   top: 0px;
@@ -58,7 +53,6 @@ body {
 }
 
 .nav_bar ul li {
-  border: 1px solid black;
   padding: 5px;
   /*top: 100px;*/
   width: 200px;
@@ -67,27 +61,52 @@ body {
 }
 
 .content {
-  border: 2px solid black;
-  width: 900px;
+  width: 700px;
   margin: auto;
+  margin-left: 500px;
   /*vertical-align*/
   padding: 20px;
   background: white;
 }
 
 .search_bar{
-  border: 1px solid red;
- left: 60px;
+  border: 1px solid #968D86;
+  left: 60px;
   float: left;
   width: 200px;
   height: 32px;
   margin: 10px, auto;
-  background-color: #C1A5A5;
+  background-color: #968D86;
   padding: 15px;
   position: fixed;
+}
+
+.search_bar input {
+  width: 100px;
+  min-height: 20px;
+} 
+
+#product {
+  height: 25px;
+  width: 100px;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: gray;
+  height: 100%;
+  text-align: left;
 }
 
 tbody {
   width: 700px;
 }
+
+#notice {
+  background-color: #E33BCF;
+  text-align: center;
+  font-size: 18pt;
+  font-style: italic;
+}
+
 
