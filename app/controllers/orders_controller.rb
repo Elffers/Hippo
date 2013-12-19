@@ -68,6 +68,19 @@ class OrdersController < ApplicationController
   end
 
   def checkout
+    @purchase_info = PurchaseInfo.new
+  end
+
+  def complete_purchase
+    @purchase_info = PurchaseInfo.new(params[:complete_purchase])
+    @purchase_info[:order_id] = current_order.id
+    if @purchase_info.save
+      flash[:notice] = "Your order is complete!"
+      redirect_to root_path
+    else
+      flash[:notice] = "There was an error processing your order."
+      redirect_to root_path
+    end
   end
 
   def submit
@@ -112,6 +125,10 @@ private
     end
     @total = @subtotals.reduce(:+)
   end
+
+  # def purchase_params
+  #   params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :photo, :retired)
+  # end
 
   helper_method :check_user
 
