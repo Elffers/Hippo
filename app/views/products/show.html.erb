@@ -51,18 +51,21 @@
             <% else %>
               <%= User.find(review.first.user_id).name %>
             <% end %>
-            on <%= review[1].strftime('%b %d, %Y at %l:%M %P') %></h4>
-            <h4>Rating: <%= review.first.rating %></h4>
-          <p><%= review.first.description %><p>
+              on <%= review[1].strftime('%b %d, %Y at %l:%M %P') %>
+          </h4>
+          <h4>Rating: <%= review.first.rating %></h4>
+            <p><%= review.first.description %><p>
             <% if review.first.user_id == session[:user_id] && current_user %>
               <%= button_to "Edit review", edit_review_path(review), method: :get %>
               <%= button_to "Delete review", review_path(review), method: :delete %>
             <% end %>
-            <hr>
+          <hr>
           </li>
           <%= link_to "See all reviews", product_reviews_path(params[:id]) %> 
-        <% end %>
+        <% end %> 
+        <!-- ends iteration through reviews -->
       <% end %> 
+      <!-- ends condition for whether there are any reviews -->
     </ul>
     <!-- ends reviews -->
 
@@ -72,8 +75,9 @@
         <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
         <%= link_to "View all your products", user_path(current_user.id) %>
       <% end %> 
-    <% end %> 
       <!-- ends what merchant can see --> 
+    <% end %> 
+      
 </div>
 
 <hr>
