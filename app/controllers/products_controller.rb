@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     #Following would be unnecessary if route was renamed RESTfully
     @product[:user_id] = current_user.id 
     if @product.save
-      redirect_to "/products/#{@products}", notice: "You have successfully listed this product!"
+      redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
       #new_product_path
       
