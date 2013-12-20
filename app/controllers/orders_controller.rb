@@ -78,6 +78,17 @@ class OrdersController < ApplicationController
 
   def checkout
     @purchase_info = PurchaseInfo.new
+    current_order.products.each do |product|
+      if product.inventory == 0
+        flash[:notice] = "We are currently out of stock. Please modify your order."
+        redirect_to order_path(current_order)
+      elsif OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity > product.inventory
+        flash[:notice] = "We have #{product.inventory} of those in stock. Please modify your order."
+        redirect_to order_path(current_order)
+      else
+        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
+      end
+    end
   end
 
   def complete_purchase
@@ -86,25 +97,11 @@ class OrdersController < ApplicationController
     current_order.update(status: "paid")
     if @purchase_info.save
       flash[:notice] = "Your order is complete!"
+      current_order = Order.new  #This needs to archive paid order and open a new one
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
       render :checkout
-    end
-  end
-
-  def submit
-   current_order.update(status:params[:payment_method])
-   current_order.products.each do |product|
-      if product.inventory == 0
-        flash[:notice] = "We are currently out of stock. Check back soon!"
-        redirect_to order_path(current_order)
-      elsif OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity > product.inventory
-        flash[:notice] = "We have #{product.inventory} of those in stock."
-        redirect_to order_path(current_order)
-      else
-        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
-      end
     end
   end
 
