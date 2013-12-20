@@ -1,32 +1,35 @@
 
-<h3>Orders to fulfill</h3>
-<h3><%= @product.name.upcase %></h3>
-<div>
-  <ol>
-    <% @items.each do |op| %>
-      <% @order = Order.find(op.order_id) %>
-      <%= @order.inspect %>
-    <li> Quantity: <%= op.quantity %><br>
-      <%= link_to "order #{op.order_id}", order_path(op.order_id) %> 
-    </li> 
-    <li>
-      <% if @order.status = "paid" %>
-        <%#= @order.purchase_info.inspect %>
-        <h3>Ship to:</h3>
-        <div class="address">
-          <%#= User.find(@order.user_id).name %><br>
-          <%= @order.purchase_info.first_name %>
-          <%= @order.purchase_info.last_name %><br>
-          <%= @order.purchase_info.address %>
-          <%= @order.purchase_info.address2 if @order.purchase_info.address2%><br>
-          <%= @order.purchase_info.city %>,
-          <%= @order.purchase_info.state %>
-          <%= @order.purchase_info.zip_code %>
-        </div>
-
+  <!-- <h2>Orders to fulfill</h2> -->
+  <h1><%= @product.name.upcase %></h1><hr>
+  <div>
+    <ol>
+      <% @items.each do |op| %>
+        <li>
+        <% @order = Order.find(op.order_id) %>
+        <%= link_to "Order #{op.order_id}", order_path(op.order_id) %> <br>
+        <%= @order.inspect %><br>
+          <% if session[:user_id] == @order.user_id %>
+            <strong>You can't buy your own products!</strong> <hr><!-- Imperfect bug fix -->
+          <% else %> 
+            Quantity: <%= op.quantity %><br>
+            Status: <%=@order.status %>
+         </li>
+            <% if @order.purchase_info %>
+              <%#= @order.purchase_info.inspect %>
+              <h3>Ship to:</h3>
+              <div class="address">
+                <%#= User.find(@order.user_id).name %><br>
+                <%= @order.purchase_info.first_name %>
+                <%= @order.purchase_info.last_name %><br>
+                <%= @order.purchase_info.address %>
+                <%= @order.purchase_info.address2 if @order.purchase_info.address2%><br>
+                <%= @order.purchase_info.city %>,
+                <%= @order.purchase_info.state %>
+                <%= @order.purchase_info.zip_code %>
+              </div>
+            <% end %>  
+          <hr>
+          <% end %>
       <% end %>
-    </li>
-  <!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
-  <% end %>
-  </ol>
-</div>
+    </ol>
+  </div>
