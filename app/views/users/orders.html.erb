@@ -14,7 +14,7 @@
             Quantity: <%= op.quantity %><br>
             Status: <%=@order.status %>
             <% if @order.purchase_info %>
-            <h4> Paid on: <%=@order.purchase_info.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4><br>
+            <h4> Paid on: <%=@order.purchase_info.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4>
               <%#= @order.purchase_info.inspect %><!-- <br><br> -->
               <div class="address">
                 <h3>Ship to:</h3>
@@ -26,6 +26,7 @@
                 <%= @order.purchase_info.city %>,
                 <%= @order.purchase_info.state %>
                 <%= @order.purchase_info.zip_code %>
+                <%= button_to "Ship!", ship_order_path(params[:id],params[:product_id]) %>
               </div><br>
               <div class="cc_info">
                 Payment info:<br>

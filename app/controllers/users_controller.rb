@@ -46,6 +46,10 @@ class UsersController < ApplicationController
       @items = @product.order_products
     end
   end
+  def ship
+    @product = Product.find(params[:product_id])
+    #update order to shipped
+  end
 
   private
 
