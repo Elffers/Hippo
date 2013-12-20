@@ -9,7 +9,12 @@
         <!-- guard against viewing retired products -->
         <% unless product[:status] == "retired" %>
           <li id="productprice"><li><%= link_to "#{product.name.capitalize}", product_path(product.id) %></li>
-          <li id="PICTURE">PICTURE</li>
+          <li><% if product.photo.present? %>
+              <%= image_tag(product.photo_url)  %>
+                <% else %>
+              <%= image_tag("hellohippo.png") %>
+                <% end %>
+          </li>
           <li><%= number_to_currency(product.price) %></li>
           <li id="cartbutton">
             <!-- Add to cart button. Ensures that user cannot add product if none in stock -->

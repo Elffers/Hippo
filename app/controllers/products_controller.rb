@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
       redirect_to "/products/#{@product.id}", notice: "You have successfully listed this product!"
     else
       #new_product_path
+      
       redirect_to "/products/new", notice: "There was an error, try again."
     end
   end
