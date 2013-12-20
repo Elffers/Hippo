@@ -2,49 +2,20 @@
 
 <h1><%= flash.notice %></h1><br>
 <%= @product.inspect %><hr>
- <h1><%= @product.name.capitalize %></h1>
+<h1><%= @product.name.capitalize %></h1>
   <div><%= image_tag(@product.photo_url, width: 200) if @product.photo%></div>
-  <ul>
-    <li>Price: <%= number_to_currency(@product.price) %></li> 
-    <li>Description: <%= @product.description %></li>
-    <li>Categories:
+    <h3>Price:</h3><li><%= number_to_currency(@product.price) %></li>
+    <h3>Description:</h3><li><%= @product.description %></li>
+    <h3>Categories:</h3>
+    <ul>
       <% unless @product.categories == [] %>
         <% @product.categories.each do |category|%>
-           <%= link_to "#{category.name}", category_path(category.id) %>
+           <li><%= link_to "#{category.name}", category_path(category.id) %></li>
         <% end %>
       <% else %>
-        There are no categories associated with this product.
+        <p>There are no categories associated with this product.</p>
       <% end %>
-    </li>
-  </ul>
-
-    <!--  starts reviews -->
-    <h3>Reviews:</h3>
-    <ul>
-      <% if @product.reviews == [] %>
-        <p>There are no reviews for this product.</p>
-      <% else %>
-        <% array = @product.reviews.map do |review| %>
-          <%[review, review.created_at] %>
-        <% end %>
-        <% @reviews = array.sort_by { |x| x[1]}.reverse.take(3) %>
-        <%= link_to "See all reviews", product_reviews_path(params[:id]) %> 
-      <% end %> 
     </ul>
-      <% unless @product.user_id == session[:user_id] %>
-        <%= link_to "Add a review!", new_product_review_path(@product) %><br>
-      <% end %> 
-    <hr>
-    <!-- ends reviews -->
-
-    <% unless session[:user_id] == nil %> 
-      <!-- start what owner of product can see -->
-      <% if @product.user_id == current_user.id %> 
-        <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
-        <%= link_to "View all your products", user_path(current_user.id) %>
-      <% end %> 
-    <% end %> 
-      <!-- ends what merchant can see -->
     <!-- makes sure product can't be purchased by owner of the product -->
     <% if @product.user_id != session[:user_id] %>
        <% if @product.inventory == 0 %>
@@ -56,6 +27,53 @@
         <% end %>
       <% end %>
     <% end %> 
+    <hr>  
+  
+    <!--  starts reviews -->
+    <h3>Reviews:</h3>
+    <% unless @product.user_id == session[:user_id] %>
+        <%= link_to "Add a review!", new_product_review_path(@product) %><br>
+      <% end %> 
+    <hr>
+    <ul>
+      <% if @product.reviews == [] %>
+        <p>There are no reviews for this product.</p>
+      <% else %>
+        <% array = @product.reviews.map do |review| %>
+          <%[review, review.created_at] %>
+        <% end %>
+        <% @reviews = array.sort_by { |x| x[1]}.reverse.take(3) %>
+        <% @reviews.each do |review| %>
+          <li>
+          <h4> Posted by 
+            <% if review.user_id == nil %>
+              Guest
+            <% else %>
+              <%= User.find(review.user_id).name %>
+            <% end %>
+            on <%= review.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4>
+            <h4>Rating: <%= review.rating %></h4>
+          <p><%= review.description %><p>
+            <% if review.user_id == session[:user_id] && current_user %>
+              <%= button_to "Edit review", edit_review_path(review), method: :get %>
+              <%= button_to "Delete review", review_path(review), method: :delete %>
+            <% end %>
+            <hr>
+          </li>
+          <%= link_to "See all reviews", product_reviews_path(params[:id]) %> 
+        <% end %>
+      <% end %> 
+    </ul>
+    <!-- ends reviews -->
+
+    <% unless session[:user_id] == nil %> 
+      <!-- start what owner of product can see -->
+      <% if @product.user_id == current_user.id %> 
+        <%= button_to "Edit this product", edit_product_path(@product.id), method: :get %><br>
+        <%= link_to "View all your products", user_path(current_user.id) %>
+      <% end %> 
+    <% end %> 
+      <!-- ends what merchant can see --> 
 </div>
 
 <hr>

@@ -20,6 +20,7 @@
     
       <div id="icon">
         <a href="/"><img src="/assets/hellohippo.png" title="Welcome to Hippo!", height="45" width="45"></a>
+      </div>
       
       <div class='navbuttons'>
         <ul>
@@ -37,10 +38,11 @@
         </ul>
       </div>
     </div> 
-</div>
   
-     <div class='content'>
-      <div id="notice">Hey there! <%=flash[:notice] %></div>
+    <div class='content'>
+      <% if flash.notice %>
+        <div id="notice">Hey there! <%=flash[:notice] %></div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
