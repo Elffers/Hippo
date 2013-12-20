@@ -154,7 +154,7 @@ th {
 
 .individualproduct img {
   width: 150px;
-  height: auto;
+  min-height: 150px;
   margin-right: 200px;
 }
 
