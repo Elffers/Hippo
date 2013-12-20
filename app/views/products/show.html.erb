@@ -39,7 +39,11 @@
       <% if @product.reviews == [] %>
         <p>There are no reviews for this product.</p>
       <% else %>
-        <% @product.reviews.each do |review| %>
+        <% array = @product.reviews.map do |review| %>
+          <%[review, review.created_at] %>
+        <% end %>
+        <% @reviews = array.sort_by { |x| x[1]}.reverse.take(3) %>
+        <% @reviews.each do |review| %>
           <li>
           <h4> Posted by 
             <% if review.user_id == nil %>
@@ -56,6 +60,7 @@
             <% end %>
             <hr>
           </li>
+          <%= link_to "See all reviews", product_reviews_path(params[:id]) %> 
         <% end %>
       <% end %> 
     </ul>
