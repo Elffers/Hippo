@@ -46,15 +46,15 @@
         <% @reviews.each do |review| %>
           <li>
           <h4> Posted by 
-            <% if review.user_id == nil %>
+            <% if review.first.user_id == nil %>
               Guest
             <% else %>
-              <%= User.find(review.user_id).name %>
+              <%= User.find(review.first.user_id).name %>
             <% end %>
-            on <%= review.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4>
-            <h4>Rating: <%= review.rating %></h4>
-          <p><%= review.description %><p>
-            <% if review.user_id == session[:user_id] && current_user %>
+            on <%= review[1].strftime('%b %d, %Y at %l:%M %P') %></h4>
+            <h4>Rating: <%= review.first.rating %></h4>
+          <p><%= review.first.description %><p>
+            <% if review.first.user_id == session[:user_id] && current_user %>
               <%= button_to "Edit review", edit_review_path(review), method: :get %>
               <%= button_to "Delete review", review_path(review), method: :delete %>
             <% end %>
