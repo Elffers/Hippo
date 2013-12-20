@@ -89,7 +89,7 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
-      redirect_to root_path
+      render :checkout
     end
   end
 
