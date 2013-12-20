@@ -22,7 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    @current_order ||= Order.find(session[:order_id]) 
+    if Order.find(session[:order_id]).status != "pending"
+      @current_order ||= Order.find(session[:order_id]) 
+    else
+      @current_order = Order.create
+    end
   rescue ActiveRecord::RecordNotFound 
     @current_order = Order.create
     session[:order_id] = @current_order.id
