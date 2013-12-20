@@ -91,6 +91,9 @@ html, body {
 }
 
 .sidebar {
+  position: absolute;
+  top: 100;
+  left: 0;
   width: 200px;
   background-color: gray;
   height: 100%;
