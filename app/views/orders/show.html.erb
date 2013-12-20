@@ -35,6 +35,7 @@ UserID: <%= current_user.id if current_user %><br>
       </thead>
       <tbody> 
         <% @products.each do |product| %>
+          <% if product.user_id != session[:user_id] %>
           <tr>
             <td id= "item name"><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
             <td id="quantity"><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %></td>
@@ -52,7 +53,10 @@ UserID: <%= current_user.id if current_user %><br>
               </td>
             <% end %>
           </tr>
-        <% end %>
+          <% else %>
+          You cannot purchase <%=product.name %> 
+          <% end %>
+        <% end %> <!-- end iteration -->
         
         <tr>
           <td>TOTAL:</td>

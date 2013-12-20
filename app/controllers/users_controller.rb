@@ -38,14 +38,23 @@ class UsersController < ApplicationController
   end
 
   def orders
-    @product = Product.find(params[:product_id])
-    @items = @product.order_products
+    if params[:id].to_i != session[:user_id].to_i
+      flash[:notice] = "You are not authorized to view this page!"
+      redirect_to user_path(params[:id])
+    else
+      @product = Product.find(params[:product_id])
+      @items = @product.order_products
+    end
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def check_user
+    
   end
 
 end
