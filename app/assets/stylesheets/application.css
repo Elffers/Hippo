@@ -11,6 +11,53 @@
  *= require_self
  *= require_tree .
  */
+/* Cross Browser Compatability CSS */
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, /*ul,*/ li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ""; content: none; }
+
+/*ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }*/
 
 html, body {
   font-family: arial, sans-serif;
@@ -25,19 +72,23 @@ html, body {
   margin-top: 30px;
 }
 
+a {
+  text-decoration: none;
+  color: #ED671F;
+}
+
 .nav_bar {
   height: 48px;
   top: 0;
-  background-color: #968D86;
+  background-color: white;
   text-align: right;
   padding: 15px;
   position: fixed;
   width: 100%;
+  border-bottom: 5px solid #ED671F; 
 }
 
 .nav_bar #icon {
-  /*display: inline-block;*/
-  /*border: 1px solid red;*/
   width: 50px;
   left: 15px;
   position: fixed;
@@ -48,13 +99,11 @@ html, body {
   right: 0px;
   top: 0px;
   position: fixed;
-  border: 1px solid blue;
-  /*position: absolute;*/
+/*  border: 1px solid blue;*/
 }
 
 .nav_bar ul li {
   padding: 5px;
-  /*top: 100px;*/
   width: 200px;
   font-size: 15pt;
   display: inline-block;
@@ -68,14 +117,23 @@ html, body {
   background: white;
 }
 
+#productname {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.productlist :hover {
+  background-color: #DED4C5;
+}
+
 .search_bar {
-  border: 1px solid #968D86;
+/*  border: 1px solid #968D86;*/
   left: 60px;
   float: left;
   width: 200px;
   height: 32px;
   margin: 10px, auto;
-  background-color: #968D86;
+/*  background-color: #968D86;*/
   padding: 15px;
   position: fixed;
 }
@@ -87,10 +145,12 @@ html, body {
 
 #product {
   height: 200px;
-  /*width: 200px;*/
 }
 
 .sidebar {
+  position: absolute;
+  top: 100;
+  left: 0;
   width: 200px;
   background-color: gray;
   height: 100%;
@@ -125,7 +185,8 @@ table {
 }
 
 td {
-  border: 1px solid #968D86;
+  border: 2px solid white;
+  background-color: #D8D7D9;
   text-align: center;
   vertical-align: middle;
   padding: 10px;
@@ -140,4 +201,23 @@ th {
 
 .individualproduct img {
   width: 150px;
+  margin-right: 200px;
 }
+
+ul.individualproduct {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#userinfo {
+  list-style-type: none;
+  font-style: italic;
+  color: purple;
+}
+
+#cartbutton {
+  max-height: 20px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
