@@ -94,8 +94,7 @@ class OrdersController < ApplicationController
   end
 
   def submit
-   current_order.update(status:params[:payment_method])
-   current_order.products.each do |product|
+    current_order.products.each do |product|
       if product.inventory == 0
         flash[:notice] = "We are currently out of stock. Check back soon!"
         redirect_to order_path(current_order)
