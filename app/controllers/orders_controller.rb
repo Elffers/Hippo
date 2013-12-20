@@ -97,24 +97,11 @@ class OrdersController < ApplicationController
     current_order.update(status: "paid")
     if @purchase_info.save
       flash[:notice] = "Your order is complete!"
+      current_order = Order.new
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
       render :checkout
-    end
-  end
-
-  def submit #this should be integrated with complete_purchase
-    current_order.products.each do |product|
-      if product.inventory == 0
-        flash[:notice] = "We are currently out of stock. Check back soon!"
-        redirect_to order_path(current_order)
-      elsif OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity > product.inventory
-        flash[:notice] = "We have #{product.inventory} of those in stock."
-        redirect_to order_path(current_order)
-      else
-        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
-      end
     end
   end
 

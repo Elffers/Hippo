@@ -8,8 +8,8 @@ class PurchaseInfo < ActiveRecord::Base
     validates  :billing_first, presence: true
     validates  :billing_last, presence: true
     validates  :credit_card_number, format: { with: /\d{16}/}
-    # validates  :expiration_date, format: { with: /\d+\/\d+/}
-    validates  :cvv, format: { with: /\d{3}/}
+    validates  :expiration_date, presence: true #format: { with: /\d+\/\d+/}
+    validates  :cvv, presence: true, format: { with: /\d{3}/}
     validates  :billing_address, presence: true
     validates  :billing_city, presence: true
     validates  :billing_state, presence: true
