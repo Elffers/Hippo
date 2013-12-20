@@ -13,7 +13,7 @@
  */
 
 html, body {
-  font-family: arial, sans-serif;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
   background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -21,8 +21,7 @@ html, body {
   background-size: cover;
   margin:0;
   padding:0;
-  height:100%;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 a {
@@ -49,11 +48,11 @@ a {
 
 .navbuttons {
   margin-right: 20px;
+  margin-top: 20px;
   width: 900px;
   right: 0px;
   top: 0px;
   position: fixed;
-/*  border: 1px solid blue;*/
 }
 
 .nav_bar ul li {
@@ -64,6 +63,7 @@ a {
 }
 
 .content {
+  min-height: 1000px;
   width: 700px;
   margin: auto;
   margin-left: 500px;
@@ -71,6 +71,9 @@ a {
   background: white;
 }
 
+label {
+  min-width: 200px;
+}
 #productname {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -81,34 +84,56 @@ a {
 }
 
 .search_bar {
-/*  border: 1px solid #968D86;*/
-  left: 60px;
-  float: left;
+  left: 30px;
   width: 200px;
   height: 32px;
   margin: 10px, auto;
-/*  background-color: #968D86;*/
-  padding: 15px;
   position: fixed;
 }
 
 .search_bar input {
-  width: 100px;
+  display: inline-block;
+  width: 150px;
   min-height: 20px;
 } 
+
+.search_bar form {
+  margin-top: 20px;
+  width: 300px;
+}
+
+.search_bar input[type=submit] {
+  width: 75px;
+}
 
 #product {
   height: 200px;
 }
 
+#productphoto {
+  text-align: center;
+}
+
+#productshowname {
+  text-align: center;
+}
+
 .sidebar {
+  font-size: 15pt;
   position: fixed;
-  top: 100;
   left: 0;
-  width: 200px;
+  width: 275px;
   background-color: gray;
   height: 100%;
   text-align: left;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar a {
+  color: white;
 }
 
 tbody {
@@ -116,7 +141,7 @@ tbody {
 }
 
 #notice {
-  background-color: #E33BCF;
+  color: #E33BCF;
   text-align: center;
   font-size: 18pt;
   font-style: italic;

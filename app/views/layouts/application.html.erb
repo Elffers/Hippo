@@ -7,6 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
 
+    <div class="sidebar">
+      <%= render 'categories/sidebar_index' %>
+    </div>
   <body>
 
     <div class='nav_bar'> 
@@ -37,7 +40,6 @@
         </ul>
       </div>
     </div> 
-  
     <div class='content'>
       <% if flash.notice %>
         <div id="notice">Hey there! <%=flash[:notice] %></div>
@@ -45,4 +47,6 @@
       <%= yield %>
     </div>
   </body>
+
+
 </html>
