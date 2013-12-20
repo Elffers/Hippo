@@ -2,7 +2,6 @@
 <% @top_categories.take(40).each do |category| %>
     <li>
     <%=link_to "#{category.first.name.upcase}", category_path(category.first.id) %>
-    <%= category[1]%>
     </li>
 <% end %> 
 </ul class= "categories">
