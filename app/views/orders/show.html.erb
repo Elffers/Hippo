@@ -73,7 +73,7 @@ UserID: <%= current_user.id if current_user %><br>
     <div class="navigation_links">
       <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
       <div class="checkout_button">
-        <% unless @products == [] %> 
+        <% if @order.status == "pending" %>  
           <%= button_to "Proceed to checkout", checkout_path, method: :get %><br>
         <% end %>
       </div>
