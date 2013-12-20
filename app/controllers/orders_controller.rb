@@ -97,7 +97,7 @@ class OrdersController < ApplicationController
     current_order.update(status: "paid")
     if @purchase_info.save
       flash[:notice] = "Your order is complete!"
-      current_order = Order.new
+      current_order = Order.new  #This needs to archive paid order and open a new one
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
