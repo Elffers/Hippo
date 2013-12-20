@@ -3,10 +3,15 @@
 <div>
   <ol>
     <% @items.each do |op| %>
+      <% @order = Order.find(op.order_id) %>
     <li> Quantity: <%= op.quantity %><br>
-
       <%= link_to "order #{op.order_id}", order_path(op.order_id) %> 
     </li> 
+    <li>
+      <% if @order.status = "paid" %>
+        <%= @order.purchase_info %>
+      <% end %>
+    </li>
   <!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
   <% end %>
   </ol>
