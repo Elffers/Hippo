@@ -1,12 +1,8 @@
-<% array = @categories.map do |c| %>
-  <%[c, c.products.count] %>
-  <% end %>
-<% @top_categories = array.sort_by{|x| x[1]}.reverse %>
-
-<%= @top_categories = array.sort_by{|x| x[1]}.reverse %>
-<%#= @top_categories.first.first.name %>
+<ul class="categories">
 <% @top_categories.each do |category| %>
-    <div>
-    <%=link_to "#{category.first.name}", category_path(category.first.id) %>
-    </div>
+    <li>
+    <%=link_to "#{category.first.name.upcase}", category_path(category.first.id) %>
+    <%= category[1]%>
+    </li>
 <% end %> 
+</ul class= "categories">
