@@ -1,7 +1,7 @@
-<% @product.reviews.each do |review| %>
 <ul>
-  <li><h1>Rating: <%= review.rating %></h1>
-    <p><%= review.description %><p>
+<% @product.reviews.each do |review| %>  
+  <li>Rating: <%= review.rating %>
+    <p><%= review.description %><p></li>
   <% end %> 
-  </li>
+  
 </ul>

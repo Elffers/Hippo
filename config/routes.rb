@@ -32,8 +32,6 @@ Hippo::Application.routes.draw do
 
   get "/checkout"     => "orders#checkout", as: :checkout
   post "/purchase_info" => "orders#complete_purchase", as: :complete_purchase
-
-  get "/reviews/:product_id" => "reviews#show", as: :reviews_index
   
   root 'welcome#index'
 end

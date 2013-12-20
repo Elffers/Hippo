@@ -25,12 +25,10 @@
         <p>There are no reviews for this product.</p>
       <% else %>
         <% array = @product.reviews.map do |review| %>
-          <%[review, review.rating] %>
+          <%[review, review.created_at] %>
         <% end %>
-        <% @best_reviews = array.sort_by! { |x| x[1].reverse } %>
-        <%= @best_reviews.first.rating %> <%= @best_review.first.description %>
-        <%= @best_review.last.rating %> <%= @best_review.last.description %>
-        <%= link_to "See all reviews", product_review_path(@product) %> 
+        <% @reviews = array.sort_by { |x| x[1]}.reverse.take(3) %>
+        <%= link_to "See all reviews", product_reviews_path(params[:id]) %> 
       <% end %> 
     </ul>
       <% unless @product.user_id == session[:user_id] %>
