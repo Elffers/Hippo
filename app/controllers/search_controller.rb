@@ -16,7 +16,6 @@ class SearchController < ApplicationController
       flash[:notice] = "No items match your search"
       redirect_to root_path
     else 
-      flash[:notice] = "these are all the results for #{params[:search]}"
       render :index
     end
   end

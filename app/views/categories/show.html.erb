@@ -1,6 +1,3 @@
-params: <% params.inspect %><hr>
-<!-- Shows all products for a given category -->
-
 <h1><%= @category.name.upcase %></h1>
 <%= render 'products/index' %> 
 <%= link_to "Back to Browse by Category", categories_path %>
