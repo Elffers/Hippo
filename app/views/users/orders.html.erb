@@ -1,18 +1,42 @@
-<h3>Orders to fulfill</h3>
-<h3><%= @product.name.upcase %></h3>
-<div>
-  <ol>
-    <% @items.each do |op| %>
-      <% @order = Order.find(op.order_id) %>
-    <li> Quantity: <%= op.quantity %><br>
-      <%= link_to "order #{op.order_id}", order_path(op.order_id) %> 
-    </li> 
-    <li>
-      <% if @order.status = "paid" %>
-        <%= @order.purchase_info %>
+
+  <!-- <h2>Orders to fulfill</h2> -->
+  <h1><%= @product.name.upcase %></h1><hr>
+  <div>
+    <ol>
+      <% @items.each do |op| %>
+        <% @order = Order.find(op.order_id) %>
+        <%#= link_to "Order #{op.order_id}", order_path(op.order_id) %> <!-- <br> -->
+        <%#= @order.inspect %>
+        <li>
+          <% if session[:user_id] == @order.user_id %>
+            <strong>You can't buy your own products!</strong> <hr><!-- Imperfect bug fix -->
+          <% else %> 
+            Quantity: <%= op.quantity %><br>
+            Status: <%=@order.status %>
+            <% if @order.purchase_info %>
+            <h4> Paid on: <%=@order.purchase_info.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4><br>
+              <%#= @order.purchase_info.inspect %><!-- <br><br> -->
+              <div class="address">
+                <h3>Ship to:</h3>
+                <%#= User.find(@order.user_id).name %>
+                <%= @order.purchase_info.first_name %>
+                <%= @order.purchase_info.last_name %><br>
+                <%= @order.purchase_info.address %>
+                <%= @order.purchase_info.address2 if @order.purchase_info.address2%><br>
+                <%= @order.purchase_info.city %>,
+                <%= @order.purchase_info.state %>
+                <%= @order.purchase_info.zip_code %>
+              </div><br>
+              <div class="cc_info">
+                Payment info:<br>
+                CC: <%= @order.purchase_info.credit_card_number.to_s.slice(-4,4) %><br>
+                CVV: <%= @order.purchase_info.cvv %><br>
+                Expiration: <%= @order.purchase_info.expiration_date %>
+              </div>
+            <% end %>  
+          <hr>
+          <% end %>
+        </li>
       <% end %>
-    </li>
-  <!-- This will allow the merchant to see the whole order, not just the produc they need. change to order product? -->
-  <% end %>
-  </ol>
-</div>
+    </ol>
+  </div>

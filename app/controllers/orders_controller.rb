@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       @orderproduct = OrderProduct.new 
       @products = @order.products
+      # put a guard here to remove products from cart if you own it (happens if bought as a guest then signed in)
       unless @products == nil?
         totals
       end
