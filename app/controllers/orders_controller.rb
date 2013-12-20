@@ -89,7 +89,7 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
-      redirect_to root_path
+      render :checkout
     end
   end
 
@@ -138,22 +138,22 @@ private
 
   def purchase_params
     params.require(:purchase_info).permit(
-    :first_name
-    :last_name
-    :address
-    :address2
-    :city
-    :state
-    :zip_code
-    :billing_first
-    :billing_last
-    :credit_card_number
-    :expiration_date
-    :cvv
-    :billing_address
-    :billing_address2
-    :billing_city
-    :billing_state
+    :first_name,
+    :last_name,
+    :address,
+    :address2,
+    :city,
+    :state,
+    :zip_code,
+    :billing_first,
+    :billing_last,
+    :credit_card_number,
+    :expiration_date,
+    :cvv,
+    :billing_address,
+    :billing_address2,
+    :billing_city,
+    :billing_state,
     :billing_zip_code)
   end
 
