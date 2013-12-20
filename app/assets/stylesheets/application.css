@@ -48,6 +48,7 @@ a {
 }
 
 .navbuttons {
+  margin-right: 20px;
   width: 900px;
   right: 0px;
   top: 0px;
@@ -92,7 +93,7 @@ a {
 }
 
 .search_bar input {
-  width: 50px;
+  width: 100px;
   min-height: 20px;
 } 
 
@@ -101,7 +102,7 @@ a {
 }
 
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 100;
   left: 0;
   width: 200px;
@@ -154,13 +155,15 @@ th {
 
 .individualproduct img {
   width: 150px;
-  min-height: 150px;
+  height: 150px;
+  padding-top: 10px;
   margin-right: 200px;
 }
 
 ul.individualproduct {
   padding-left: 20px;
   padding-right: 20px;
+  min-height: 150px;
 }
 
 #userinfo {

@@ -28,6 +28,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'carrierwave'
 
+gem 'mini_magick'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
