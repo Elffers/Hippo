@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
   end
 
   def complete_purchase
-    @purchase_info = PurchaseInfo.new(params[:complete_purchase])
+    @purchase_info = PurchaseInfo.new(purchase_params)
     @purchase_info[:order_id] = current_order.id
     current_order.update(status: "paid")
     if @purchase_info.save
@@ -136,9 +136,26 @@ private
     @total = @subtotals.reduce(:+)
   end
 
-  # def purchase_params
-  #   params.require(:product).permit(:name, :price, :user_id, :inventory, :description, :photo, :retired)
-  # end
+  def purchase_params
+    params.require(:purchase_info).permit(
+    :first_name
+    :last_name
+    :address
+    :address2
+    :city
+    :state
+    :zip_code
+    :billing_first
+    :billing_last
+    :credit_card_number
+    :expiration_date
+    :cvv
+    :billing_address
+    :billing_address2
+    :billing_city
+    :billing_state
+    :billing_zip_code)
+  end
 
   helper_method :check_user
 
