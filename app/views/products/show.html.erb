@@ -24,15 +24,13 @@
       <% if @product.reviews == [] %>
         <p>There are no reviews for this product.</p>
       <% else %>
-        <% @product.reviews.each do |review| %>
-        <li><h4>Rating: <%= review.rating %></h4>
-          <p><%= review.description %><p>
-          <% if review.user_id == session[:user_id] %>
-            <%= link_to "Delete review", review_path(review), method: :delete %>
-            <%= link_to "Edit review", edit_review_path(review) %>
-          <% end %>
-        <% end %> 
-        </li>
+        <% array = @product.reviews.map do |review| %>
+          <%[review, review.rating] %>
+        <% end %>
+        <% @best_reviews = array.sort_by! { |x| x[1].reverse } %>
+        <%= @best_reviews.first.rating %> <%= @best_review.first.description %>
+        <%= @best_review.last.rating %> <%= @best_review.last.description %>
+        <%= link_to "See all reviews", product_review_path(@product) %> 
       <% end %> 
     </ul>
       <% unless @product.user_id == session[:user_id] %>
