@@ -5,14 +5,17 @@
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag %>
   </head>
 
+    <div class="sidebar">
+      <%= render 'categories/sidebar_index' %>
+    </div>
   <body>
 
     <div class='nav_bar'> 
       <div class='search_bar'>
         <%= form_tag("/search", method: "get") do %>
-          <%= label_tag("Have something in mind?") %>
           <%= text_field_tag(:search, params[:search]) %>
           <%= submit_tag("SEARCH!") %>
         <% end %> 
@@ -38,7 +41,6 @@
         </ul>
       </div>
     </div> 
-  
     <div class='content'>
       <% if flash.notice %>
         <div id="notice">Hey there! <%=flash[:notice] %></div>
@@ -46,4 +48,6 @@
       <%= yield %>
     </div>
   </body>
+
+
 </html>

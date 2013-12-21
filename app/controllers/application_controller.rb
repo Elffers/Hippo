@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :top_categories
 
   def require_login
     unless session[:user_id].present?
@@ -12,6 +13,14 @@ class ApplicationController < ActionController::Base
   end
 
  private
+   def top_categories
+    @products = Product.all
+    @categories = Category.all.map do |c| 
+      [c, c.products.count]
+    end
+    @top_categories = @categories.sort_by{|x| x[1]}.reverse
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
      #else the session[:user_id] is nil for a guest browser
@@ -36,5 +45,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
   helper_method :current_user
   helper_method :require_login
+  helper_method :top_categories
 
 end
