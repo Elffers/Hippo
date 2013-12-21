@@ -28,7 +28,7 @@
               CVV: <%= info.cvv %><br>
               Expiration: <%= info.expiration_date %>
             </div>
-              <%= button_to "Ship!", ship_order_path(params[:id],params[:product_id]) %>
+              <%= button_to "Ship!", ship_order_path(params[:id], op.id) %>
             <hr>
           <% end %>
         <% end %>

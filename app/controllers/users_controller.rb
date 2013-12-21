@@ -51,7 +51,9 @@ class UsersController < ApplicationController
   end
 
   def ship
-    @product = Product.find(params[:product_id])
+    @op = OrderProduct.find(params[:op_id])
+    @op.update(status: "shipped")
+    redirect_to user_orders_path(session[:user_id],Order.find(@op.order_id))
     #update order to shipped
   end
 
