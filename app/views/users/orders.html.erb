@@ -1,5 +1,9 @@
 
-  <!-- <h2>Orders to fulfill</h2> -->
+
+<% if @paid == [] %>
+  <h4>You have no orders to fulfill</h4>
+<% else %>
+
   <h1>Paid orders</h1><hr>
 
   <div>
@@ -33,6 +37,10 @@
           <% end %>
         <% end %>
       <% end %>
+
+    
+      <% end %>
+
 
       <%# @items.each do |op| %>
         <%# info_id) %>
