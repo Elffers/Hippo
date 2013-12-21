@@ -1,9 +1,9 @@
 <h1><%= @user.name.upcase %></h1>
-  
+
 <% if session[:user_id] == @user.id %> 
 
   <ul id="userinfo">
-    <li> USER NAME: <%= @user.name %> </li>
+    <li> USER NAME: <%= @user.name %> </li> 
     <li> USER EMAIL: <%= @user.email %></li>
   </ul>
     
@@ -29,7 +29,7 @@
               <td id="items_ordered"> This product has been retired </td>
               <td id="ship"></td>
             <% else %>
-            <td id="items_ordered"><%= product.orders.count %></td> 
+            <td id="items_ordered"><%= @totals.fetch(@user.products.index(product)) %></td> 
             <td id="ship"></td>
             <% end %>
           </tr>
