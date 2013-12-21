@@ -2,7 +2,7 @@ Hippo::Application.routes.draw do
 
   resources :users
   get "users/:id/orders" => "users#orders", as: :user_orders
-  post "users/:id/orders" => "users#ship", as: :ship_order 
+  post "users/:id/ship/:op_id" => "users#ship", as: :ship_order 
   
   resources :products do 
     resources :category_products
