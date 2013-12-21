@@ -23,7 +23,7 @@
       <tbody>
         <% @user.products.each do |product|%>
           <tr>
-            <td id="product_name"><%= product.id %><%= link_to "#{product.name}", product_path(product.id)%></td>
+            <td id="product_name"><%= link_to "#{product.name}", product_path(product.id)%></td>
             <td id="inventory"><%= product.inventory %></td>
             <% if product.retired == true %>
               <td id="items_ordered"> This product has been retired </td>
