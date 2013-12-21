@@ -54,8 +54,8 @@
           <h4>Rating: <%= review.first.rating %></h4>
             <p><%= review.first.description %><p>
             <% if review.first.user_id == session[:user_id] && current_user %>
-              <%= button_to "Edit review", edit_review_path(review), method: :get %>
-              <%= button_to "Delete review", review_path(review), method: :delete %>
+              <%= button_to "Edit review", edit_review_path(review.first), method: :get %>
+              <%= button_to "Delete review", review_path(review.first), method: :delete %>
             <% end %>
           <hr>
           </li>
