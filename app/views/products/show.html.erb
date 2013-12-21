@@ -1,4 +1,5 @@
 <div class= "productshow">
+
 <h1 id="productshowname"><%= @product.name.capitalize %></h1>
   <div id="productphoto"><%= image_tag(@product.photo_url(:showpage)) if @product.photo%></div>
     <h3>Price:</h3><li><%= number_to_currency(@product.price) %></li>
@@ -82,7 +83,7 @@
 <div class="see_all_products_by_merchant">
   <%= link_to "View all products by #{@users.find_by(id: @product.user_id).name}", user_path(@product.user_id)  %>
 </div>
-
+<br>
 <div class="go_back">
   <%= link_to "Back to browsing", root_path %>
 </div>
