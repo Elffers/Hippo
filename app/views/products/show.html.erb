@@ -84,7 +84,7 @@
 <div class="see_all_products_by_merchant">
   <%= link_to "View all products by #{@users.find_by(id: @product.user_id).name}", user_path(@product.user_id)  %>
 </div>
-
+<br>
 <div class="go_back">
   <%= link_to "Back to browsing", root_path %>
 </div>
