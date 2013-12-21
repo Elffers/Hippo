@@ -50,7 +50,8 @@ class OrdersController < ApplicationController
         @orderproduct = OrderProduct.new(
         order_id: current_order.id, 
         product_id: params[:product_id], 
-        quantity: params[:quantity])
+        quantity: params[:quantity],
+        status: "pending")
         if @orderproduct.save
           redirect_to order_path(current_order) #changes url
         else 
