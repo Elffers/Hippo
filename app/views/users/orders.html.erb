@@ -4,47 +4,70 @@
 
   <div>
     <ol>
-      <% @products.map do |product| %>
-      <%= product.order_products %>
+
+      <% @paid.each do |array|%>
+        <% if array != [] %>
+          <% array.each do |op| %>
+            Product:<%= Product.find(op.product_id).name %><br>
+            Quantity:<%= op.quantity %><br>
+            <% info = Order.find(op.order_id).purchase_info %><br>
+            Ship to: 
+            <div class= "shipping_address">
+              <%= info.first_name %>
+              <%= info.first_name %>
+              <%= info.last_name %><br>
+              <%= info.address %>
+              <%= info.address2 if info.address2%><br>
+              <%= info.city %>
+              <%= info.state %>
+              <%= info.zip_code %>
+            </div><br>
+            <div class="cc_info">
+              Payment info:<br>
+              CC: <%= info.credit_card_number.to_s.slice(-4,4) %><br>
+              CVV: <%= info.cvv %><br>
+              Expiration: <%= info.expiration_date %>
+            </div>
+              <%= button_to "Ship!", ship_order_path(params[:id],params[:product_id]) %>
+            <hr>
+          <% end %>
+        <% end %>
       <% end %>
 
       <%# @items.each do |op| %>
-        <%# @order = Order.find(op.order_id) %>
-        <%#= link_to "Order #{op.order_id}", order_path(op.order_id) %> <!-- <br> -->
-        <%#= @order.inspect %>
-        <li>
-          <%# if session[:user_id] == @order.user_id %>
-            <strong>You can't buy your own products!</strong> <hr><!-- Imperfect bug fix -->
+        <%# info_id) %>
+        <%#= link_to info}", order_path(op.order_id) %> <!-- <br> -->
+        <%#= info     <!--  <li> -->
+          <%# if session[:user_id] == info          <!-- <strong>You can't buy your own products!</strong> <hr>< --><!-- Imperfect bug fix -->
           <%# else %> 
-            Quantity: <%#= op.quantity %><br>
-            Status: <%#=@order.status %>
-            <%# if @order.purchase_info %>
-            <h4> Paid on: <%#=@order.purchase_info.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4>
-              <%#= @order.purchase_info.inspect %><!-- <br><br> -->
-              <div class="address">
+       <!--      Quantity: <%#= op.quantity %><br>
+            Status:  --><%#=info         <%# if info %>
+            <!-- <h4> Paid on: <%#=info.created_at.strftime('%b %d, %Y at %l:%M %P') %></h4> -->
+              <%#= info.inspect %><!-- <br><br> -->
+              <!-- <div class="address">
                 <h3>Ship to:</h3>
-                <%#= User.find(@order.user_id).name %>
-                <%#= @order.purchase_info.first_name %>
-                <%#= @order.purchase_info.last_name %><br>
-                <%#= @order.purchase_info.address %>
-                <%#= @order.purchase_info.address2 if @order.purchase_info.address2%><br>
-                <%#= @order.purchase_info.city %>,
-                <%#= @order.purchase_info.state %>
-                <%#= @order.purchase_info.zip_code %>
+                <%#= User.find(info %>
+                <%#= info.first_name %>
+                <%#= info.last_name %><br>
+                <%#= info.address %>
+                <%#= info.address2 if info.address2%><br>
+                <%#= info.city %>
+                <%#= info.state %>
+                <%#= info.zip_code %>
                 <%#= button_to "Ship!", ship_order_path(params[:id],params[:product_id]) %>
-              </div><br>
-              <div class="cc_info">
+              </div><br> -->
+             <!--  <div class="cc_info">
                 Payment info:<br>
-                CC: <%#= @order.purchase_info.credit_card_number.to_s.slice(-4,4) %><br>
-                CVV: <%#= @order.purchase_info.cvv %><br>
-                Expiration: <%#= @order.purchase_info.expiration_date %>
-              </div>
+                CC: <%#= info.credit_card_number.to_s.slice(-4,4) %><br>
+                CVV: <%#= info.cvv %><br>
+                Expiration: <%#= info.expiration_date %>
+              </div> -->
             <%# end %>  
-          <hr>
+          <!-- <hr>
           <%# end %>
-        </li>
+        </li> -->
       <%# end %>
-    </ol>
-  </div>
+  <!--   </ol>
+  </div> -->
 
   

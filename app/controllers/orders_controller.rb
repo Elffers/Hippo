@@ -97,6 +97,9 @@ class OrdersController < ApplicationController
     @purchase_info = PurchaseInfo.new(purchase_params)
     @purchase_info[:order_id] = current_order.id
     current_order.update(status: "paid")
+    current_order.order_products.each do |op|
+      op.update(status:"paid")
+    end
     if @purchase_info.save
       flash[:notice] = "Your order is complete!"
       current_order = Order.new  #This needs to archive paid order and open a new one

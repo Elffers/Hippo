@@ -30,13 +30,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @products = @user.products
     @orders = @user.orders
-    #total = 0
-    #@total_sold 
-    paid = @products.map do |product|
-      product.orders.keep_if {|order| order.status == "paid"}
-    end
-    @paid = paid.compact.flatten
-    puts @paid
   end
 
   def search
@@ -51,6 +44,9 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       @products = @user.products
+      @paid = @products.map do |product|
+        product.order_products.where(status:"paid")
+      end
     end
   end
 
