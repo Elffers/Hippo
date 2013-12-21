@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     if session[:user_id] == @product.user_id
       flash[:notice] = "You can't review your own products. That's cheating. >:("
       redirect_to product_path(params[:product_id])
-    elsif @product.reviews.where(:user_id == session[:user_id]) != nil
+    elsif @product.reviews.where(:user_id == session[:user_id]).exists?
       flash[:notice] = "You have already posted a review for this product!"
       redirect_to product_path(params[:product_id])
     else
