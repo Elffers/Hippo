@@ -23,7 +23,7 @@
       <tbody>
         <% @user.products.each do |product|%>
           <tr>
-            <td id="product_name"><%= product.id %><%= link_to "#{product.name}", product_path(product.id)%></td>
+            <td id="product_name"><%= link_to "#{product.name}", product_path(product.id)%></td>
             <td id="inventory"><%= product.inventory %></td>
             <% if product.orders != [] && product.inventory > 0 %>
             <!-- #this should only take into account orders whose status is "paid" -->
