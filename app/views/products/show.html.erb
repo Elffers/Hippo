@@ -48,7 +48,7 @@
             <% else %>
               <%= User.find(review.first.user_id).name %>
             <% end %>
-              on <%= review[1].strftime('%b %d, %Y at %l:%M %P') %>
+              on <%= review[1].utc.getlocal.strftime('%b %d, %Y at %l:%M %P') %>
           </h4>
           <h4>Rating: <%= review.first.rating %></h4>
             <p><%= review.first.description %><p>
