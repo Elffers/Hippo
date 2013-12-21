@@ -1,6 +1,4 @@
 <div class= "productshow">
-
-<h1><%= flash.notice %></h1><br>
 <h1 id="productshowname"><%= @product.name.capitalize %></h1>
   <div id="productphoto"><%= image_tag(@product.photo_url(:showpage)) if @product.photo%></div>
     <h3>Price:</h3><li><%= number_to_currency(@product.price) %></li>
