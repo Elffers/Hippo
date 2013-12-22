@@ -89,7 +89,7 @@ class UsersController < ApplicationController
   def ship
     @op = OrderProduct.find(params[:op_id])
     @op.update(status: "shipped")
-    redirect_to user_orders_path(session[:user_id],Order.find(@op.order_id))
+    redirect_to user_orders_path(session[:user_id], Order.find(@op.order_id))
     #update order to shipped
   end
 

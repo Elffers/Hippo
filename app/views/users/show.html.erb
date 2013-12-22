@@ -6,17 +6,16 @@
     <li> USER NAME: <%= @user.name %> </li> 
     <li> USER EMAIL: <%= @user.email %></li>
   </ul>
-    <hr>
-  <!-- <h3>ORDERS TO FULFILL:</h3> -->
+  <hr>
 
-   <h3>ORDER FULFILLMENT:</h3>
+  <h3>ORDER FULFILLMENT:</h3>
     <ul>
       <li><%=link_to "Paid - Needs to be shipped!", user_orders_path(params[:id]) %></li>
-     
       <li><%=link_to "Pending", pending_path(params[:id]) %></li>
       <li><%=link_to "Completed", completed_path(params[:id]) %></li>
     </ul>
-    <hr>
+  <hr>
+
   <h3>PRODUCTS:</h3>
   <%=button_to "List a new product", new_product_path, method: :get %><br>
     <table>
@@ -37,53 +36,46 @@
               <td id="items_ordered"> This product has been retired </td>
               <td id="ship"></td>
             <% else %>
-            <td id="items_ordered"><%= @totals.fetch(@user.products.index(product)) %></td> 
-            <td id="ship"></td>
+              <td id="items_ordered"><%= @totals.fetch(@user.products.index(product)) %></td> 
+              <td id="ship"></td>
             <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <h3>ORDER HISTORY:</h3>
-      <table>
-        <thead>
-          <tr>
-            <th> Order </th>
-            <th> Status </th>
-            <th> Items in Order </th>
-            <th> Created on </th>
-            <th> Last Updated </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @user.orders.reverse.each do |order|%>
-           <tr> 
-            <% if order == current_order %>
-              <td><%= link_to "Current order", order_path(current_order) %></td>
-              <!-- the next elsif block will be condensed into the current order -->
-            <% elsif order.status == "pending" %> 
-              <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
-              <!-- end the part that will be condesned -->
-            <% elsif order.status != "pending" %>
-              <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
-            <% end %>
-            <td><%= order.status %></td>
-            <td><%= order.products.count %></td>
-            <td><%= order.created_at.strftime('%b %d, %Y at %l:%M %P') %></td>
-            <td><%= order.updated_at.strftime('%b %d, %Y at %l:%M %P') %></td> 
-            <!-- #maybe change order of table elements? if shipped, show completion date -->
-           </tr>
+  <h3>ORDER HISTORY:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th> Order </th>
+          <th> Status </th>
+          <th> Items in Order </th>
+          <th> Created on </th>
+          <th> Last Updated </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.orders.reverse.each do |order|%>
+         <tr> 
+          <% if order == current_order %>
+            <td><%= link_to "Current order", order_path(current_order) %></td>
+          <% else  %>
+            <td><%= link_to "Order \# #{order.id}", order_path(order) %></td>
           <% end %>
-        </tbody>
-      </table>
-<br>    
-
+          <td><%= order.status %></td>
+          <td><%= order.products.count %></td>
+          <td><%= order.created_at.strftime('%b %d, %Y at %l:%M %P') %></td>
+          <td><%= order.updated_at.strftime('%b %d, %Y at %l:%M %P') %></td> 
+          <!-- #maybe change order of table elements? if shipped, show completion date -->
+         </tr>
+        <% end %>
+      </tbody>
+    </table><br>    
 
 <% else %>
 
   <h3>Products sold by <%=@user.name%>:</h3>
-
   <%= render 'products/index' %>
 
 <% end %>
