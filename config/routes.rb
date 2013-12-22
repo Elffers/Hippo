@@ -3,7 +3,9 @@ Hippo::Application.routes.draw do
   resources :users
   get "users/:id/orders" => "users#orders", as: :user_orders
   post "users/:id/ship/:op_id" => "users#ship", as: :ship_order 
-  
+
+  get "users/:id/completed" => "users#completed", as: :completed
+
   resources :products do 
     resources :category_products
     resources :reviews, only: [:new, :create, :index]

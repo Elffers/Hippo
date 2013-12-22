@@ -34,8 +34,18 @@ class UsersController < ApplicationController
         end
       end
     @totals = @quantityarray.map do |qa|
-         qa.inject(:+) 
-      end
+      qa.inject(:+) 
+    end
+    # @paid = @products.map do |product|
+    #   product.order_products.map do |item|
+    #     item.quantity if item.status == "paid"
+    #   end
+    # end
+    # @sold = @paid.each do |item|
+    #   item.inject(:+)
+    # end
+    # puts @sold
+
     @user = User.find(params[:id])
     @products = @user.products
     @orders = @user.orders
@@ -55,6 +65,19 @@ class UsersController < ApplicationController
       @products = @user.products
       @paid = @products.map do |product|
         product.order_products.where(status:"paid")
+      end
+    end
+  end
+
+  def completed
+    if params[:id].to_i != session[:user_id].to_i
+      flash[:notice] = "You are not authorized to view this page!"
+      redirect_to user_path(params[:id])
+    else
+      @user = User.find(params[:id])
+      @products = @user.products
+      @shipped = @products.map do |product|
+        product.order_products.where(status:"shipped")
       end
     end
   end
