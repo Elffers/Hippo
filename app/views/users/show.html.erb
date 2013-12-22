@@ -9,6 +9,14 @@
     
   <!-- <h3>ORDERS TO FULFILL:</h3> -->
 
+   <h3>ORDER FULFILLMENT:</h3>
+    <ul>
+      <li><%=link_to "Paid - Needs to be shipped!", user_orders_path(params[:id]) %></li>
+     
+      <li><%=link_to "Pending", pending_path(params[:id]) %></li>
+      <li><%=link_to "Completed", completed_path(params[:id]) %></li>
+    </ul>
+    
   <h3>PRODUCTS:</h3>
   <%=button_to "List a new product", new_product_path, method: :get %><br>
     <table>
@@ -37,15 +45,6 @@
       </tbody>
     </table>
 
- <h3>ORDER FULFILLMENT:</h3>
-    <ul>
-      <li><%=link_to "Paid - Needs to be shipped!", user_orders_path(params[:id]) %></li>
-     
-      <li><%=link_to "Pending", user_orders_path(params[:id]) %></li>
-      <li><%=link_to "Completed", completed_path(params[:id]) %></li>
-    </ul>
-
-    
     <h3>ORDER HISTORY:</h3>
       <table>
         <thead>
