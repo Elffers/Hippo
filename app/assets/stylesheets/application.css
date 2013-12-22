@@ -14,7 +14,7 @@
 
 html, body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
-  background: url('Pod_of_hippos.jpg') no-repeat center center fixed; 
+  background-image: url(<%=asset_path'Pod_of_hippos.jpg'%>) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
