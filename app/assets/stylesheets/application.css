@@ -40,7 +40,7 @@ a {
   border-bottom: 5px solid #ED671F; 
 }
 
-.nav_bar #icon {
+.nav_bar #icon img{
   width: 50px;
   left: 15px;
   position: fixed;
