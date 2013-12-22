@@ -27,7 +27,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @products = current_user.products
+    @user = User.find(params[:id])
+    @products = @user.products
+    @orders = @user.orders
     @quantityarray = @products.map do |product|
         product.order_products.map do |item|
           item.quantity
@@ -36,9 +38,6 @@ class UsersController < ApplicationController
     @totals = @quantityarray.map do |qa|
          qa.inject(:+) 
       end
-    @user = User.find(params[:id])
-    @products = @user.products
-    @orders = @user.orders
   end
 
   def search
