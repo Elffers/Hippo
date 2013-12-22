@@ -10,7 +10,7 @@
                 Quantity:<%= op.quantity %><br>
                 Placed: <%= op.created_at.utc.getlocal.strftime('%b %d, %Y at %l:%M %P') %><br>
                 <% @subtotal = @product.price * op.quantity %>
-                Total revenue: <%= @subtotal %>
+                Total revenue: <%= number_to_currency(@subtotal) %>
               <hr>
             </li>
           <% end %>
