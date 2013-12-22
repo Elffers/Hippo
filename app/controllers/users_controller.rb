@@ -27,7 +27,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @products = current_user.products
+    @user = User.find(params[:id])
+    @products = @user.products
+    @orders = @user.orders
     @quantityarray = @products.map do |product|
         product.order_products.map do |item|
           item.quantity
@@ -46,9 +48,7 @@ class UsersController < ApplicationController
     # end
     # puts @sold
 
-    @user = User.find(params[:id])
-    @products = @user.products
-    @orders = @user.orders
+    
   end
 
   def search
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       @products = @user.products
-      @shipped = @products.map do |product|
+      @completed = @products.map do |product|
         product.order_products.where(status:"shipped")
       end
     end
