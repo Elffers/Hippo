@@ -38,17 +38,6 @@ class UsersController < ApplicationController
     @totals = @quantityarray.map do |qa|
       qa.inject(:+) 
     end
-    # @paid = @products.map do |product|
-    #   product.order_products.map do |item|
-    #     item.quantity if item.status == "paid"
-    #   end
-    # end
-    # @sold = @paid.each do |item|
-    #   item.inject(:+)
-    # end
-    # puts @sold
-
-    
   end
 
   def search
