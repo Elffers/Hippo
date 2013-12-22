@@ -31,11 +31,6 @@ class OrdersController < ApplicationController
         totals
       end
     end
-    # rescue ActiveRecord::RecordNotFound
-    #   flash[:notice] = "This order does not exist."
-    #   @order = current_order
-    #   redirect_to root_path
-
   end
   
   def add_product
