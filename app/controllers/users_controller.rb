@@ -69,6 +69,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def pending
+    if params[:id].to_i != session[:user_id].to_i
+      flash[:notice] = "You are not authorized to view this page!"
+      redirect_to user_path(params[:id])
+    else
+      @user = User.find(params[:id])
+      @products = @user.products
+      @pending = @products.map do |product|
+        product.order_products.where(status:"pending")
+      end
+    end
+  end
+
   def completed
     if params[:id].to_i != session[:user_id].to_i
       flash[:notice] = "You are not authorized to view this page!"
