@@ -1,0 +1,25 @@
+ <h1>Completed orders</h1><hr>
+  <div>
+    <ol>
+      <% @completed.each do |array|%>
+
+        <% if array != [] %>
+          <% array.each do |op| %>
+            <li>
+              <% @product = Product.find(op.product_id) %>
+                Product:<%= link_to "#{@product.name.capitalize}", product_path(@product) %><br>
+                Quantity:<%= op.quantity %><br>
+                Completed: <%= op.updated_at.utc.getlocal.strftime('%b %d, %Y at %l:%M %P') %><br>
+                <% @subtotal = @product.price * op.quantity %>
+                <% @revenue << @subtotal %>
+                Total revenue: <%= @subtotal %>
+              <hr>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ol>
+
+    <h2>Total Revenue</h2>
+    <%= @revenue %>
+  </div>

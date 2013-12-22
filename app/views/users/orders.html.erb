@@ -1,40 +1,44 @@
 
-  <!-- <h2>Orders to fulfill</h2> -->
-
-
+<%= @paid.inspect%>
+<% if @paid.uniq == [] %>
+  <h4>You have no orders to fulfill</h4>
+<% else %>
   <h1>Paid orders</h1><hr>
-
   <div>
     <ol>
-
       <% @paid.each do |array|%>
         <% if array != [] %>
-          <% array.each do |op| %>
-            Product:<%= Product.find(op.product_id).name %><br>
-            Quantity:<%= op.quantity %><br>
-            <% info = Order.find(op.order_id).purchase_info %><br>
-            Ship to: 
-            <div class= "shipping_address">
-              <%= info.first_name %>
-              <%= info.first_name %>
-              <%= info.last_name %><br>
-              <%= info.address %>
-              <%= info.address2 if info.address2%><br>
-              <%= info.city %>
-              <%= info.state %>
-              <%= info.zip_code %>
-            </div><br>
-            <div class="cc_info">
-              Payment info:<br>
-              CC: <%= info.credit_card_number.to_s.slice(-4,4) %><br>
-              CVV: <%= info.cvv %><br>
-              Expiration: <%= info.expiration_date %>
-            </div>
-              <%= button_to "Ship!", ship_order_path(params[:id], op.id) %>
-            <hr>
-          <% end %>
+          <li>
+            <% array.each do |op| %>
+              Product:<%= Product.find(op.product_id).name %><br>
+              Quantity:<%= op.quantity %><br>
+              <% info = Order.find(op.order_id).purchase_info %><br>
+              Ship to: 
+              <div class= "shipping_address">
+                <%= info.first_name %>
+                <%= info.first_name %>
+                <%= info.last_name %><br>
+                <%= info.address %>
+                <%= info.address2 if info.address2%><br>
+                <%= info.city %>
+                <%= info.state %>
+                <%= info.zip_code %>
+              </div><br>
+              <div class="cc_info">
+                Payment info:<br>
+                CC: <%= info.credit_card_number.to_s.slice(-4,4) %><br>
+                CVV: <%= info.cvv %><br>
+                Expiration: <%= info.expiration_date %>
+              </div>
+                <%= button_to "Ship!", ship_order_path(params[:id], op.id) %>
+              <hr>
+            <% end %>
+          </li>
         <% end %>
       <% end %>
+    </ol>
+  <% end %>
+
 
       <%# @items.each do |op| %>
         <%# info_id) %>

@@ -41,8 +41,8 @@
     <ul>
       <li><%=link_to "Paid - Needs to be shipped!", user_orders_path(params[:id]) %></li>
      
-      <li>Pending</li>
-      <li>Completed</li>
+      <li><%=link_to "Pending", user_orders_path(params[:id]) %></li>
+      <li><%=link_to "Completed", completed_path(params[:id]) %></li>
     </ul>
 
     
