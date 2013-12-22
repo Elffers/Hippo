@@ -6,7 +6,7 @@
     <li> USER NAME: <%= @user.name %> </li> 
     <li> USER EMAIL: <%= @user.email %></li>
   </ul>
-    
+    <hr>
   <!-- <h3>ORDERS TO FULFILL:</h3> -->
 
    <h3>ORDER FULFILLMENT:</h3>
@@ -16,7 +16,7 @@
       <li><%=link_to "Pending", pending_path(params[:id]) %></li>
       <li><%=link_to "Completed", completed_path(params[:id]) %></li>
     </ul>
-    
+    <hr>
   <h3>PRODUCTS:</h3>
   <%=button_to "List a new product", new_product_path, method: :get %><br>
     <table>
