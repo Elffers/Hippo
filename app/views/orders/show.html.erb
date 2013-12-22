@@ -14,9 +14,9 @@ UserID: <%= current_user.id if current_user %><br>
     <!-- maybe refactor to case when syntax? -->
       <% if @order.status == "pending" %>
         <h3>This order has not been checked out!</h3>
-      <% elsif @order.status == "paid" %>
-         <h3>This order is being processed!</h3>
-      <% elsif @order.order_products.where(status: "shipped").exists? %>
+      <%# elsif @order.status == "paid" %>
+         <!-- <h3>This order is being processed!</h3> -->
+      <% elsif @order.order_products.where(status: "shipped") %>
         <h3>This order has been completed!</h3>
       <% end %>
     <!-- end status message -->
