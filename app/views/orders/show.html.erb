@@ -1,4 +1,6 @@
 <%=flash.notice %>
+session id<%= session[:user_id] %><br>
+ order user id<%= @order.user_id %>
 
 <!-- Ensures only buyer can see full order -->
 <% if check_user %>
@@ -7,11 +9,11 @@
       <h3> There are no products in this order.</h3>
     <% else %>
     <!-- maybe refactor to case when syntax? -->
-      <% if @order.status == "pending" %>
+      <% if @stati.include? "pending" %>
         <h3>This order has not been checked out!</h3>
       <%# elsif @order.status == "paid" %>
          <!-- <h3>This order is being processed!</h3> -->
-      <% elsif @order.order_products.where(status: "shipped") %>
+      <% elsif @stati.include? "paid" %>
         <h3>This order has been completed!</h3>
       <% end %>
     <!-- end status message -->
