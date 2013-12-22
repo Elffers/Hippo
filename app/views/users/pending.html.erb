@@ -6,8 +6,15 @@
           <% array.each do |op| %>
             <li>
               <% @product = Product.find(op.product_id) %>
+              <% @order = Order.find(op.order_id) %>
                 Product:<%= link_to "#{@product.name.capitalize}", product_path(@product) %><br>
                 Quantity:<%= op.quantity %><br>
+                Buyer: 
+                <% if @order.user_id == nil %>
+                Guest
+                <% else %>
+                <%= User.find(@order.user_id).name %><br>
+                <% end %>
                 Placed: <%= op.created_at.utc.getlocal.strftime('%b %d, %Y at %l:%M %P') %><br>
                 <% @subtotal = @product.price * op.quantity %>
                 Total revenue: <%= number_to_currency(@subtotal) %>

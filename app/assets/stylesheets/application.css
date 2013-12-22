@@ -14,7 +14,7 @@
 
 html, body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
-  background: white url(Pod_of_hippos.jpg) no-repeat center center fixed; 
+  background: white url('Pod_of_hippos.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -40,7 +40,7 @@ a {
   border-bottom: 5px solid #ED671F; 
 }
 
-.nav_bar #icon {
+.nav_bar #icon img{
   width: 50px;
   left: 15px;
   position: fixed;
