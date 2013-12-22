@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      current_order.update(user_id:@user.id)
       redirect_to root_path, notice: "You are now a hippo!"
     else
       render :new, notice: "There was a problem saving this user! :("
@@ -95,10 +96,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def check_user
-    
   end
 
 end

@@ -1,4 +1,6 @@
 <%=flash.notice %>
+session id<%= session[:user_id] %><br>
+ order user id<%= @order.user_id %>
 
 <!-- Ensures only buyer can see full order -->
 <% if check_user %>
