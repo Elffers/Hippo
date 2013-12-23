@@ -1,2 +1,32 @@
-<h1>User#edit</h1>
-<p>Find me in app/views/user/edit.html.erb</p>
+<h1> Edit my profile </h1>
+<%= form_for @user, url: user_path(@user.id), method: :patch do |f| %>
+  <% if @user.errors.any? %>
+  <div class= "error_messages">
+    <h2> Form is invalid </h2>
+    <ul>
+      <% for message in @user.errors.full_messages %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name, "Username" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email, "Please enter your email:" %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Reset password:" %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Re-enter password"%>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class= "actions"><%=f.submit %></div>
+
+
+<% end %>
