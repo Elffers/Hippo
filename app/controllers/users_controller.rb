@@ -38,16 +38,15 @@ class UsersController < ApplicationController
     #   end
     @quantityarray = @products.map do |product|
       product.order_products.map do |item|
-        item.quantity
+        item.quantity if item.status == "pending"
       end
     end
     @totals = @quantityarray.map do |qa|
-      qa.inject(:+) 
+      qa.compact.inject(:+) 
     end
     @paid = @products.map do |product|
-      product.order_products.where(status:"paid", status:"shipped")
+      product.order_products.where(status: 'paid', status: 'shipped') #this is not getting the paid ops
     end
-    #now need to map each AR collection of OP to their quantities
     @bought =  @paid.map do |a|
       a.map {|op| op.quantity}
     end
