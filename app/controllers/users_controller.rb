@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     @totals = @quantityarray.map do |qa|
       qa.inject(:+) 
     end
+    
   end
 
   def search
