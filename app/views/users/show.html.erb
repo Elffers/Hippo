@@ -57,6 +57,7 @@
       </thead>
       <tbody>
         <% @user.orders.reverse.each do |order|%>
+       
          <tr> 
           <% if order == current_order %>
             <td><%= link_to "Current order", order_path(current_order) %></td>

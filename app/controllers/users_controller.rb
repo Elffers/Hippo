@@ -32,6 +32,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @products = @user.products
     @orders = @user.orders
+    # @stati = @order.order_products.map {|op| op.status}
+    #   unless (@stati.include? "pending") || (@stati.include? "paid")
+    #     @order.update(status:"complete")
+    #   end
     @quantityarray = @products.map do |product|
       product.order_products.map do |item|
         item.quantity
