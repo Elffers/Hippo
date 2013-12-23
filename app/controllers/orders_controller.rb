@@ -26,9 +26,9 @@ class OrdersController < ApplicationController
       @orderproduct = OrderProduct.new 
       @products = @order.products
       @stati = @order.order_products.map {|op| op.status}
-      unless (@stati.include? "pending") || (@stati.include? "paid")
-        @order.update(status:"complete")
-      end
+      # unless (@stati.include? "pending") || (@stati.include? "paid")
+      #   @order.update(status:"complete")
+      # end
       # put a guard here to remove products from cart if you own it (happens if bought as a guest then signed in)
       unless @products == nil?
         totals
