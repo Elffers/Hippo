@@ -60,6 +60,7 @@ session id<%= session[:user_id] %><br>
             <% end %>
           </tr>
           <% else %>
+          <% OrderProduct.find_by(product_id: product.id, order_id: @order.id).destroy %>
             You cannot purchase <%=product.name %> 
             <!-- #The orderproduct object needs to be destroyed -->
           <% end %>

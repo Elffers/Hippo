@@ -23,7 +23,6 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       @order = Order.find(params[:id])
-      #@orderproduct = OrderProduct.new 
       @products = @order.products
       @stati = @order.order_products.map {|op| op.status}
       # unless (@stati.include? "pending") || (@stati.include? "paid")
@@ -123,16 +122,16 @@ private
   end
 
   # Checks if any products in order are owned by the buyer 
-  def check_products
-    @order = Order.find(params[:id])
-    @user = User.find(@order.user_id)
-    @products = @order.products.each do |product|
-      if product.user_id == @user.id
-        flash[:notice] = "#{product} has been removed from your order!"
-        OrderProduct.find_by(product_id:product.id, order_id: @order.id).destroy
-      end
-    end
-  end
+  # def check_products
+  #   @order = Order.find(params[:id])
+  #   @user = User.find(@order.user_id)
+  #   @products = @order.products.each do |product|
+  #     if product.user_id == @user.id
+  #       flash[:notice] = "#{product} has been removed from your order!"
+  #       OrderProduct.find_by(product_id:product.id, order_id: @order.id).destroy
+  #     end
+  #   end
+  # end
   
   def set_order
     @order = current_order 
