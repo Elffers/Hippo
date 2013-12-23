@@ -39,15 +39,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @products = @user.products
     @orders = @user.orders
-    # @stati = @order.order_products.map {|op| op.status}
-    #   unless (@stati.include? "pending") || (@stati.include? "paid")
-    #     @order.update(status:"complete")
-    #   end
+    #something here to update order status to complete
     @quantityarray = @products.map do |product|
       product.order_products.map do |item|
         item.quantity if item.status == "pending"
       end
     end
+    # returns array of total quantity ordered per product
     @totals = @quantityarray.map do |qa|
       qa.compact.inject(:+) 
     end
@@ -57,6 +55,7 @@ class UsersController < ApplicationController
     @bought =  @paid.map do |a|
       a.map {|op| op.quantity}
     end
+    # returns array of total quantity bought per product
     @total_bought = @bought.map {|x| x.inject(:+)}
   end
 
