@@ -12,8 +12,8 @@ CarrierWave.configure do |config|
   config.storage = :fog
   config.fog_credentials = { 
     :provider               => 'AWS', 
-    :aws_access_key_id      => ENV['AKIAJT5LBD34DLGCK6LA'], 
-    :aws_secret_access_key  => ENV['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'] 
+    :aws_access_key_id      => Figaro.env.hippo_key, 
+    :aws_secret_access_key  => Figaro.env.hippo_secret
   } 
   config.fog_directory  = ENV['ada-areyouhipponot']
   config.fog_public     = false 
