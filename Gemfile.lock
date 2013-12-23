@@ -61,6 +61,9 @@ GEM
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
     ffi (1.9.3)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     fog (1.19.0)
       builder
       excon (~> 0.31.0)
@@ -212,6 +215,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   factory_girl_rails
+  figaro
   fog
   guard-rspec
   jbuilder (~> 1.2)
