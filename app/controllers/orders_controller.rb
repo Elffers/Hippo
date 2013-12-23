@@ -23,12 +23,13 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       @order = Order.find(params[:id])
-      @orderproduct = OrderProduct.new 
+      #@orderproduct = OrderProduct.new 
       @products = @order.products
       @stati = @order.order_products.map {|op| op.status}
       # unless (@stati.include? "pending") || (@stati.include? "paid")
       #   @order.update(status:"complete")
       # end
+      #commenting out above now does not update the orders status to complete once all OPs are shipped
       # put a guard here to remove products from cart if you own it (happens if bought as a guest then signed in)
       unless @products == nil?
         totals
@@ -115,9 +116,22 @@ private
     @order.user_id == session[:user_id]
   end
 
-  def check_order
+  #Checks if product already exists in an order
+  def check_order 
    @product = Product.find(params[:product_id])
    OrderProduct.find_by(product_id: @product.id, order_id: current_order.id).present?
+  end
+
+  # Checks if any products in order are owned by the buyer 
+  def check_products
+    @order = Order.find(params[:id])
+    @user = User.find(@order.user_id)
+    @products = @order.products.each do |product|
+      if product.user_id == @user.id
+        flash[:notice] = "#{product} has been removed from your order!"
+        OrderProduct.find_by(product_id:product.id, order_id: @order.id).destroy
+      end
+    end
   end
   
   def set_order

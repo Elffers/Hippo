@@ -11,11 +11,9 @@ session id<%= session[:user_id] %><br>
     <!-- maybe refactor to case when syntax? -->
       <% if @order.status == "pending" %>
         <h3>This order has not been checked out!</h3>
-      <%# elsif @order.status == "paid" %>
-         <!-- <h3>This order is being processed!</h3> -->
       <% elsif @order.status == "paid" %>
         <h3>This order is being processed!</h3>
-      <% else %>
+      <% elsif @order.status == "complete" %>
         <h3> This order has been completed! </h3>
       <% end %>
     <!-- end status message -->
@@ -49,7 +47,7 @@ session id<%= session[:user_id] %><br>
             <% unless @order.status == "pending" %>
               <td id= "status"><%= @order.order_products.find_by(product_id:product.id, order_id:@order.id).status %></td>
             <% end %>
-            <!-- Can edit/remove if order still open -->
+            <!-- Can edit/remove if order still open --> 
             <% if @order.status == "pending" %>
               <td id= "edit_quantity">
                 <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
