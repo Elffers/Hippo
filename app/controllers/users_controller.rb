@@ -16,9 +16,16 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: "Your profile was successfully updated!"
+    else
+      render :edit, notice: "There was a problem updating your profile :("
+    end
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def destroy

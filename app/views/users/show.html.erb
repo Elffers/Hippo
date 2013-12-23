@@ -6,6 +6,7 @@
     <li> USER NAME: <%= @user.name %> </li> 
     <li> USER EMAIL: <%= @user.email %></li>
   </ul>
+  <%= button_to "Edit my profile", edit_user_path(@user), method: :get %>
   <hr>
 
   <h3>ORDER FULFILLMENT:</h3>
