@@ -75,7 +75,9 @@
             <td></td>
             <td></td>
           <% end %>
-          <td></td>
+          <% unless @order.status == "pending" %>
+            <td></td>
+          <% end %>
         </tr>
       </tbody>
     </table>
