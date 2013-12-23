@@ -44,7 +44,14 @@ class UsersController < ApplicationController
     @totals = @quantityarray.map do |qa|
       qa.inject(:+) 
     end
-    
+    @paid = @products.map do |product|
+      product.order_products.where(status:"paid", status:"shipped")
+    end
+    #now need to map each AR collection of OP to their quantities
+    @bought =  @paid.map do |a|
+      a.map {|op| op.quantity}
+    end
+    @total_bought = @bought.map {|x| x.inject(:+)}
   end
 
   def search

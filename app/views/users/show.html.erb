@@ -37,7 +37,7 @@
               <td id="ship"></td>
             <% else %>
               <td id="items_ordered"><%= @totals.fetch(@user.products.index(product)) %></td> 
-              <td id="total sold"> </td>
+              <td id="total sold"><%= @total_bought.fetch(@user.products.index(product)) %> </td>
             <% end %>
           </tr>
         <% end %>
