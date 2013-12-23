@@ -100,7 +100,7 @@ class OrdersController < ApplicationController
       op.update(status:"paid")
     end
     if @purchase_info.save
-      flash[:notice] = "Your order is complete!"
+      flash[:notice] = "Thank you for your purchase! Your order should be shipped within 7-10 business days!"
       current_order = Order.new  #This needs to archive paid order and open a new one
       redirect_to root_path
     else
