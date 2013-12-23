@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       qa.compact.inject(:+) 
     end
     @paid = @products.map do |product|
-      product.order_products.where(status: 'paid', status: 'shipped') #this is not getting the paid ops
+      product.order_products.where.not(status: 'pending') 
     end
     @bought =  @paid.map do |a|
       a.map {|op| op.quantity}
