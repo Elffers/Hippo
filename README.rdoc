@@ -1,13 +1,13 @@
-#Project Specs!#
+*Specs:*
 https://github.com/Ada-Developers-Academy/daily-curriculum/blob/master/week7/congo.md
 
-#Heroku URL#
+*Heroku:*
 http://areyouhipponot.herokuapp.com/
 
-#Naming Logic#
+*Definition:*
 Amazon ripoff => Amazons => Hippolyta, Queen of the Amazons => ???? => Hippo. A Rails marketplace app.
 
-#Authors#
+*Authors:*
 Hsing-Hui Hsu
 Blake Johnson
 Anne Kimsey
