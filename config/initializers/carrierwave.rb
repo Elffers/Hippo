@@ -12,7 +12,7 @@ CarrierWave.configure do |config|
     :aws_access_key_id      => Figaro.env.hippo_key, 
     :aws_secret_access_key  => Figaro.env.hippo_secret
   } 
-  config.fog_directory  = ENV['bucket']
+  config.fog_directory  = ENV['ada-areyouhipponot']
   config.fog_public     = false 
   end
 
