@@ -15,4 +15,6 @@
 /log/*.log
 /tmp
 
+#Ignore things that contain secret keys
+/config/initializers/locales/application.yml
 *DS_Store
