@@ -31,9 +31,9 @@ Hippo::Application.routes.draw do
   delete '/orders/:id/remove_product/:product_id' => "orders#remove_product", as: :remove_product
   patch '/orders/:id/update_quantity/:product_id' => "orders#update_quantity", as: :update_quantity
 
-  get "/search"       => "search#show"
+  get "/search"         => "search#show"
 
-  get "/checkout"     => "orders#checkout", as: :checkout
+  get "/checkout"       => "orders#checkout", as: :checkout
   post "/purchase_info" => "orders#complete_purchase", as: :complete_purchase
   
   root 'welcome#index'
