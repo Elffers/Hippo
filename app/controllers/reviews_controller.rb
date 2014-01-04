@@ -21,7 +21,6 @@ class ReviewsController < ApplicationController
         flash[:notice] = "You have successfully posted this review!"
         redirect_to product_path(params[:product_id])
       else
-        flash[:notice] = "You must add a description!"
         render :new
       end
     end
