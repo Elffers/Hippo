@@ -22,15 +22,15 @@ class SearchController < ApplicationController
 
   private
   def search_user
-    @users = User.where('name LIKE ?', "%#{params[:search]}%")
+    @users = User.where('LOWER(name) LIKE ?', "%#{params[:search]}%".downcase)
   end
 
   def search_category
-    @categories = Category.where('name LIKE ?', "%#{params[:search]}%")
+    @categories = Category.where('LOWER(name) LIKE ?', "%#{params[:search]}%".downcase)
   end
 
   def search_product
-    @products = Product.where('name LIKE ? OR description LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%" )
+    @products = Product.where('LOWER(name) LIKE ? OR description LIKE ?', "%#{params[:search]}%".downcase, "%#{params[:search]}%".downcase )
   end
 
   def concat_search

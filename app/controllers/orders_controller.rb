@@ -96,6 +96,7 @@ class OrdersController < ApplicationController
     @purchase_info = PurchaseInfo.new(purchase_params)
     @purchase_info[:order_id] = current_order.id
     current_order.update(status: "paid")
+    # session[:order_id] = nil #reset current order
     current_order.order_products.each do |op|
       op.update(status:"paid")
     end

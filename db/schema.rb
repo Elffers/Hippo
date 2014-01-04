@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131221202748) do
+ActiveRecord::Schema.define(version: 20140104211108) do
 
   create_table "categories", force: true do |t|
     t.text     "name"
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20131221202748) do
     t.integer  "zip_code"
     t.string   "billing_first"
     t.string   "billing_last"
-    t.integer  "credit_card_number"
+    t.string   "credit_card_number"
     t.string   "expiration_date"
-    t.integer  "cvv"
+    t.string   "cvv"
     t.string   "billing_address"
     t.string   "billing_address2"
     t.string   "billing_city"
