@@ -35,7 +35,7 @@ Product.create(user_id: 5, name: "purple pen", photo: 'http://upload.wikimedia.o
 Product.create(user_id: 2, name: "whiteout pen", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 1.99, description: "good at fixing writing in blue", retired: false, inventory: 12)
 Product.create(user_id: 4, name: "notebook", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 2.99, description: "good for writing", retired: false, inventory: 12)
 Product.create(user_id: 5, name: "dictionary", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 12.99, description: "good for learning", retired: false, inventory: 12)
-Product.create(user_id: 1, name:"test", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 12.99, description:"good for practicing", retired: false, inventory: 12)
+Product.create(user_id: 1, name: "test", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 12.99, description: "good for practicing", retired: false, inventory: 12)
 Product.create(user_id: 5, name: "last year's test", photo: 'http://upload.wikimedia.org/wikipedia/commons/4/48/Hippo_mouth.jpg', price: 12.99, description: "used to be good for learning", retired: true, inventory: 12)
 
 # Category
