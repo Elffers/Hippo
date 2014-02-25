@@ -432,13 +432,3 @@ CategoryProduct.create(category_id: 9, product_id: 29)
 CategoryProduct.create(category_id: 9, product_id: 30)
 CategoryProduct.create(category_id: 10, product_id: 31)
 CategoryProduct.create(category_id: 10, product_id: 32)
-
-# Reviews
-# create_table "reviews", force: true do |t|
-#     t.integer  "rating"
-#     t.integer  "product_id"
-#     t.text     "description"
-#     t.datetime "created_at"
-#     t.datetime "updated_at"
-#   end
-
