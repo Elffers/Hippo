@@ -12,31 +12,35 @@
 class SearchController < ApplicationController
   def show
     concat_search
-    if @results == {:users=>[], :categories=>[], :products=>[]}
+    if @results == { users: [], categories: [], products: [] }
       flash[:notice] = "No items match your search"
       redirect_to root_path
-    else 
+    else
       render :index
     end
   end
 
   private
+
   def search_user
     @users = User.where('LOWER(name) LIKE ?', "%#{params[:search]}%".downcase)
   end
 
   def search_category
-    @categories = Category.where('LOWER(name) LIKE ?', "%#{params[:search]}%".downcase)
+    @categories = Category.where('LOWER(name) LIKE ?',
+                                 "%#{params[:search]}%".downcase)
   end
 
   def search_product
-    @products = Product.where('LOWER(name) LIKE ? OR description LIKE ?', "%#{params[:search]}%".downcase, "%#{params[:search]}%".downcase )
+    @products = Product.where('LOWER(name) LIKE ? OR description LIKE ?',
+                              "%#{params[:search]}%".downcase,
+                              "%#{params[:search]}%".downcase)
   end
 
   def concat_search
     search_user
     search_category
     search_product
-    @results = {:users => @users, :categories => @categories, :products => @products} 
+    @results = { users: @users, categories: @categories, products: @products }
   end
 end
