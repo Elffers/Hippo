@@ -1,8 +1,10 @@
-  class OrdersController < ApplicationController
-  before_action :set_order, except: [:new, :create, :show] #don't want to show only current order
-  before_action :set_products, only: [:add_product, :update_quantity, :checkout]
-  before_action :check_order, only: [:add_product]
-  before_action :totals, only: [:update_quantity, :checkout]
+  # OrdersController
+
+class OrdersController < ApplicationController
+    before_action :set_order, except: [:new, :create, :show] # don't want to show only current order
+    before_action :set_products, only: [:add_product, :update_quantity, :checkout]
+    before_action :check_order, only: [:add_product]
+    before_action :totals, only: [:update_quantity, :checkout]
 
   def new
     @order = Order.new
@@ -47,14 +49,15 @@
         redirect_to root_path
       else
         @orderproduct = OrderProduct.new(
-        order_id: current_order.id, 
-        product_id: params[:product_id], 
+        order_id: current_order.id,
+        product_id: params[:product_id],
         quantity: params[:quantity],
         status: "pending")
         if @orderproduct.save
-          redirect_to order_path(current_order) #changes url
+          redirect_to order_path(current_order) # changes url
         else 
-          flash.now[:notice] = "There was a problem adding this item to the cart." #render doesn't show notice b/c generates page first
+          flash.now[:notice] = "There was a problem adding this item to the cart." 
+          # render doesn't show notice b/c generates page first
           render :show
         end
       end
@@ -62,13 +65,15 @@
   end
 
   def remove_product
-    @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
+    @orderproduct = OrderProduct.find_by(order_id: current_order.id,
+                                         product_id: params[:product_id])
     @orderproduct.destroy
-    redirect_to order_path(current_order) #why doesn't need to be current_order.id?
+    redirect_to order_path(current_order) # why doesn't need to be current_order.id?
   end
 
   def update_quantity
-    @orderproduct = OrderProduct.find_by(order_id: current_order.id, product_id: params[:product_id])
+    @orderproduct = OrderProduct.find_by(order_id: current_order.id,
+                                         product_id: params[:product_id])
     if @orderproduct.update(quantity:params[:quantity])
       redirect_to order_path(current_order)
     else
@@ -83,11 +88,13 @@
       if product.inventory == 0
         flash[:notice] = "We are currently out of stock. Please modify your order."
         redirect_to order_path(current_order)
-      elsif OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity > product.inventory
+      elsif OrderProduct.find_by(product_id:product.id,
+                                 order_id:current_order.id).quantity > product.inventory
         flash[:notice] = "We have #{product.inventory} of those in stock. Please modify your order."
         redirect_to order_path(current_order)
       else
-        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, order_id:current_order.id).quantity)
+        product.update(inventory:product.inventory - OrderProduct.find_by(product_id:product.id, 
+                                                                          order_id:current_order.id).quantity)
       end
     end
   end
@@ -96,13 +103,15 @@
     @purchase_info = PurchaseInfo.new(purchase_params)
     @purchase_info[:order_id] = current_order.id
     current_order.update(status: "paid")
-    # session[:order_id] = nil #reset current order
+    # session[:order_id] = nil # reset current order
     current_order.order_products.each do |op|
       op.update(status:"paid")
     end
     if @purchase_info.save
-      flash[:notice] = "Thank you for your purchase! Your order should be shipped within 7-10 business days!"
-      current_order = Order.new  #This needs to archive paid order and open a new one
+      flash[:notice] = "Thank you for your purchase! 
+                        Your order should be shipped 
+                        within 7-10 business days!"
+      current_order = Order.new  # This needs to archive paid order and open a new one
       redirect_to root_path
     else
       flash[:notice] = "There was an error processing your order."
@@ -116,10 +125,11 @@ private
     @order.user_id == session[:user_id]
   end
 
-  #Checks if product already exists in an order
+  # Checks if product already exists in an order
   def check_order 
    @product = Product.find(params[:product_id])
-   OrderProduct.find_by(product_id: @product.id, order_id: current_order.id).present?
+   OrderProduct.find_by(product_id: @product.id,
+                        order_id: current_order.id).present?
   end
 
   # Checks if any products in order are owned by the buyer 
@@ -173,7 +183,4 @@ private
   end
 
   helper_method :check_user
-
 end
-
-
