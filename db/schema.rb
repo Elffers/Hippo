@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201_401_042_111_08) do
+ActiveRecord::Schema.define(version: 20140227213001) do
 
   create_table "categories", force: true do |t|
     t.text     "name"
@@ -95,6 +95,11 @@ ActiveRecord::Schema.define(version: 201_401_042_111_08) do
     t.datetime "updated_at"
     t.text     "address"
     t.string   "password_digest"
+    t.string   "seller_address"
+    t.string   "seller_address2"
+    t.string   "seller_city"
+    t.string   "seller_state"
+    t.integer  "seller_zipcode"
   end
 
 end
