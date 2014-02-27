@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   #   render partial: "index"
   # end
 
-  def show
+  def show  # compare w/users
     @users = User.all
   end
 
