@@ -1,12 +1,16 @@
 # How Search should work:
 # Take query from the text field in the navbar
-# Run a search for query in Products and return product objects in array @products based on name & description
-# Run a search for query in Categories and return category objects in array @categories based on name
-# Run a search for query in Users and return User objects in array @users based on user name
+# Run a search for query in Products and return product objects
+  # in array @products based on name & description
+# Run a search for query in Categories and return category objects
+  # in array @categories based on name
+# Run a search for query in Users and return User objects in array
+  # @users based on user name
 # Files affected:
 # app/models/search.rb
 # app/views/layouts/application.html.erb
-# app/controllers/application_controller.rb? or app/controllers/welcome_controller.rb?
+# app/controllers/application_controller.rb? or
+  # app/controllers/welcome_controller.rb?
 # config/routes.rb
 
 class SearchController < ApplicationController
