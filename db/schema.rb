@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227213001) do
+ActiveRecord::Schema.define(version: 201_402_272_130_01) do
 
   create_table "categories", force: true do |t|
     t.text     "name"
