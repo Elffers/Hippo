@@ -50,16 +50,6 @@ describe Product do
           inventory: 5)).to_not be_valid
       end
 
-      pending "must be valid if a float 9.99" do
-        expect(Product.new(
-          name: "shoes",
-          price: 9.99,
-          user_id: 1,
-          description: "Something you should buy",
-          retired: false,
-          inventory: 5)).to be_valid
-      end
-
       it "must be invalid if negative" do
         expect(Product.new(
           name: "shoes",

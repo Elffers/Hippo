@@ -1,7 +1,7 @@
-require 'test_helper'
+require 'spec_helper'
 
 class UserControllerTest < ActionController::TestCase
-  describe 'GET "new" ' do 
+  describe 'GET #new' do 
     it 'assigns @user as an instance of User' do 
       let(:user) { create(:user) }
       get :new
@@ -9,7 +9,7 @@ class UserControllerTest < ActionController::TestCase
     end
   end
 
-  describe 'POST "create" ' do 
+  describe 'POST #create' do 
     context 'with valid attributes' do 
       let(:user) { create(:user) }
 
