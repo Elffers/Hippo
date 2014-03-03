@@ -40,6 +40,9 @@ class UsersController < ApplicationController
     @products = @user.products
     @orders = @user.orders
     #something here to update order status to complete
+
+    # user's products that are in orderproducts which have a 'pending' status...
+    # will return quantity of each item
     @quantityarray = @products.map do |product|
       product.order_products.map do |item|
         item.quantity if item.status == "pending"
@@ -49,6 +52,7 @@ class UsersController < ApplicationController
     @totals = @quantityarray.map do |qa|
       qa.compact.inject(:+) 
     end
+    raise
     @paid = @products.map do |product|
       product.order_products.where.not(status: 'pending') 
     end
