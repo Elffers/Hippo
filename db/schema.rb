@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104211108) do
+ActiveRecord::Schema.define(version: 201_402_272_130_01) do
 
   create_table "categories", force: true do |t|
     t.text     "name"
@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(version: 20140104211108) do
   end
 
   create_table "orders", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id" # buyer id
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",     default: "pending"
   end
 
   create_table "products", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id" # seller id
     t.string   "name"
     t.float    "price"
     t.datetime "created_at"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 20140104211108) do
   end
 
   create_table "purchase_infos", force: true do |t|
-    t.integer  "order_id"
-    t.integer  "user_id"
+    t.integer  "order_id" 
+    t.integer  "user_id" # buyer id
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
@@ -95,6 +95,10 @@ ActiveRecord::Schema.define(version: 20140104211108) do
     t.datetime "updated_at"
     t.text     "address"
     t.string   "password_digest"
+    t.string   "seller_address"
+    t.string   "seller_address2"
+    t.string   "seller_city"
+    t.string   "seller_state"
+    t.integer  "seller_zipcode"
   end
-
 end

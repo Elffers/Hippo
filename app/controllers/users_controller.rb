@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_user, [:update, :edit, :show]
+
   def new
     @user = User.new
   end
@@ -7,8 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      #attaches current order to newly created user
-      current_order.update(user_id:@user.id)
+      # attaches current order to newly created user
+      current_order.update(user_id: @user.id)
       redirect_to root_path, notice: "You are now a hippo!"
     else
       render :new, notice: "There was a problem saving this user! :("
@@ -16,16 +18,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: "Your profile was successfully updated!"
+      redirect_to user_path(@user.id), notice: "Your profile was successfully
+                                                updated!"
     else
       render :edit, notice: "There was a problem updating your profile :("
     end
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def destroy
@@ -36,31 +37,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @products = @user.products
-    @orders = @user.orders
-    #something here to update order status to complete
-
-    # user's products that are in orderproducts which have a 'pending' status...
-    # will return quantity of each item
-    @quantityarray = @products.map do |product|
-      product.order_products.map do |item|
-        item.quantity if item.status == "pending"
-      end
-    end
-    # returns array of total quantity ordered per product
-    @totals = @quantityarray.map do |qa|
-      qa.compact.inject(:+) 
-    end
-    raise
+    @totals = find_total(@products)
     @paid = @products.map do |product|
-      product.order_products.where.not(status: 'pending') 
+      product.order_products.where.not(status: 'pending')
     end
     @bought =  @paid.map do |a|
-      a.map {|op| op.quantity}
+      a.map { |op| op.quantity }
     end
     # returns array of total quantity bought per product
-    @total_bought = @bought.map {|x| x.inject(:+)}
+    @total_bought = @bought.map { |x| x.inject(:+) }
   end
 
   def search
@@ -76,7 +62,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @products = @user.products
       @paid = @products.map do |product|
-        product.order_products.where(status:"paid")
+        product.order_products.where(status: "paid")
       end
     end
   end
@@ -89,7 +75,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @products = @user.products
       @pending = @products.map do |product|
-        product.order_products.where(status:"pending")
+        product.order_products.where(status: "pending")
       end
     end
   end
@@ -102,7 +88,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @products = @user.products
       @completed = @products.map do |product|
-        product.order_products.where(status:"shipped")
+        product.order_products.where(status: "shipped")
       end
     end
   end
@@ -111,13 +97,43 @@ class UsersController < ApplicationController
     @op = OrderProduct.find(params[:op_id])
     @op.update(status: "shipped")
     redirect_to user_orders_path(session[:user_id], Order.find(@op.order_id))
-    #update order to shipped
+    # update order to shipped
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  def set_user
+    @user = User.find(params[:id])
   end
 
+  def find_total(products)
+    create_quantity = products.map do |product|
+      product.order_products.map do |item|
+        item.quantity if item.status == "pending"
+      end
+    end
+    total = create_quantity.map do |qa|
+      qa.compact.inject(:+)
+    end
+    total
+  end
+
+  def user_params
+    params.require(:user).permit(
+                                :name,
+                                :email,
+                                :password,
+                                :password_confirmation
+                                )
+  end
+
+  def seller_params
+    params.require(:user).permit(
+                                :seller_address,
+                                :seller_address2,
+                                :seller_city,
+                                :seller_state,
+                                :seller_zipcode
+                                )
+  end
 end
