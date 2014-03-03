@@ -35,8 +35,15 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
   gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
+  gem 'capybara', '2.1.0' # Capybara is an integration testing tool for rack based web applications. It simulates how a user would interact with a website
   gem 'sqlite3'
+  gem 'simplecov' # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites
+  gem 'rubocop' # Automatic Ruby code style checking tool. Aims to enforce the community-driven Ruby Style Guide
+  gem 'brakeman' # Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis
+end
+
+group :test do
+  gem "nyan-cat-formatter"
 end
 
 group :production do
@@ -51,12 +58,3 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
