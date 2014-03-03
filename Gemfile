@@ -42,6 +42,10 @@ group :development, :test do
   gem 'brakeman' # Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis
 end
 
+group :test do
+  gem "nyan-cat-formatter"
+end
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

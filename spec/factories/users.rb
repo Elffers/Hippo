@@ -1,12 +1,16 @@
 FactoryGirl.define do
   factory :user do
-    name  "Ada Doe"
-    email "ada@adadoe.com"
-    seller_address "1234 Tech Ave"
-    seller_address2 "Ste 1234"
-    seller_city "Seattle"
-    seller_state "WA"
-    seller_zipcode "98101"
+
+    name "person"
+    email "asha@gmail.com"
+    address "blah blah blah"
+    password "hello"
+    password_digest "hello"
+  end
+
+  factory :invalid_user do 
+    name " "
+    email " "
+    address "invalid invalid"
   end
 end
-  

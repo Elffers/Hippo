@@ -22,13 +22,14 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     # Following would be unnecessary if route was renamed RESTfully
-    @product[:user_id] = current_user.id
+    @product.user_id = current_user.id
+
     if @product.save
-      redirect_to "/products/#{@product.id}", notice: "You have successfully
-                                                      listed this product!"
+      msg = "You have successfully listed this product!"
+      redirect_to @product, notice: msg
     else
-      # new_product_path
-      redirect_to "/products/new", notice: "There was an error, try again."
+      msg = "There was an error, try again."
+      redirect_to new_product_path, notice: msg
     end
   end
 

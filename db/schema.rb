@@ -101,5 +101,4 @@ ActiveRecord::Schema.define(version: 201_402_272_130_01) do
     t.string   "seller_state"
     t.integer  "seller_zipcode"
   end
-
 end
