@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227213001) do
+ActiveRecord::Schema.define(version: 20140303230506) do
 
   create_table "categories", force: true do |t|
     t.text     "name"
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(version: 20140227213001) do
     t.boolean  "retired",     default: false
     t.integer  "inventory"
     t.string   "photo"
+    t.integer  "weight"
+    t.integer  "height"
+    t.integer  "depth"
+    t.integer  "length"
   end
 
   create_table "purchase_infos", force: true do |t|

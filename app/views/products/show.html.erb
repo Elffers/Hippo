@@ -14,6 +14,7 @@
         <p>There are no categories associated with this product.</p>
       <% end %>
     </ul>
+
     <!-- makes sure product can't be purchased by owner of the product -->
     <% if @product.user_id != session[:user_id] %>
        <% if @product.inventory == 0 %>
