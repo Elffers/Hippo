@@ -9,3 +9,4 @@ FactoryGirl.define do
     seller_zipcode "98101"
   end
 end
+  

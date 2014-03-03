@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
     else
       @order = Order.find(params[:id])
       @products = @order.products
-      @stati = @order.order_products.map { |op| op.status }
+      # @stati = @order.order_products.map { |op| op.status }
       # unless (@stati.include? "pending") || (@stati.include? "paid")
       #   @order.update(status:"complete")
       # end
@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
   def checkout
     @purchase_info = PurchaseInfo.new
     current_order.products.each do |product|
-      if product.inventory == 0
+      if product.inventory == 0 #make check inv method?
         flash[:notice] = "We are currently out of stock.
                           Please modify your order."
         redirect_to order_path(current_order)

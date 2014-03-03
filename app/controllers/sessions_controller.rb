@@ -12,16 +12,16 @@ class SessionsController < ApplicationController
                                      #{user.name}!"
       # To set previous orderproducts into current order if not checked out-
       # should maybe be a private method?
-      if user.orders != []
-        user.orders.each do |order|
-          if order.status == "pending" && order != current_order
-            order.order_products.each do |op|
-              op.update(order_id: current_order.id)
-              order.destroy
-            end
-          end
-        end
-      end
+      # if user.orders != [] DON'T THINK THIS IS EVER EXECUTED?
+      #   user.orders.each do |order|
+      #     if order.status == "pending" && order != current_order
+      #       order.order_products.each do |op|
+      #         op.update(order_id: current_order.id)
+      #         order.destroy
+      #       end
+      #     end
+      #   end
+      # end
       # also should have private method here to destroy any OPs put into
       # the current order (i.e. as a guest) if the user owns the product
     else

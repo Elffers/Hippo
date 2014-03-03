@@ -1,11 +1,11 @@
 class ReviewsController < ApplicationController
+  before_action :set_product, [:new, :create, :index]
+  
   def new
     @review = Review.new
-    @product = Product.find(params[:product_id])
   end
 
   def create # Are we going to have a problem if current_user.id == nil here?
-    @product = Product.find(params[:product_id])
     if session[:user_id] == @product.user_id
       flash[:notice] = "You can't review your own products. That's cheating."
       redirect_to product_path(params[:product_id])
@@ -26,7 +26,7 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @product = Product.find(params[:product_id])
+    # @products = Product.all ?
   end
 
   def edit
@@ -50,6 +50,10 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:product_id])
+  end
 
   def review_params
     params.require(:review).permit(:rating, :description, :product_id)

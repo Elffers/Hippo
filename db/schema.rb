@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(version: 201_402_272_130_01) do
   end
 
   create_table "orders", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id" # buyer id
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",     default: "pending"
   end
 
   create_table "products", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id" # seller id
     t.string   "name"
     t.float    "price"
     t.datetime "created_at"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 201_402_272_130_01) do
   end
 
   create_table "purchase_infos", force: true do |t|
-    t.integer  "order_id"
-    t.integer  "user_id"
+    t.integer  "order_id" 
+    t.integer  "user_id" # buyer id
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"

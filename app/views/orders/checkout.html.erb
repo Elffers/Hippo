@@ -1,25 +1,3 @@
-<!-- <h1>TOTAL: <%= number_to_currency @total %></h1>
-<hr>
-
-<#%= form_tag pay_path do %>
-<#% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
-  <h3>Payment method:</h3>
-  <div class= "field">
-    <%#= label_tag :payment_method %>
-    <%#= select_tag :payment_method, options_for_select(payment) %>
-  </div>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "Visa") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "MasterCard") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "PayPal") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "Bitcoins") %> -->
 <h3>Shipping Information</h3>
   <%= form_for @purchase_info, url: {action: "complete_purchase" } do |f| %>
   <% if @purchase_info.errors.any? %>
