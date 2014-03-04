@@ -21,10 +21,6 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
-  <!-- <div class="field">
-    <%#= f.label :photo, "Photo URL" %>
-    <%#= f.text_field :photo %>
-  </div> -->
   <div class="field">
     <%= f.label(:retired) %>
     <%= f.check_box :retired %>
@@ -49,12 +45,10 @@
     <%= f.label :length %>
     <%= f.text_field :length %>
   </div>
-
-   <div class="image">
+  <div class="image">
     <%= f.label :photo, "Upload an image of your product!" %>
     <%= f.file_field :photo %>
     <%= f.hidden_field :photo_cache %> <!-- what is this? -->
   </div>
- 
   <div class= "actions"><%=f.submit %></div>
 <% end %>
