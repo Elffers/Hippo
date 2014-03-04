@@ -68,7 +68,11 @@ class ProductsController < ApplicationController
                                     :inventory,
                                     :description,
                                     :photo,
-                                    :retired)
+                                    :retired,
+                                    :length,
+                                    :weight,
+                                    :height,
+                                    :depth)
   end
 
   def set_product
