@@ -3,7 +3,15 @@
 <h1 id="productshowname"><%= @product.name.capitalize %></h1>
   <div id="productphoto"><%= image_tag(@product.photo_url(:showpage)) if @product.photo%></div>
     <h3>Price:</h3><li><%= number_to_currency(@product.price) %></li>
-    <h3>Description:</h3><li><%= @product.description %></li>
+    <h3>Description:</h3>
+    Product Description:
+    <li> <%= @product.description %></li>
+    Product Dimensions:
+    <li><%= @product.weight %> oz in weight</li>
+    <li><%= @product.height %> inches high</li>
+    <li><%= @product.depth %> inches deep</li>
+    <li><%= @product.length %> inches long</li>
+
     <h3>Categories:</h3>
     <ul>
       <% unless @product.categories == [] %>
