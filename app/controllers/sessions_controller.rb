@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(name: params[:name])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.user_id
+      session[:user_id] = user.id
       # this should attach order to user if signed in.
       current_order.update(user_id: current_user.id) if current_user
       redirect_to root_path, notice: "Hip Hipporay! You are now logged in as

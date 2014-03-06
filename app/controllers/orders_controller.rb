@@ -14,6 +14,12 @@ class OrdersController < ApplicationController
   def create
   end
 
+  def shipping
+    @order = Order.find(params[:id])
+    x = HTTParty.post("http://localhost:4000/rates.json",{:body => {:origin => {:country => 'US', :state => 'CA', :city => 'Beverly Hills', :zip => '90210'}, :destination => {:country => 'US', :state => 'WA', :city => 'Seattle', :zip => '98101'}, :package => {:weight => 70, :height => 15, :depth => 10, :length => 4}}})
+    
+  end
+
   def edit
   end
 
@@ -88,6 +94,8 @@ class OrdersController < ApplicationController
   end
 
   def checkout
+    @order = current_order
+    @products = current_order.products
     @purchase_info = PurchaseInfo.new
     current_order.products.each do |product|
       if product.inventory == 0 #make check inv method?
@@ -108,6 +116,8 @@ class OrdersController < ApplicationController
           ).quantity)
       end
     end
+    @shipping = HTTParty.post("http://localhost:4000/rates.json",{:body => {:origin => {:country => 'US', :state => 'CA', :city => 'Beverly Hills', :zip => '90210'}, :destination => {:country => 'US', :state => 'WA', :city => 'Seattle', :zip => '98101'}, :package => {:weight => 70, :height => 15, :depth => 10, :length => 4}}})
+
   end
 
   def complete_purchase
@@ -134,8 +144,8 @@ class OrdersController < ApplicationController
   private
 
   def check_user
-    @order = Order.find(params[:id])
-    @order.user_id == session[:user_id]
+    @orderu = current_order.user_id
+    @orderu == session[:user_id]
   end
 
   # Checks if product already exists in an order
