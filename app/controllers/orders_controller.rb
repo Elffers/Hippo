@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 
   def shipping
     @order = Order.find(params[:id])
-    x = HTTParty.post("http://localhost:4000/rates.json",{:body => {:origin => {:country => 'US', :state => 'CA', :city => 'Beverly Hills', :zip => '90210'}, :destination => {:country => 'US', :state => 'WA', :city => 'Seattle', :zip => '98101'}, :package => {:weight => 70, :height => 15, :depth => 10, :length => 4}}})
+    x = HTTParty.post("http://localhost:3000/rates.json",{:body => {:origin => {:country => 'US', :state => 'CA', :city => 'Beverly Hills', :zip => '90210'}, :destination => {:country => 'US', :state => 'WA', :city => 'Seattle', :zip => '98101'}, :package => {:weight => 70, :height => 15, :depth => 10, :length => 4}}})
     
   end
 
@@ -117,6 +117,7 @@ class OrdersController < ApplicationController
       end
     end
     @shipping = HTTParty.post("http://localhost:4000/rates.json",{:body => {:origin => {:country => 'US', :state => 'CA', :city => 'Beverly Hills', :zip => '90210'}, :destination => {:country => 'US', :state => 'WA', :city => 'Seattle', :zip => '98101'}, :package => {:weight => 70, :height => 15, :depth => 10, :length => 4}}})
+
 
   end
 
