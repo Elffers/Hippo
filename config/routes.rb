@@ -36,9 +36,10 @@ Hippo::Application.routes.draw do
   patch '/orders/:id/update_quantity/:product_id',
         to: "orders#update_quantity",
         as: :update_quantity
-  get 'orders/shipping', to: 'orders#shipping', as: :shipping
+  # get 'orders/shipping', to: 'orders#shipping', as: :shipping
   get "/search"         => "search#show"
-  get "/checkout"       => "orders#checkout", as: :checkout
+  get "/shipping", to: "orders#shipping", as: :shipping
+  post "/checkout"       => "orders#checkout", as: :checkout
   post "/purchase_info" => "orders#complete_purchase", as: :complete_purchase
   root 'welcome#index'
 end

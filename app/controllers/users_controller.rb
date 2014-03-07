@@ -122,6 +122,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(
                                 :name,
                                 :email,
+                                :seller_address,
+                                :seller_address2,
+                                :seller_city,
+                                :seller_state,
+                                :seller_zipcode,
                                 :password,
                                 :password_confirmation
                                 )
