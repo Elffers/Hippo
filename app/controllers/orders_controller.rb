@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
                                       :update_quantity,
                                       :checkout]
   before_action :check_order, only: [:add_product]
-  before_action :totals, only: [:update_quantity, :checkout]
+  before_action :totals, only: [:checkout] #:update_quantity, 
 
   def new
     @order = Order.new
@@ -121,11 +121,11 @@ class OrdersController < ApplicationController
                             Please modify your order."
           redirect_to order_path(current_order)
         else
-          product.update(
-            inventory: product.inventory - OrderProduct.find_by(
-              product_id: product.id,
-              order_id: current_order.id
-            ).quantity)
+          # product.update(
+          #   inventory: product.inventory - OrderProduct.find_by(
+          #     product_id: product.id,
+          #     order_id: current_order.id
+          #   ).quantity)
         end
       end
     else
@@ -204,8 +204,7 @@ class OrdersController < ApplicationController
 
   def purchase_params
     params.require(:purchase_info).permit(
-    :first_name, :last_name, :address, :address2,
-    :city, :state, :zip_code, :billing_first, :billing_last,
+    :first_name, :last_name, :billing_first, :billing_last,
     :credit_card_number, :expiration_date, :cvv,
     :billing_address, :billing_address2, :billing_city, :billing_state,
     :billing_zip_code

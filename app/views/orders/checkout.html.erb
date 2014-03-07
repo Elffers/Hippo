@@ -62,9 +62,9 @@ $("#shipping_price").change(function(){
               </td>
             <% end %>
           </tr>
-          <% else %>
-          <% OrderProduct.find_by(product_id: product.id, order_id: @order.id).destroy %>
-            You cannot purchase <%=product.name %> 
+          <%# else %>
+          <%# OrderProduct.find_by(product_id: product.id, order_id: @order.id).destroy %>
+           <!--  You cannot purchase  --><%#=product.name %> 
           <% end %>
         <% end %> <!-- end iteration -->
         
@@ -126,18 +126,22 @@ $("#shipping_price").change(function(){
     <tbody>
       <% @shippings.each do |ship| %>
       <% ship.each do |company| %>
-      <% company[0..1].each do |offering| %>
+      <% company[1..2].each do |offering| %>
       <tr>
        <td style= "text-align: left"> <%= offering["service"] %></td>
-       <td> <%= Time.now.strftime("%b %e, %Y") %> </td>
+       <td> <%= offering["delivery_range"] %> </td>
        <td> <%= offering["price"]/100.00 %> </td>
-       <td> <input type="radio" name="shipping_price" value="<%= offering["price"]/100.00 %>"><%# select_shipping = ship[0]["price"] %> <%#= f.submit "Select Shipping Option", select_shipping %></td>
+       <td> <input type="radio" name="shipping_price" value="<%= offering["price"]/100.00 %>"></td>
       </tr>
       <% end %>
       <% end %>
       <% end %>
     </tbody>
   </table>
+
+<!-- strftime("%b %e, %Y") -->
+<!-- Time.now.strftime("%b %e, %Y") -->
+
 
 <!-- Total (Products + Shipping) -->
 
