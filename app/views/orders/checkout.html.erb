@@ -1,6 +1,12 @@
 <script>
-$("#shipping_price").change(function(){
-  $("#shipping_total").val("hello");//$("input[@name=shipping_price]:checked").val());
+$( document ).ready(function() {
+  $("input[type=submit]:last").attr("disabled", "disabled");
+
+  $("input[name=shipping_price]:radio").change(function() {
+    $("#shipping_total").text($("input[name=shipping_price]:checked").val());
+    $("#total_price").text(parseFloat($("#product_total").text().replace("$",""))+parseFloat($("#shipping_total").text().replace("$","")));
+    $("input[type=submit]:last").removeAttr("disabled");
+  });
 });
 </script>
 
@@ -111,7 +117,7 @@ $("#shipping_price").change(function(){
 <% end %>
 
 <!-- Shipping Call -->
-<%= form_for @purchase_info, url: {action: "complete_purchase" } do |f| %>
+<%= form_for @purchase_info, url: {action: "start_purchase" } do |f| %>
 <hr>
 <h3>Shipping Options:</h3>
   <table>
@@ -158,9 +164,9 @@ $("#shipping_price").change(function(){
 
     <tbody>
       <tr>
-        <td> <%= items.inject(:+) %></td>
-        <td id = "shipping_total"> </td>
-        <td>$$$$</td>
+        <td><p id = "product_total"><%= number_to_currency(@total)%></p></td>
+        <td><p id ="shipping_total"></p></td>
+        <td><p id ="total_price"></p></td>
       </tr>
     </tbody>
   </table>
@@ -171,15 +177,6 @@ $("#shipping_price").change(function(){
 
 <br><hr>
   <h3>Billing Information:</h3>
-  
-<!--   <div class="field">
-    <input type="checkbox" name="same" value="Y" />
-    <%#= f.label :same_address %>?
-    <%#= f.check_box :same_address, {:checked=>false} %>
-    <%#= f.checkbox :same_address %>
-  </div> -->
-
-
 
   <% if @purchase_info.errors.any? %>
   <div class= "error_messages">
@@ -232,7 +229,7 @@ $("#shipping_price").change(function(){
     <%= f.text_field :cvv %>
   </div>
   <br>
-  <%= f.submit "Submit Order" %>
+  <%= f.submit "Submit Order", url: complete_purchase_path %> 
 <% end %>
 
 <hr>

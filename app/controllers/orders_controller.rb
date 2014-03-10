@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
                                       :update_quantity,
                                       :checkout]
   before_action :check_order, only: [:add_product]
-  before_action :totals, only: [:checkout] #:update_quantity, 
+  before_action :totals, only: [:update_quantity, :checkout] #:update_quantity, 
 
   def new
     @order = Order.new
@@ -134,9 +134,14 @@ class OrdersController < ApplicationController
     end
   end
 
-  def complete_purchase
+  def start_purchase
     @purchase_info = PurchaseInfo.new(purchase_params)
     @purchase_info[:order_id] = current_order.id
+  end
+
+  def complete_purchase
+    # @purchase_info = PurchaseInfo.new(purchase_params)
+    # @purchase_info[:order_id] = current_order.id
     current_order.update(status: "paid")
     # session[:order_id] = nil # reset current order
     current_order.order_products.each do |op|

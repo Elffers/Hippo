@@ -1,4 +1,5 @@
 <h3>Shipping Address:</h3>
+<!-- address action neeeds to match billing route;  -->
 
   <%= form_for @purchase_info, url: {action: "checkout" } do |f| %>
   <% if @purchase_info.errors.any? %>

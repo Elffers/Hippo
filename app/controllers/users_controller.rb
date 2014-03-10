@@ -131,14 +131,4 @@ class UsersController < ApplicationController
                                 :password_confirmation
                                 )
   end
-
-  def seller_params
-    params.require(:user).permit(
-                                :seller_address,
-                                :seller_address2,
-                                :seller_city,
-                                :seller_state,
-                                :seller_zipcode
-                                )
-  end
 end
