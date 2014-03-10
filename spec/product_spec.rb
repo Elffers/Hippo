@@ -26,10 +26,6 @@ describe Product do
         expect(Product.new(name: "shoes", price: "money", user_id: 1)).to_not be_valid
       end
 
-      it "must be valid if a float 9.99" do
-        expect(Product.new(name: "shoes", price: 9.99, user_id: 1)).to be_valid
-      end
-
       it "must be invalid if negative" do
         expect(Product.new(name: "shoes", price: -1, user_id: 1)).to_not be_valid
       end

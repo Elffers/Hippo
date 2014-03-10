@@ -1,27 +1,183 @@
-<!-- <h1>TOTAL: <%= number_to_currency @total %></h1>
-<hr>
+<script>
+$( document ).ready(function() {
+  $("input[type=submit]:last").attr("disabled", "disabled");
 
-<#%= form_tag pay_path do %>
-<#% payment = ["Credit Card", "PayPal", "Bitcoins"] %>
-  <h3>Payment method:</h3>
-  <div class= "field">
-    <%#= label_tag :payment_method %>
-    <%#= select_tag :payment_method, options_for_select(payment) %>
-  </div>
+  $("input[name=shipping_price]:radio").change(function() {
+    $("#shipping_total").text($("input[name=shipping_price]:checked").val());
+    $("#total_price").text(parseFloat($("#product_total").text().replace("$",""))+parseFloat($("#shipping_total").text().replace("$","")));
+    $("input[type=submit]:last").removeAttr("disabled");
+  });
+});
+</script>
 
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "Visa") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "MasterCard") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "PayPal") %>
-
-  <%#= radio_button_tag(:payment_method, "paid") %>
-  <%#= label_tag(:payment_method, "Bitcoins") %> -->
 <h3>Shipping Information</h3>
-  <%= form_for @purchase_info, url: {action: "complete_purchase" } do |f| %>
+
+<% if check_user %>
+  <div class= "ordershow">
+    <% if @products == [] %>
+      <h3> There are no products in this order.</h3>
+    <% else %>
+    <!-- maybe refactor to case when syntax? -->
+      <% if @order.status == "pending" %>
+        <h3>This order has not been checked out!</h3>
+      <% elsif @order.status == "paid" %>
+        <h3>This order is being processed!</h3>
+      <% elsif @order.status == "complete" %>
+        <h3> This order has been completed! </h3>
+      <% end %>
+    <!-- end status message -->
+
+    <table>
+      <thead>
+        <tr>
+          <th> Name      </th>
+          <th> Quantity  </th>
+          <th> Price     </th>
+          <th> Subtotal  </th>
+          <!-- only want this column if order has been paid for -->
+          <% unless @order.status == "pending" %>
+            <th> Status    </th>
+          <% end %>
+          <% if @order.status == "pending" %>
+            <th> Edit quantity  </th>
+            <th> Remove         </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody> 
+        <% @products.each do |product| %>
+          <% if product.user_id != session[:user_id] %>
+          <tr>
+            <td id= "item name"><%= link_to "#{product.name.capitalize}", product_path(product) %></td>
+            <td id="quantity"><%= OrderProduct.find_by(product_id: product.id, order_id: @order.id).quantity %></td>
+            <td id="price"><%= number_to_currency(product.price) %></td>
+            <td id= "subtotal"><%= number_to_currency @subtotals[@products.index(product)]%></td>
+            <!-- only shows status of products if order has been checked out -->
+            <% unless @order.status == "pending" %>
+              <td id= "status"><%= @order.order_products.find_by(product_id:product.id, order_id:@order.id).status %></td>
+            <% end %>
+            <!-- Can edit/remove if order still open --> 
+            <% if @order.status == "pending" %>
+              <td id= "edit_quantity">
+                <%= form_tag(update_quantity_path(@order.id, product.id), method: "patch") do %>
+                  <%= number_field_tag(:quantity, params[:quantity], in: 1..product.inventory, class: "number_field") %>
+                  <%= submit_tag "Update!" %>
+                <% end %>
+              </td>
+              <td id= "remove"><%= button_to "Remove", remove_product_path(current_order.id, product.id), method: :delete %>
+              </td>
+            <% end %>
+          </tr>
+          <%# else %>
+          <%# OrderProduct.find_by(product_id: product.id, order_id: @order.id).destroy %>
+           <!--  You cannot purchase  --><%#=product.name %> 
+          <% end %>
+        <% end %> <!-- end iteration -->
+        
+        <tr>
+          <td>TOTAL:</td>
+          <td> 
+            <% items = current_order.order_products.map {|x| x.quantity} %>
+            <%= items.inject(:+) %>
+          </td>
+          <td></td>
+          <td><%= number_to_currency(@total)%></td>
+          <% if @order.status == "pending" %>
+            <td></td>
+            <td></td>
+          <% end %>
+          <% unless @order.status == "pending" %>
+            <td></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  <br><hr>
+
+<!--     <div class="navigation_links">
+      <! Maybe just go to checkout with a notice "You have no items in your cart? -->
+     <!--  <div class="checkout_button">
+        <#% if @order.status == "pending" %>  
+          <#%= button_to "Proceed to checkout", checkout_path, method: :get %><br>
+        <#% end %>
+      </div>
+    <#% end %> -->
+
+    <% end %>
+
+      <%= link_to "Back to browsing", root_path %><br><br>
+      <% if current_user %>
+        <%= link_to "Back to profile", user_path(current_user.id) %>
+      <% end %>
+    </div> <!-- ends ordershow -->
+  <hr>
+
+<% else %>
+  <h3>You are not authorized to view this page!</h3>  
+<% end %>
+
+<!-- Shipping Call -->
+<%= form_for @purchase_info, url: {action: "start_purchase" } do |f| %>
+<hr>
+<h3>Shipping Options:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Provider</th>
+        <th>Est. Delivery Date</th>
+        <th>Price</th>
+        <th>Select</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shippings.each do |ship| %>
+      <% ship.each do |company| %>
+      <% company[1..2].each do |offering| %>
+      <tr>
+       <td style= "text-align: left"> <%= offering["service"] %></td>
+       <td> <%= offering["delivery_range"] %> </td>
+       <td> <%= offering["price"]/100.00 %> </td>
+       <td> <input type="radio" name="shipping_price" value="<%= offering["price"]/100.00 %>"></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+<!-- strftime("%b %e, %Y") -->
+<!-- Time.now.strftime("%b %e, %Y") -->
+
+
+<!-- Total (Products + Shipping) -->
+
+<br><hr>
+<h3>Order Total:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Subtotal</th>
+        <th>Shipping</th>
+        <th>TOTAL</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><p id = "product_total"><%= number_to_currency(@total)%></p></td>
+        <td><p id ="shipping_total"></p></td>
+        <td><p id ="total_price"></p></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<!-- Checkout Forms -->
+
+
+<br><hr>
+  <h3>Billing Information:</h3>
+
   <% if @purchase_info.errors.any? %>
   <div class= "error_messages">
     <h2> Problem in Form </h2>
@@ -32,82 +188,48 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %>
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city, "City" %>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state, "State" %>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :zip_code, "Zip Code" %>
-    <%= f.number_field :zip_code %>
-  </div>
-<hr>
-  <h3>Billing Information:</h3>
-<!--   <div class="field">
-    <#%= f.label :same_address %>
-    <#%= f.checkbox :same_address %>
-  </div> -->
-  
  <div class="field">
-    <%= f.label :billing_first %>
+    <%= f.label :billing_first %>:
     <%= f.text_field :billing_first %>
   </div>
   <div class="field">
-    <%= f.label :billing_last %>
+    <%= f.label :billing_last %>:
     <%= f.text_field :billing_last %>
   </div>
   <div class="field">
-    <%= f.label :credit_card_number %>
-    <%= f.text_field :credit_card_number %>
-  </div>
-  <div class="field">
-    <%= f.label :expiration_date %>
-    <%= f.text_field :expiration_date %>
-  </div>
-  <div class="field">
-    <%= f.label :cvv %>
-    <%= f.text_field :cvv %>
-  </div>
-  <div class="field">
-    <%= f.label :billing_address %>
+    <%= f.label :billing_address %>:
     <%= f.text_field :billing_address %>
   </div>
   <div class="field">
-    <%= f.label :billing_address2 %>
+    <%= f.label :billing_address2 %>:
     <%= f.text_field :billing_address2 %>
   </div>
   <div class="field">
-    <%= f.label :billing_city %>
+    <%= f.label :billing_city %>:
     <%= f.text_field :billing_city %>
   </div>
   <div class="field">
-    <%= f.label :billing_state %>
+    <%= f.label :billing_state %>:
     <%= f.text_field :billing_state %>
   </div>
   <div class="field">
-    <%= f.label :billing_zip_code %>
+    <%= f.label :billing_zip_code %>:
     <%= f.number_field :billing_zip_code %>
   </div>
-  <%= f.submit %>
+  <div class="field">
+    <%= f.label :credit_card_number %>:
+    <%= f.text_field :credit_card_number %>
+  </div>
+  <div class="field">
+    <%= f.label :expiration_date %>:
+    <%= f.text_field :expiration_date %>
+  </div>
+  <div class="field">
+    <%= f.label :cvv %>:
+    <%= f.text_field :cvv %>
+  </div>
+  <br>
+  <%= f.submit "Submit Order", url: complete_purchase_path %> 
 <% end %>
 
 <hr>

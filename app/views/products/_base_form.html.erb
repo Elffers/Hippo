@@ -21,10 +21,6 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
-  <!-- <div class="field">
-    <%#= f.label :photo, "Photo URL" %>
-    <%#= f.text_field :photo %>
-  </div> -->
   <div class="field">
     <%= f.label(:retired) %>
     <%= f.check_box :retired %>
@@ -33,12 +29,26 @@
     <%= f.label :inventory %>
     <%= f.number_field :inventory %>
   </div>
-
-   <div class="image">
+  <div class="field">
+    <%= f.label :weight_in_oz %>
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :height %>
+    <%= f.text_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :depth %>
+    <%= f.text_field :depth %>
+  </div>
+  <div class="field">
+    <%= f.label :length %>
+    <%= f.text_field :length %>
+  </div>
+  <div class="image">
     <%= f.label :photo, "Upload an image of your product!" %>
     <%= f.file_field :photo %>
     <%= f.hidden_field :photo_cache %> <!-- what is this? -->
   </div>
- 
   <div class= "actions"><%=f.submit %></div>
 <% end %>

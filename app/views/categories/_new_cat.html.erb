@@ -1,0 +1,22 @@
+<h1>Create a new Category!</h1>
+<%= form_for @category, url: create_category_path(Product.find(params[:product_id])) do |f| %>
+  <% if @category.errors.any? %>
+  <div class= "error_messages">
+    <h2> Form is invalid </h2>
+    <ul>
+      <% for message in @category.errors.full_messages %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Category:" %>
+    <%= f.text_field :name %><br><br>
+  </div>
+
+  <div class= "actions"><%=f.submit %></div>
+
+
+<% end %>

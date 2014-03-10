@@ -1,0 +1,23 @@
+Thanks for your order!
+
+<%= current_order.inspect %>
+<hr>
+
+<div>You have successfully paid!
+  <br>
+
+  Your order will be shipped to:<br><br>
+  <div>
+    <% if current_user %>
+    <%= current_user.name %><br>
+    <% end %>
+  <%=params[:address1]%>
+  <%=params[:address2]%><br>
+  <%=params[:city]%>, <%=params[:state]%><br>
+  <%=params[:zipcode]%>
+  </div>
+  <br>
+</div>
+  Your order should arrive in 7-10 business days.<br><br>
+
+<%= link_to "Keep shopping!", root_path %>

@@ -70,7 +70,7 @@
             <%= items.inject(:+) %>
           </td>
           <td></td>
-          <td><%= number_to_currency(@total)%></td>
+          <td><%= number_to_currency(@total) %></td>
           <% if @order.status == "pending" %>
             <td></td>
             <td></td>
@@ -86,7 +86,7 @@
       <!-- Maybe just go to checkout with a notice "You have no items in your cart? -->
       <div class="checkout_button">
         <% if @order.status == "pending" %>  
-          <%= button_to "Proceed to checkout", checkout_path, method: :get %><br>
+          <%= button_to "Proceed to shipping options", shipping_path, method: :get %><br>
         <% end %>
       </div>
     <% end %>

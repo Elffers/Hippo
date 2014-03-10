@@ -19,6 +19,30 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
+    <%= f.label :address, "Please enter your address:" %>
+    <%= f.text_field :seller_address %>
+  </div>
+  <div class="field">
+    <%= f.label :address2, "Please enter suite or apartment numbers:" %>
+    <%= f.text_field :seller_address2 %>
+  </div>
+    <div class="field">
+    <%= f.label :city, "Please enter your city:" %>
+    <%= f.text_field :seller_city %>
+  </div>
+    <div class="field">
+    <%= f.label :state, "Please enter your state:" %>
+    <%= f.text_field :seller_state %>
+  </div>
+    <div class="field">
+    <%= f.label :zipcode, "Please enter your zipcode:" %>
+    <%= f.text_field :seller_zipcode %>
+  </div>
+    <div class="field">
+    <%#= f.label :country, "Please enter your country:" %>
+    <%#= f.text_field :seller_country %>
+  </div>
+  <div class="field">
     <%= f.label :password, "Create password:" %>
     <%= f.password_field :password %>
   </div>
@@ -26,7 +50,7 @@
     <%= f.label :password_confirmation, "Re-enter password"%>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class= "actions"><%=f.submit %></div>
+  <div class= "actions"><%= f.submit %></div>
 
 
 <% end %>
