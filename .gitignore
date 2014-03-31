@@ -18,3 +18,5 @@
 #Ignore things that contain secret keys
 /config/initializers/locales/application.yml
 *DS_Store
+# Ignore application configuration
+/config/application.yml
